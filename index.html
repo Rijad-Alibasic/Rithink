@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advera - Marketing Bureau Skabt Til Resultater</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #999999;
+            --light-gray: #f5f5f5;
+            --border-gray: #e5e5e5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--black);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            z-index: 1000;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--black);
+            font-size: 14px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .contact-btn {
+            background: var(--black);
+            color: var(--white);
+            padding: 12px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: transform 0.3s;
+        }
+
+        .contact-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--light-gray);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.5;
+        }
+
+        .metrics {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 48px;
+            font-weight: 700;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        /* Case Study Section */
+        .case-study {
+            background: var(--light-gray);
+            padding: 80px 0;
+            margin: 80px 0;
+        }
+
+        .case-study-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .case-study-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .case-study-text p {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+
+        .case-results {
+            list-style: none;
+        }
+
+        .case-results li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-gray);
+            font-weight: 500;
+        }
+
+        .case-results li:last-child {
+            border-bottom: none;
+        }
+
+        .case-image {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: var(--gray);
+        }
+
+        /* Philosophy Section */
+        .philosophy {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .philosophy h2 {
+            font-size: 48px;
+            margin-bottom: 50px;
+            line-height: 1.2;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .philosophy-item {
+            padding: 30px;
+            border: 1px solid var(--border-gray);
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .philosophy-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .philosophy-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .philosophy-item p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+
+        .process h2 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .process-intro {
+            text-align: center;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .process-step {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--black);
+            color: var(--white);
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .process-step h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .process-step p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 100px 0;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            height: 400px;
+            background: var(--light-gray);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.02);
+        }
+
+        .portfolio-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 30px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: var(--white);
+        }
+
+        .portfolio-content h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .portfolio-content p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Why Us Section */
+        .why-us {
+            padding: 100px 0;
+            background: var(--light-gray);
+        }
+
+        .why-us h2 {
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .why-us-intro {
+            text-align: center;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .why-us-item {
+            text-align: center;
+        }
+
+        .why-us-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--black);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .why-us-item h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .why-us-item p {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+
+        .cta-benefits {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .cta-benefit {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+
+        .checkmark {
+            width: 20px;
+            height: 20px;
+            background: var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 12px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--black);
+            color: var(--white);
+            padding: 20px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: transform 0.3s;
+            margin-top: 30px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-gray);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--black);
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-gray);
+            text-align: center;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .metrics {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .case-study-content {
+                grid-template-columns: 1fr;
+            }
+
+            .philosophy-grid,
+            .process-steps,
+            .portfolio-grid,
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-benefits {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Advera</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#cases">Cases</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <a href="#contact" class="contact-btn">Book a Free Call</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-tag">Performance Driven</span>
+            <h1>From first click to<br>repeat purchase</h1>
+            <p class="hero-description">We turn your ad spend into measurable growth.</p>
+            
+            <div class="metrics">
+                <div class="metric">
+                    <span class="metric-value">350K+</span>
+                    <span class="metric-label">monthly ad spend under management</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">5.2x</span>
+                    <span class="metric-label">average ROI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study Section -->
+    <section class="case-study">
+        <div class="container">
+            <div class="case-study-content">
+                <div class="case-study-text">
+                    <h2>By focusing on scalable ad strategies and ROI-driven campaigns, we helped Nordic Gear transform strong products into predictable month-to-month growth.</h2>
+                    <ul class="case-results">
+                        <li>+38% over sales target within 6 months</li>
+                        <li>5.2x ROI maintained during scaling</li>
+                        <li>Predictable growth month after month</li>
+                    </ul>
+                </div>
+                <div class="case-image">
+                    [Nordic Gear Campaign Visuals]
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="container">
+            <h2>We don't rely on empty claims.<br>We work with proven strategies.</h2>
+            <div class="philosophy-grid">
+                <div class="philosophy-item">
+                    <h3>Results-Based Compensation</h3>
+                    <p>We work primarily on a results-basis compensation model because we believe in our ability to deliver.</p>
+                </div>
+                <div class="philosophy-item">
+                    <h3>Strategy First</h3>
+                    <p>Ads are fundamentals - strategy is the reason we are effective. We focus on the bigger picture.</p>
+                </div>
+                <div class="philosophy-item">
+                    <h3>True Partnership</h3>
+                    <p>More than marketing, we are partners in your business, invested in your long-term success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2>Our Process</h2>
+            <p class="process-intro">Our approach is centered around a collaborative and data-driven process that ensures every aspect of your marketing strategy is optimized for maximum results.</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <span class="step-number">1</span>
+                    <h3>Strategy</h3>
+                    <p>We craft a comprehensive strategy tailored to your business goals.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">2</span>
+                    <h3>Execution</h3>
+                    <p>Our team sets up and manages campaigns with precision.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">3</span>
+                    <h3>Analysis</h3>
+                    <p>We leverage data to inform decisions and drive better outcomes.</p>
+                </div>
+                <div class="process-step">
+                    <span class="step-number">4</span>
+                    <h3>Scale</h3>
+                    <p>Continuously scaling your campaigns for greater success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Nordic Kitchen</h3>
+                        <p>Elevated everyday cooking through elegant, user-friendly kitchen tools—powered by design and innovation.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Nordic Lamps</h3>
+                        <p>Strengthened brand visibility, boosted conversion rates, and positioned Nordic Lamps as a premium design choice.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <div class="portfolio-content">
+                        <h3>Exclusive Jewelry</h3>
+                        <p>Exclusive jewelry brand combining timeless design, modern elegance, and powerful storytelling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Us Section -->
+    <section class="why-us">
+        <div class="container">
+            <h2>Why Choose Advera</h2>
+            <p class="why-us-intro">Advera is more than just a marketing agency; we're a catalyst for extraordinary growth. Our unique approach sets us apart in a crowded digital landscape.</p>
+            
+            <div class="why-us-grid">
+                <div class="why-us-item">
+                    <div class="why-us-icon"></div>
+                    <h3>Precision Execution</h3>
+                    <p>Every campaign is executed with meticulous attention to detail, ensuring that your brand stands out and resonates with your audience.</p>
+                </div>
+                <div class="why-us-item">
+                    <div class="why-us-icon"></div>
+                    <h3>Customer-Centric</h3>
+                    <p>We put your customers at the heart of our strategies, creating personalized experiences that drive engagement and loyalty.</p>
+                </div>
+                <div class="why-us-item">
+                    <div class="why-us-icon"></div>
+                    <h3>Future-Focused</h3>
+                    <p>We're not just about immediate results; we're about setting you up for long-term success with forward-thinking approaches.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to elevate your business<br>with results for once? Let's talk.</h2>
+            
+            <div class="cta-benefits">
+                <div class="cta-benefit">
+                    <span class="checkmark">✓</span>
+                    <span>In-depth analysis of your current marketing</span>
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">✓</span>
+                    <span>No contingencies</span>
+                </div>
+                <div class="cta-benefit">
+                    <span class="checkmark">✓</span>
+                    <span>If we can't help, we won't pitch you</span>
+                </div>
+            </div>
+            
+            <a href="#" class="cta-button">Book Your Free Strategy Call</a>
+            
+            <p style="margin-top: 20px; color: var(--gray); font-size: 14px;">
+                We work with results-first partnerships<br>
+                30-Day Satisfaction Policy
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Advera</div>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Advera. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Video Gallery Zoom Effect - Simplified and working
+        const videoGallery = document.querySelector('.video-gallery');
+        const videoGallerySection = document.querySelector('.video-gallery-section');
+        const videoItems = document.querySelectorAll('.video-item');
+        
+        // Function to handle the zoom effect
+        function handleVideoGalleryScroll() {
+            if (!videoGallerySection || !videoGallery) return;
+            
+            const sectionRect = videoGallerySection.getBoundingClientRect();
+            const sectionTop = sectionRect.top;
+            const sectionHeight = videoGallerySection.offsetHeight;
+            const windowHeight = window.innerHeight;
+            
+            // Check if section is in viewport
+            if (sectionTop < windowHeight && sectionTop > -sectionHeight) {
+                // Calculate scroll progress (0 to 1)
+                const scrollProgress = Math.max(0, Math.min(1, 
+                    (windowHeight - sectionTop) / (windowHeight + sectionHeight)
+                ));
+                
+                // Apply transforms based on scroll progress
+                if (scrollProgress < 0.2) {
+                    // Initial state - zoomed out
+                    const scale = 0.3 + (scrollProgress * 3.5);
+                    const rotateX = 45 - (scrollProgress * 225);
+                    const translateZ = -500 + (scrollProgress * 2500);
+                    videoGallery.style.transform = `scale(${scale}) rotateX(${rotateX}deg) translateZ(${translateZ}px)`;
+                    videoGallery.style.opacity = scrollProgress * 5;
+                } else if (scrollProgress < 0.5) {
+                    // Zooming in
+                    const progress = (scrollProgress - 0.2) / 0.3;
+                    const scale = 1 + (progress * 0.2);
+                    videoGallery.style.transform = `scale(${scale}) rotateX(0deg) translateZ(0)`;
+                    videoGallery.style.opacity = 1;
+                    
+                    // Add visible class to video items
+                    videoItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.classList.add('visible');
+                        }, index * 100);
+                    });
+                } else if (scrollProgress < 0.8) {
+                    // Normal view
+                    videoGallery.style.transform = 'scale(1.2) rotateX(0deg) translateZ(0)';
+                    videoGallery.style.opacity = 1;
+                } else {
+                    // Zooming out at the end
+                    const progress = (scrollProgress - 0.8) / 0.2;
+                    const scale = 1.2 - (progress * 0.4);
+                    const rotateX = progress * 20;
+                    const opacity = 1 - (progress * 0.6);
+                    videoGallery.style.transform = `scale(${scale}) rotateX(${rotateX}deg)`;
+                    videoGallery.style.opacity = opacity;
+                }
+            }
+        }
+        
+        // Add scroll listener
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(handleVideoGalleryScroll);
+            
+            // Original parallax for hero
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < 500) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+        
+        // Initial check
+        handleVideoGalleryScroll();
+
+        // Animate metrics on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.metric').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effect for videos - play on hover
+        document.querySelectorAll('.video-item').forEach(item => {
+            const video = item.querySelector('video');
+            if (video) {
+                // Ensure videos are playing
+                video.play().catch(e => console.log('Video autoplay failed:', e));
+                
+                item.addEventListener('mouseenter', function() {
+                    video.playbackRate = 0.5; // Slow down on hover for effect
+                });
+                item.addEventListener('mouseleave', function() {
+                    video.playbackRate = 1; // Normal speed
+                });
+            }
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
