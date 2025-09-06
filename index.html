@@ -1,1005 +1,564 @@
-
-
-
 <!DOCTYPE html>
-<html lang="da">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Rithink - Digital Marketing & AI Løsninger. Vi transformerer virksomheder gennem innovative digitale strategier og skræddersyede AI-løsninger.">
-    <title>Rithink - Digital Marketing & AI Solutions</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #0A0E27;
-            --accent: #4A69FF;
-            --accent-light: #6B84FF;
-            --text-dark: #1a1a1a;
-            --text-light: #6c757d;
-            --white: #ffffff;
-            --gray-light: #f8f9fa;
-            --border-light: #e9ecef;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--white);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Navigation */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 15px 0;
-            transition: all 0.3s ease;
-            border-bottom: 1px solid transparent;
-        }
-
-        header.scrolled {
-            padding: 10px 0;
-            border-bottom-color: var(--border-light);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 35px;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-size: 15px;
-            font-weight: 500;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .contact-btn {
-            background: var(--accent);
-            color: var(--white);
-            padding: 12px 28px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(74, 105, 255, 0.2);
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(74, 105, 255, 0.3);
-            background: var(--accent-light);
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 2px;
-            background: var(--text-dark);
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        .hero {
-            margin-top: 80px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--primary) 0%, #1a2454 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, var(--accent-light) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(74, 105, 255, 0.1) 0%, transparent 50%);
-            opacity: 0.2;
-            animation: gradientShift 15s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(-5%, 5%) rotate(120deg); }
-            66% { transform: translate(5%, -5%) rotate(240deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            color: var(--white);
-            padding: 40px 0;
-        }
-
-        .hero-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .hero h1 {
-            font-size: clamp(48px, 8vw, 88px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            letter-spacing: -2px;
-            animation: fadeInUp 0.8s ease 0.2s backwards;
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-description {
-            font-size: 22px;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.6;
-            animation: fadeInUp 0.8s ease 0.4s backwards;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease 0.6s backwards;
-        }
-
-        .btn {
-            padding: 16px 36px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: var(--white);
-            color: var(--primary);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--white);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--white);
-            transform: translateY(-3px);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Metrics Section */
-        .metrics {
-            padding: 80px 0;
-            background: var(--white);
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            text-align: center;
-        }
-
-        .metric-card {
-            padding: 30px;
-            background: var(--gray-light);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            background: var(--white);
-        }
-
-        .metric-value {
-            font-size: 48px;
-            font-weight: 800;
-            color: var(--accent);
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        .metric-label {
-            font-size: 16px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        /* Video Gallery Section */
-        .video-gallery-section {
-            position: relative;
-            min-height: 100vh;
-            background: linear-gradient(180deg, var(--white) 0%, #f0f4ff 50%, var(--white) 100%);
-            padding: 100px 0;
-            overflow: hidden;
-        }
-
-        .video-gallery-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .video-gallery-header h2 {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .video-gallery-header p {
-            font-size: 20px;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .video-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 300px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(74, 105, 255, 0.2);
-        }
-
-        .video-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 50px rgba(74, 105, 255, 0.3);
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-placeholder::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="40,30 40,70 70,50" fill="white" opacity="0.3"/></svg>') center/60px no-repeat;
-        }
-
-        .video-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 30px;
-            background: linear-gradient(to top, rgba(10, 14, 39, 0.95), transparent);
-            color: var(--white);
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .video-card:hover .video-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .video-content h3 {
-            font-size: 22px;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .video-content p {
-            font-size: 15px;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
-
-        /* Services Section */
-        .services {
-            padding: 100px 0;
-            background: var(--white);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-header h2 {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .section-header p {
-            font-size: 20px;
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            padding: 40px;
-            background: var(--white);
-            border-radius: 20px;
-            border: 1px solid var(--border-light);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-light));
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            border-color: transparent;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-light));
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 32px;
-            margin-bottom: 25px;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover .service-icon {
-            transform: rotate(-5deg) scale(1.1);
-        }
-
-        .service-card h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            line-height: 1.8;
-            font-size: 16px;
-        }
-
-        /* Case Studies Section */
-        .case-studies {
-            padding: 100px 0;
-            background: var(--gray-light);
-        }
-
-        .case-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .case-card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .case-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .case-image {
-            height: 250px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .case-image::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            backdrop-filter: blur(10px);
-        }
-
-        .case-content {
-            padding: 30px;
-        }
-
-        .case-tag {
-            display: inline-block;
-            background: var(--gray-light);
-            color: var(--accent);
-            padding: 6px 14px;
-            border-radius: 15px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .case-content h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .case-content p {
-            color: var(--text-light);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .case-results {
-            display: flex;
-            gap: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .case-stat {
-            flex: 1;
-        }
-
-        .case-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent);
-            display: block;
-        }
-
-        .case-stat-label {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-top: 5px;
-        }
-
-        /* Process Section */
-        .process {
-            padding: 100px 0;
-            background: var(--white);
-        }
-
-        .process-timeline {
-            position: relative;
-            max-width: 1000px;
-            margin: 60px auto 0;
-        }
-
-        .process-timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--accent), var(--accent-light));
-        }
-
-        .process-step {
-            display: flex;
-            align-items: center;
-            margin-bottom: 80px;
-            position: relative;
-        }
-
-        .process-step:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .process-content {
-            flex: 1;
-            padding: 30px;
-            background: var(--white);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            margin: 0 40px;
-            transition: transform 0.3s ease;
-        }
-
-        .process-content:hover {
-            transform: scale(1.05);
-        }
-
-        .process-number {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: var(--white);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            z-index: 1;
-            box-shadow: 0 5px 20px rgba(74, 105, 255, 0.3);
-        }
-
-        .process-content h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .process-content p {
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* About Section */
-        .about {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary) 0%, #1a2454 100%);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 50%, rgba(74, 105, 255, 0.1) 0%, transparent 50%);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .about-text h2 {
-            font-size: clamp(36px, 5vw, 48px);
-            font-weight: 800;
-            margin-bottom: 30px;
-        }
-
-        .about-text p {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .about-feature {
-            display: flex;
-            align-items: start;
-            gap: 15px;
-        }
-
-        .feature-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            font-size: 18px;
-            margin-bottom: 5px;
-        }
-
-        .feature-text p {
-            font-size: 14px;
-            opacity: 0.8;
-            margin: 0;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            padding: 100px 0;
-            background: var(--white);
-            text-align: center;
-        }
-
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .cta-content p {
-            font-size: 20px;
-            color: var(--text-light);
-            margin-bottom: 40px;
-        }
-
-        .cta-benefits {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 40px 0;
-            flex-wrap: wrap;
-        }
-
-        .cta-benefit {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .checkmark {
-            width: 24px;
-            height: 24px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0 30px;
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-about h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .footer-about p {
-            opacity: 0.8;
-            line-height: 1.6;
-        }
-
-        .footer-column h4 {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column li {
-            margin-bottom: 12px;
-        }
-
-        .footer-column a {
-            color: var(--white);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-column a:hover {
-            opacity: 1;
-        }
-
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            opacity: 0.6;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .hero h1 {
-                font-size: 48px;
-            }
-
-            .video-grid,
-            .services-grid,
-            .case-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .process-timeline::before {
-                left: 30px;
-            }
-
-            .process-step,
-            .process-step:nth-child(even) {
-                flex-direction: row;
-            }
-
-            .process-number {
-                left: 30px;
-            }
-
-            .process-content {
-                margin-left: 80px;
-                margin-right: 0;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .cta-benefits {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-
-        /* Loading Animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating animation for hero */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Rithink — Digital Marketing & AI Solutions. We transform businesses with data-driven strategy, AI automation, and performance advertising." />
+  <title>Rithink — Digital Marketing & AI Solutions</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --primary:#0A0E27;
+      --accent:#4A69FF;
+      --accent-light:#6B84FF;
+      --text:#1a1a1a;
+      --muted:#6c757d;
+      --white:#fff;
+      --gray:#f8f9fa;
+      --border:#e9ecef
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      color:var(--text);
+      background:var(--white);
+      line-height:1.6;
+      overflow-x:hidden
+    }
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header{
+      position:fixed;inset:0 0 auto 0;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+      padding:14px 0;
+      border-bottom:1px solid transparent;
+      transition:all .3s ease
+    }
+    header.scrolled{padding:10px 0;border-bottom-color:var(--border);box-shadow:0 2px 20px rgba(0,0,0,.08)}
+    nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
+    .logo{
+      font-size:28px;font-weight:800;letter-spacing:-.5px;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+    }
+    .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
+    .nav-links a{
+      text-decoration:none;color:var(--text);font-size:15px;font-weight:500;position:relative;transition:.3s
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--accent);transition:width .25s
+    }
+    .nav-links a:hover{color:var(--accent)}
+    .nav-links a:hover::after{width:100%}
+    .btn-pill{
+      background:var(--accent);color:var(--white);padding:11px 22px;border-radius:24px;
+      text-decoration:none;font-weight:600;box-shadow:0 4px 15px rgba(74,105,255,.2);transition:.25s
+    }
+    .btn-pill:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(74,105,255,.3);background:var(--accent-light)}
+
+    .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer}
+    .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
+
+    /* Hero */
+    .hero{
+      margin-top:80px;min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,var(--primary) 0%,#1a2454 100%)
+    }
+    .hero::before{
+      content:"";position:absolute;width:200%;height:200%;
+      background:
+        radial-gradient(circle at 20% 80%,var(--accent) 0%,transparent 50%),
+        radial-gradient(circle at 80% 20%,var(--accent-light) 0%,transparent 50%),
+        radial-gradient(circle at 40% 40%,rgba(74,105,255,.12) 0%,transparent 50%);
+      opacity:.22;animation:gradientShift 14s ease infinite
+    }
+    @keyframes gradientShift{
+      0%,100%{transform:translate(0,0) rotate(0)}
+      33%{transform:translate(-5%,5%) rotate(120deg)}
+      66%{transform:translate(5%,-5%) rotate(240deg)}
+    }
+    .hero-content{position:relative;z-index:1;color:var(--white);padding:48px 0}
+    .tag{
+      display:inline-block;padding:9px 16px;border-radius:999px;
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+      font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:22px
+    }
+    .hero h1{
+      font-size:clamp(42px,7vw,80px);line-height:1.08;font-weight:850;letter-spacing:-2px;margin-bottom:16px
+    }
+    .gradient-text{
+      background:linear-gradient(135deg,#fff 0%,var(--accent-light) 100%);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
+    }
+    .hero p{font-size:20px;color:rgba(255,255,255,.85);max-width:680px;margin-bottom:28px}
+    .cta{display:flex;gap:14px;flex-wrap:wrap}
+    .btn{padding:14px 28px;border-radius:28px;text-decoration:none;font-weight:700;font-size:15px;transition:.25s;display:inline-block}
+    .btn-primary{background:#fff;color:var(--primary);box-shadow:0 4px 16px rgba(255,255,255,.25)}
+    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(255,255,255,.35)}
+    .btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.35);backdrop-filter:blur(8px)}
+    .btn-outline:hover{border-color:#fff;background:rgba(255,255,255,.1);transform:translateY(-3px)}
+
+    /* Sections */
+    section{scroll-margin-top:100px}
+    .section{padding:96px 0}
+    .section-header{text-align:center;margin-bottom:56px}
+    .section h2{font-size:clamp(34px,5vw,54px);font-weight:850;color:var(--primary);margin-bottom:10px}
+    .section p.lead{font-size:19px;color:var(--muted);max-width:720px;margin:0 auto}
+
+    /* Metrics */
+    .metrics{background:var(--white)}
+    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;text-align:center}
+    .metric{padding:26px;background:var(--gray);border-radius:18px;transition:.25s}
+    .metric:hover{transform:translateY(-6px);box-shadow:0 14px 28px rgba(0,0,0,.08);background:#fff}
+    .metric .value{display:block;font-size:42px;font-weight:800;color:var(--accent);margin-bottom:6px}
+    .metric .label{font-size:15px;color:var(--muted);font-weight:600}
+
+    /* Video/Resources */
+    .videos{background:linear-gradient(180deg,#fff 0%,#f0f4ff 50%,#fff 100%)}
+    .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
+    .video-card{
+      height:260px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);
+      box-shadow:0 12px 30px rgba(74,105,255,.22);transition:.3s
+    }
+    .video-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 52px rgba(74,105,255,.32)}
+    .video-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+    .video-ph::before{
+      content:"";position:absolute;inset:0;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="40,30 40,70 70,50" fill="white" opacity="0.35"/></svg>') center/60px no-repeat
+    }
+    .video-info{position:absolute;left:0;right:0;bottom:0;padding:22px;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55))}
+    .video-info h3{font-size:18px;margin-bottom:6px}
+    .video-info p{font-size:14px;opacity:.92}
+
+    /* Services */
+    .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+    .card{
+      padding:34px;background:#fff;border-radius:18px;border:1px solid var(--border);transition:.25s;position:relative;overflow:hidden
+    }
+    .card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transition:transform .25s}
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,.08);border-color:transparent}
+    .card:hover::before{transform:scaleX(1)}
+    .icon{
+      width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;font-size:28px;margin-bottom:16px
+    }
+    .card h3{font-size:22px;margin-bottom:8px}
+    .card p{color:var(--muted)}
+
+    /* Case Studies */
+    .cases{background:var(--gray)}
+    .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+    .case{
+      background:#fff;border-radius:18px;overflow:hidden;transition:.25s;cursor:pointer;border:1px solid var(--border)
+    }
+    .case:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,.1)}
+    .case-top{height:200px;background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);position:relative}
+    .case-top::after{content:"";position:absolute;inset:auto 0 0 0;height:70px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.25))}
+    .case-body{padding:22px}
+    .tag{font-size:12px;background:var(--gray);color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:800;display:inline-block;margin-bottom:10px;border:1px solid var(--border)}
+    .stats{display:flex;gap:18px;border-top:1px solid var(--border);padding-top:14px;margin-top:12px}
+    .stat .v{display:block;color:var(--accent);font-weight:800}
+    .stat .k{font-size:12px;color:var(--muted)}
+
+    /* Process */
+    .timeline{max-width:1000px;margin:40px auto 0;position:relative}
+    .timeline::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:2px;height:100%;background:linear-gradient(180deg,var(--accent),var(--accent-light))}
+    .step{display:flex;align-items:center;margin:64px 0;position:relative}
+    .step:nth-child(even){flex-direction:row-reverse}
+    .bubble{
+      position:absolute;left:50%;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;
+      background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;box-shadow:0 8px 22px rgba(74,105,255,.35)
+    }
+    .step .content{flex:1;margin:0 38px;background:#fff;border-radius:18px;box-shadow:0 10px 28px rgba(0,0,0,.08);padding:24px}
+    .step .content h3{margin-bottom:8px}
+    .step .content p{color:var(--muted)}
+
+    /* About */
+    .about{background:linear-gradient(135deg,var(--primary) 0%,#1a2454 100%);color:#fff;position:relative;overflow:hidden}
+    .about::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(74,105,255,.14) 0%,transparent 55%)}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+    .about h2{color:#fff}
+    .about p{color:rgba(255,255,255,.88)}
+    .features{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+    .feat{display:flex;gap:10px;align-items:flex-start}
+    .feat .f-ic{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center}
+    .feat .f-t h4{margin:0 0 4px 0}
+    .feat .f-t p{margin:0;color:rgba(255,255,255,.8);font-size:14px}
+
+    /* CTA */
+    .cta{text-align:center}
+    .cta h2{color:var(--primary)}
+    .benefits{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:18px 0 28px}
+    .benefit{display:flex;align-items:center;gap:8px}
+    .check{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center}
+
+    /* Footer */
+    footer{background:var(--primary);color:#fff;padding:56px 0 28px}
+    .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:32px}
+    .foot h3{font-size:26px;background:linear-gradient(135deg,#fff 0%,var(--accent-light) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
+    .foot p{opacity:.85}
+    .fcol h4{margin-bottom:10px}
+    .fcol ul{list-style:none}
+    .fcol li{margin:8px 0}
+    .fcol a{color:#fff;text-decoration:none;opacity:.8}
+    .fcol a:hover{opacity:1}
+    .foot-bottom{opacity:.6;border-top:1px solid rgba(255,255,255,.15);padding-top:18px;text-align:center}
+
+    /* Utilities */
+    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
+    .fade.show{opacity:1;transform:translateY(0)}
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .menu-toggle{display:flex}
+      .about-grid{grid-template-columns:1fr;gap:36px}
+      .features{grid-template-columns:1fr}
+      .timeline::before{left:28px;transform:none}
+      .bubble{left:28px;transform:none}
+      .step,.step:nth-child(even){flex-direction:row}
+      .step .content{margin-left:72px;margin-right:0}
+      .foot{grid-template-columns:1fr;text-align:center}
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Navigation -->
-    <header id="header">
-        <nav class="container">
-            <div class="logo">Rithink</div>
-            <ul class="nav-links">
-                <li><a href="#home">Hjem</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#cases">Cases</a></li>
-                <li><a href="#process">Process</a></li>
-                <li><a href="#about">Om Os</a></li>
-                <li><a href="#contact" class="contact-btn">Book Gratis Samtale</a></li>
-            </ul>
-            <div class="menu-toggle" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header id="header">
+    <nav class="container" aria-label="Primary">
+      <div class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">Rithink</div>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#cases">Case Studies</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a class="btn-pill" href="#contact">Book Free Consultation</a></li>
+      </ul>
+      <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <span class="hero-tag">Performance Driven</span>
-                <h1>Fra første klik til<br><span class="gradient-text">gentagne køb</span></h1>
-                <p class="hero-description">Vi transformerer din marketinginvestering til målbar vækst gennem innovative digitale strategier og AI-løsninger.</p>
-                
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Få Gratis Konsultation</a>
-                    <a href="#services" class="btn btn-secondary">Se Vores Services</a>
-                </div>
-            </div>
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <span class="tag">Performance Driven</span>
+      <h1>From first click to <span class="gradient-text">repeat customers</span></h1>
+      <p>
+        We turn marketing spend into measurable growth with data-driven strategy, AI-powered
+        automation, and continuous experimentation — so you get more qualified leads, lower
+        acquisition costs, and higher lifetime value.
+      </p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#contact">Get a Free Strategy Call</a>
+        <a class="btn btn-outline" href="#services">Explore Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics -->
+  <section class="section metrics">
+    <div class="container">
+      <div class="metrics-grid">
+        <div class="metric fade"><span class="value">€350k+</span><span class="label">Monthly ad spend managed</span></div>
+        <div class="metric fade"><span class="value">5.2×</span><span class="label">Average paid media ROAS</span></div>
+        <div class="metric fade"><span class="value">40%</span><span class="label">Avg. CPL reduction with AI</span></div>
+        <div class="metric fade"><span class="value">10+ yrs</span><span class="label">Combined experience</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video / Resources -->
+  <section class="section videos">
+    <div class="container">
+      <div class="section-header">
+        <h2>Learn how we work</h2>
+        <p class="lead">Short explainers and resources on data-driven growth, AI personalisation, and performance optimisation.</p>
+      </div>
+      <div class="video-grid">
+        <a class="video-card fade" href="#contact">
+          <div class="video-ph" role="img" aria-label="AI Targeting Explainer"></div>
+          <div class="video-info">
+            <h3>AI Targeting 101</h3>
+            <p>From broad signals to micro-segments that actually convert.</p>
+          </div>
+        </a>
+        <a class="video-card fade" href="#contact">
+          <div class="video-ph" role="img" aria-label="Predictive Lead Scoring"></div>
+          <div class="video-info">
+            <h3>Predictive Lead Scoring</h3>
+            <p>Prioritise leads by likelihood to buy — focus your sales time.</p>
+          </div>
+        </a>
+        <a class="video-card fade" href="#contact">
+          <div class="video-ph" role="img" aria-label="Creative testing framework"></div>
+          <div class="video-info">
+            <h3>Creative Testing Framework</h3>
+            <p>Rapid iterations, clear winners, and scalable ad sets.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <h2>What we do</h2>
+        <p class="lead">End-to-end growth: from strategy and tracking to AI activation and relentless optimisation.</p>
+      </div>
+      <div class="services-grid">
+        <div class="card fade">
+          <div class="icon">⚙️</div>
+          <h3>AI-Powered Advertising</h3>
+          <p>Full-funnel paid media across Meta, Google, TikTok & LinkedIn with creatives, budgets and audiences guided by predictive models — maximising ROAS and reducing CAC.</p>
         </div>
-    </section>
+        <div class="card fade">
+          <div class="icon">📈</div>
+          <h3>Data-Driven Strategy</h3>
+          <p>Attribution, tracking and dashboards. We connect the dots from click to revenue and use insights to decide where to spend the next euro.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">🤖</div>
+          <h3>Automation & Personalisation</h3>
+          <p>Lifecycle flows, lead scoring and smart outreach. AI tailors messages and timing to each user to lift conversion and LTV.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">🧭</div>
+          <h3>SEO & Content Systems</h3>
+          <p>Research, briefs and publishing pipelines that combine human quality with AI speed, boosting organic growth sustainably.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Metrics Section -->
-    <section class="metrics">
-        <div class="container">
-            <div class="metrics-grid">
-                <div class="metric-card fade-in">
-                    <span class="metric-value">350K+</span>
-                    <span class="metric-label">Månedlig annoncespend under forvaltning</span>
-                </div>
-                <div class="metric-card fade-in">
-                    <span class="metric-value">5.2x</span>
-                    <span class="metric-label">Gennemsnitlig ROI</span>
-                </div>
-                <div class="metric-card fade-in">team
+  <!-- Case Studies -->
+  <section class="section cases" id="cases">
+    <div class="container">
+      <div class="section-header">
+        <h2>Selected results</h2>
+        <p class="lead">A few examples of the impact we’ve delivered.</p>
+      </div>
+      <div class="case-grid">
+        <div class="case fade">
+          <div class="case-top"></div>
+          <div class="case-body">
+            <span class="tag">E-commerce</span>
+            <h3>From 2.1× to 4.8× ROAS in 60 days</h3>
+            <p>Creative refresh + AI-assisted audience expansion + offer testing.</p>
+            <div class="stats">
+              <div class="stat"><span class="v">+128%</span><span class="k">Revenue</span></div>
+              <div class="stat"><span class="v">-37%</span><span class="k">CPA</span></div>
+              <div class="stat"><span class="v">+3.2pp</span><span class="k">CR lift</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="case fade">
+          <div class="case-top"></div>
+          <div class="case-body">
+            <span class="tag">Lead Gen</span>
+            <h3>Cost per lead down 42%</h3>
+            <p>Predictive lead scoring prioritised high-intent segments and tightened bidding.</p>
+            <div class="stats">
+              <div class="stat"><span class="v">-42%</span><span class="k">CPL</span></div>
+              <div class="stat"><span class="v">+36%</span><span class="k">Qualified rate</span></div>
+              <div class="stat"><span class="v">+22%</span><span class="k">Booked calls</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="case fade">
+          <div class="case-top"></div>
+          <div class="case-body">
+            <span class="tag">Retention</span>
+            <h3>LTV up 18% with AI lifecycle</h3>
+            <p>Behavioural triggers and content personalisation across email/SMS.</p>
+            <div class="stats">
+              <div class="stat"><span class="v">+18%</span><span class="k">LTV</span></div>
+              <div class="stat"><span class="v">-21%</span><span class="k">Churn</span></div>
+              <div class="stat"><span class="v">+11%</span><span class="k">Repeat orders</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <h2>How we work</h2>
+        <p class="lead">Clear steps. Transparent reporting. Compounding gains.</p>
+      </div>
+      <div class="timeline">
+        <div class="step fade">
+          <div class="bubble">1</div>
+          <div class="content">
+            <h3>Discovery & Analysis</h3>
+            <p>Audit tracking, funnels and data. Identify growth levers and quick wins.</p>
+          </div>
+        </div>
+        <div class="step fade">
+          <div class="bubble">2</div>
+          <div class="content">
+            <h3>Strategy</h3>
+            <p>Prioritised roadmap across channels, creative angles and measurement.</p>
+          </div>
+        </div>
+        <div class="step fade">
+          <div class="bubble">3</div>
+          <div class="content">
+            <h3>Implementation & Optimisation</h3>
+            <p>Launch, test and iterate. AI assists with audiences, bids and messaging.</p>
+          </div>
+        </div>
+        <div class="step fade">
+          <div class="bubble">4</div>
+          <div class="content">
+            <h3>Reporting & Growth</h3>
+            <p>Simple dashboards tied to business KPIs. Scale what works, retire what doesn’t.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>About Rithink</h2>
+          <p>We’re a digital marketing & AI studio focused on measurable outcomes. Our approach combines experimentation with machine learning to deliver personalised experiences at scale.</p>
+          <div class="features">
+            <div class="feat">
+              <div class="f-ic">📊</div>
+              <div class="f-t">
+                <h4>Data first</h4>
+                <p>Every decision ties back to tracking and business KPIs.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="f-ic">🧪</div>
+              <div class="f-t">
+                <h4>Test & learn</h4>
+                <p>Fast cycles to find winners and scale with confidence.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="f-ic">🤝</div>
+              <div class="f-t">
+                <h4>Partnership</h4>
+                <p>We work as an extension of your team — transparent and proactive.</p>
+              </div>
+            </div>
+            <div class="feat">
+              <div class="f-ic">🔒</div>
+              <div class="f-t">
+                <h4>Privacy-aware</h4>
+                <p>Responsible data use and cookieless-ready measurement.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:10px">What AI means in practice</h3>
+          <ul style="line-height:1.9;opacity:.95">
+            <li>Hyper-personalised journeys based on behaviour and preferences.</li>
+            <li>Predictive insights to forecast demand, budgets and lead quality.</li>
+            <li>Smarter automation for outreach, timing and content variants.</li>
+            <li>Faster research and creative iteration without sacrificing quality.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta" id="contact">
+    <div class="container">
+      <h2>Ready to grow?</h2>
+      <p class="lead">Tell us about your goals and we’ll map a path to measurable results.</p>
+      <div class="benefits">
+        <div class="benefit"><span class="check">✓</span><span>No-pressure discovery call</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Audit & action plan</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Transparent pricing</span></div>
+      </div>
+      <a class="btn btn-primary" href="mailto:rijad.alibasic@hotmail.com?subject=Rithink%20—%20Free%20Strategy%20Call">Book now via email</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>
+          <h3>Rithink</h3>
+          <p>Digital Marketing & AI Solutions. Based in Copenhagen. We partner with ambitious teams to unlock profitable growth.</p>
+        </div>
+        <div class="fcol">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#cases">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Paid Media</a></li>
+            <li><a href="#services">Automation</a></li>
+            <li><a href="#services">SEO & Content</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:rijad.alibasic@hotmail.com">Email us</a></li>
+            <li><a href="#contact">Free consultation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">© <span id="yr"></span> Rithink. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu (simple open/close by toggling a cloned list)
+    const toggleMenu = () => {
+      const existing = document.querySelector('.mobile-nav');
+      if (existing){ existing.remove(); return; }
+      const ul = document.querySelector('.nav-links').cloneNode(true);
+      ul.className = 'mobile-nav';
+      Object.assign(ul.style,{
+        position:'fixed',top:'64px',left:'0',right:'0',
+        background:'#fff',padding:'16px 20px 24px',display:'grid',gap:'14px',
+        borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.12)',zIndex:'999'
+      });
+      document.body.appendChild(ul);
+    };
+
+    // Sticky header
+    const hdr = document.getElementById('header');
+    const onScroll = () => {
+      if (window.scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+      // reveal on scroll
+      document.querySelectorAll('.fade').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight - 80) el.classList.add('show');
+      });
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('load', ()=>{
+      document.getElementById('yr').textContent = new Date().getFullYear();
+      onScroll();
+    });
+  </script>
+</body>
+</html>
