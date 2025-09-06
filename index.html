@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="da">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advera - Marketing Bureau Skabt Til Resultater</title>
+    <meta name="description" content="Rithink - Digital Marketing & AI Løsninger. Vi transformerer virksomheder gennem innovative digitale strategier og skræddersyede AI-løsninger.">
+    <title>Rithink - Digital Marketing & AI Solutions</title>
     <style>
         * {
             margin: 0;
@@ -12,17 +13,24 @@
         }
 
         :root {
-            --black: #000000;
+            --primary: #0A0E27;
+            --accent: #4A69FF;
+            --accent-light: #6B84FF;
+            --text-dark: #1a1a1a;
+            --text-light: #6c757d;
             --white: #ffffff;
-            --gray: #999999;
-            --light-gray: #f5f5f5;
-            --border-gray: #e5e5e5;
+            --gray-light: #f8f9fa;
+            --border-light: #e9ecef;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             line-height: 1.6;
-            color: var(--black);
+            color: var(--text-dark);
             background: var(--white);
             overflow-x: hidden;
         }
@@ -33,16 +41,24 @@
             padding: 0 20px;
         }
 
-        /* Header */
+        /* Header Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-gray);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            padding: 10px 0;
+            border-bottom-color: var(--border-light);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
         }
 
         nav {
@@ -52,353 +68,725 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             letter-spacing: -1px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 35px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--black);
-            font-size: 14px;
+            color: var(--text-dark);
+            font-size: 15px;
             font-weight: 500;
-            transition: opacity 0.3s;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            opacity: 0.6;
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .contact-btn {
-            background: var(--black);
+            background: var(--accent);
             color: var(--white);
-            padding: 12px 24px;
-            border-radius: 24px;
+            padding: 12px 28px;
+            border-radius: 25px;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: transform 0.3s;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(74, 105, 255, 0.2);
         }
 
         .contact-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(74, 105, 255, 0.3);
+            background: var(--accent-light);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
         }
 
         /* Hero Section */
         .hero {
-            margin-top: 100px;
-            padding: 80px 0;
-            text-align: center;
+            margin-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2454 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 80%, var(--accent) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, var(--accent-light) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(74, 105, 255, 0.1) 0%, transparent 50%);
+            opacity: 0.2;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(-5%, 5%) rotate(120deg); }
+            66% { transform: translate(5%, -5%) rotate(240deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--white);
+            padding: 40px 0;
         }
 
         .hero-tag {
             display: inline-block;
-            background: var(--light-gray);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 13px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease;
         }
 
         .hero h1 {
-            font-size: clamp(40px, 8vw, 80px);
-            font-weight: 700;
+            font-size: clamp(48px, 8vw, 88px);
+            font-weight: 800;
             line-height: 1.1;
             margin-bottom: 30px;
             letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .hero-description {
-            font-size: 20px;
-            color: var(--gray);
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.8);
             max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.5;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
 
-        .metrics {
+        .cta-buttons {
             display: flex;
-            justify-content: center;
-            gap: 60px;
-            margin-top: 60px;
+            gap: 20px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s backwards;
         }
 
-        .metric {
+        .btn {
+            padding: 16px 36px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Metrics Section */
+        .metrics {
+            padding: 80px 0;
+            background: var(--white);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
             text-align: center;
+        }
+
+        .metric-card {
+            padding: 30px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: var(--white);
         }
 
         .metric-value {
             font-size: 48px;
-            font-weight: 700;
+            font-weight: 800;
+            color: var(--accent);
             display: block;
+            margin-bottom: 10px;
         }
 
         .metric-label {
-            font-size: 14px;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-
-        /* Case Study Section */
-        .case-study {
-            background: var(--light-gray);
-            padding: 80px 0;
-            margin: 80px 0;
-        }
-
-        .case-study-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .case-study-text h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .case-study-text p {
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-
-        .case-results {
-            list-style: none;
-        }
-
-        .case-results li {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--border-gray);
+            font-size: 16px;
+            color: var(--text-light);
             font-weight: 500;
         }
 
-        .case-results li:last-child {
-            border-bottom: none;
+        /* Video Gallery Section */
+        .video-gallery-section {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(180deg, var(--white) 0%, #f0f4ff 50%, var(--white) 100%);
+            padding: 100px 0;
+            overflow: hidden;
         }
 
-        .case-image {
-            background: var(--white);
-            padding: 40px;
+        .video-gallery-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .video-gallery-header h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .video-gallery-header p {
+            font-size: 20px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .video-card {
+            position: relative;
             border-radius: 20px;
-            height: 400px;
+            overflow: hidden;
+            height: 300px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 30px rgba(74, 105, 255, 0.2);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(74, 105, 255, 0.3);
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
-            color: var(--gray);
-        }
-
-        /* Philosophy Section */
-        .philosophy {
-            padding: 100px 0;
-            text-align: center;
-        }
-
-        .philosophy h2 {
-            font-size: 48px;
-            margin-bottom: 50px;
-            line-height: 1.2;
-        }
-
-        .philosophy-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        .philosophy-item {
-            padding: 30px;
-            border: 1px solid var(--border-gray);
-            border-radius: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .philosophy-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .philosophy-item h3 {
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .philosophy-item p {
-            color: var(--gray);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Process Section */
-        .process {
-            padding: 100px 0;
-            background: var(--light-gray);
-        }
-
-        .process h2 {
-            font-size: 48px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .process-intro {
-            text-align: center;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-
-        .process-steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-        }
-
-        .process-step {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            position: relative;
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: var(--black);
-            color: var(--white);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .process-step h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .process-step p {
-            color: var(--gray);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Portfolio Section */
-        .portfolio {
-            padding: 100px 0;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-
-        .portfolio-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             position: relative;
             overflow: hidden;
-            border-radius: 20px;
-            height: 400px;
-            background: var(--light-gray);
-            transition: transform 0.3s;
-            cursor: pointer;
         }
 
-        .portfolio-item:hover {
-            transform: scale(1.02);
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="40,30 40,70 70,50" fill="white" opacity="0.3"/></svg>') center/60px no-repeat;
         }
 
-        .portfolio-content {
+        .video-content {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             padding: 30px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(10, 14, 39, 0.95), transparent);
             color: var(--white);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
 
-        .portfolio-content h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
+        .video-card:hover .video-content {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-        .portfolio-content p {
-            font-size: 14px;
+        .video-content h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .video-content p {
+            font-size: 15px;
             opacity: 0.9;
+            line-height: 1.5;
         }
 
-        /* Why Us Section */
-        .why-us {
+        /* Services Section */
+        .services {
             padding: 100px 0;
-            background: var(--light-gray);
+            background: var(--white);
         }
 
-        .why-us h2 {
-            font-size: 48px;
+        .section-header {
             text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
             margin-bottom: 20px;
+            color: var(--primary);
         }
 
-        .why-us-intro {
-            text-align: center;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-
-        .why-us-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-
-        .why-us-item {
-            text-align: center;
-        }
-
-        .why-us-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--black);
-            border-radius: 50%;
-            margin: 0 auto 20px;
-        }
-
-        .why-us-item h3 {
+        .section-header p {
             font-size: 20px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 40px;
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            border-color: transparent;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 32px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(-5deg) scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        /* Case Studies Section */
+        .case-studies {
+            padding: 100px 0;
+            background: var(--gray-light);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .case-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+
+        .case-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-image::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            backdrop-filter: blur(10px);
+        }
+
+        .case-content {
+            padding: 30px;
+        }
+
+        .case-tag {
+            display: inline-block;
+            background: var(--gray-light);
+            color: var(--accent);
+            padding: 6px 14px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
             margin-bottom: 15px;
         }
 
-        .why-us-item p {
-            color: var(--gray);
-            font-size: 14px;
+        .case-content h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .case-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .case-results {
+            display: flex;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .case-stat {
+            flex: 1;
+        }
+
+        .case-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .case-stat-label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 5px;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .process-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .process-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent), var(--accent-light));
+        }
+
+        .process-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .process-step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .process-content {
+            flex: 1;
+            padding: 30px;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .process-content:hover {
+            transform: scale(1.05);
+        }
+
+        .process-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            z-index: 1;
+            box-shadow: 0 5px 20px rgba(74, 105, 255, 0.3);
+        }
+
+        .process-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .process-content p {
+            color: var(--text-light);
             line-height: 1.6;
         }
 
-        /* CTA Section */
-        .cta {
+        /* About Section */
+        .about {
             padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #1a2454 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 50%, rgba(74, 105, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h2 {
+            font-size: clamp(36px, 5vw, 48px);
+            font-weight: 800;
+            margin-bottom: 30px;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            font-size: 14px;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: var(--white);
             text-align: center;
         }
 
-        .cta h2 {
-            font-size: 48px;
-            margin-bottom: 30px;
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .cta-content p {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
         }
 
         .cta-benefits {
@@ -406,456 +794,209 @@
             justify-content: center;
             gap: 40px;
             margin: 40px 0;
+            flex-wrap: wrap;
         }
 
         .cta-benefit {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: var(--gray);
         }
 
         .checkmark {
-            width: 20px;
-            height: 20px;
-            background: var(--black);
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--white);
-            font-size: 12px;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--black);
-            color: var(--white);
-            padding: 20px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: transform 0.3s;
-            margin-top: 30px;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
         }
 
         /* Footer */
         footer {
-            padding: 60px 0;
-            border-top: 1px solid var(--border-gray);
+            padding: 60px 0 30px;
+            background: var(--primary);
+            color: var(--white);
         }
 
         .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        .footer-links {
-            display: flex;
-            gap: 30px;
+        .footer-about h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--accent-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .footer-links a {
-            color: var(--gray);
+        .footer-about p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--white);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: var(--black);
+        .footer-column a:hover {
+            opacity: 1;
         }
 
         .footer-bottom {
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid var(--border-gray);
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            color: var(--gray);
-            font-size: 14px;
+            opacity: 0.6;
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
-            .metrics {
-                flex-direction: column;
-                gap: 30px;
+            .menu-toggle {
+                display: flex;
             }
 
-            .case-study-content {
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .video-grid,
+            .services-grid,
+            .case-grid {
                 grid-template-columns: 1fr;
             }
 
-            .philosophy-grid,
-            .process-steps,
-            .portfolio-grid,
-            .why-us-grid {
+            .process-timeline::before {
+                left: 30px;
+            }
+
+            .process-step,
+            .process-step:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .process-number {
+                left: 30px;
+            }
+
+            .process-content {
+                margin-left: 80px;
+                margin-right: 0;
+            }
+
+            .about-content {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
 
             .cta-benefits {
                 flex-direction: column;
-                gap: 20px;
+                align-items: center;
             }
+        }
 
-            .footer-content {
-                flex-direction: column;
-                gap: 30px;
-            }
+        /* Loading Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Floating animation for hero */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
+    <!-- Header Navigation -->
+    <header id="header">
         <nav class="container">
-            <div class="logo">Advera</div>
+            <div class="logo">Rithink</div>
             <ul class="nav-links">
+                <li><a href="#home">Hjem</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#cases">Cases</a></li>
                 <li><a href="#process">Process</a></li>
-                <li><a href="#about">About</a></li>
+                <li><a href="#about">Om Os</a></li>
+                <li><a href="#contact" class="contact-btn">Book Gratis Samtale</a></li>
             </ul>
-            <a href="#contact" class="contact-btn">Book a Free Call</a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="home">
         <div class="container">
-            <span class="hero-tag">Performance Driven</span>
-            <h1>From first click to<br>repeat purchase</h1>
-            <p class="hero-description">We turn your ad spend into measurable growth.</p>
-            
-            <div class="metrics">
-                <div class="metric">
+            <div class="hero-content">
+                <span class="hero-tag">Performance Driven</span>
+                <h1>Fra første klik til<br><span class="gradient-text">gentagne køb</span></h1>
+                <p class="hero-description">Vi transformerer din marketinginvestering til målbar vækst gennem innovative digitale strategier og AI-løsninger.</p>
+                
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Få Gratis Konsultation</a>
+                    <a href="#services" class="btn btn-secondary">Se Vores Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Section -->
+    <section class="metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-card fade-in">
                     <span class="metric-value">350K+</span>
-                    <span class="metric-label">monthly ad spend under management</span>
+                    <span class="metric-label">Månedlig annoncespend under forvaltning</span>
                 </div>
-                <div class="metric">
+                <div class="metric-card fade-in">
                     <span class="metric-value">5.2x</span>
-                    <span class="metric-label">average ROI</span>
+                    <span class="metric-label">Gennemsnitlig ROI</span>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Case Study Section -->
-    <section class="case-study">
-        <div class="container">
-            <div class="case-study-content">
-                <div class="case-study-text">
-                    <h2>By focusing on scalable ad strategies and ROI-driven campaigns, we helped Nordic Gear transform strong products into predictable month-to-month growth.</h2>
-                    <ul class="case-results">
-                        <li>+38% over sales target within 6 months</li>
-                        <li>5.2x ROI maintained during scaling</li>
-                        <li>Predictable growth month after month</li>
-                    </ul>
-                </div>
-                <div class="case-image">
-                    [Nordic Gear Campaign Visuals]
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Philosophy Section -->
-    <section class="philosophy">
-        <div class="container">
-            <h2>We don't rely on empty claims.<br>We work with proven strategies.</h2>
-            <div class="philosophy-grid">
-                <div class="philosophy-item">
-                    <h3>Results-Based Compensation</h3>
-                    <p>We work primarily on a results-basis compensation model because we believe in our ability to deliver.</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>Strategy First</h3>
-                    <p>Ads are fundamentals - strategy is the reason we are effective. We focus on the bigger picture.</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>True Partnership</h3>
-                    <p>More than marketing, we are partners in your business, invested in your long-term success.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Process Section -->
-    <section class="process">
-        <div class="container">
-            <h2>Our Process</h2>
-            <p class="process-intro">Our approach is centered around a collaborative and data-driven process that ensures every aspect of your marketing strategy is optimized for maximum results.</p>
-            
-            <div class="process-steps">
-                <div class="process-step">
-                    <span class="step-number">1</span>
-                    <h3>Strategy</h3>
-                    <p>We craft a comprehensive strategy tailored to your business goals.</p>
-                </div>
-                <div class="process-step">
-                    <span class="step-number">2</span>
-                    <h3>Execution</h3>
-                    <p>Our team sets up and manages campaigns with precision.</p>
-                </div>
-                <div class="process-step">
-                    <span class="step-number">3</span>
-                    <h3>Analysis</h3>
-                    <p>We leverage data to inform decisions and drive better outcomes.</p>
-                </div>
-                <div class="process-step">
-                    <span class="step-number">4</span>
-                    <h3>Scale</h3>
-                    <p>Continuously scaling your campaigns for greater success.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section class="portfolio">
-        <div class="container">
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <h3>Nordic Kitchen</h3>
-                        <p>Elevated everyday cooking through elegant, user-friendly kitchen tools—powered by design and innovation.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <h3>Nordic Lamps</h3>
-                        <p>Strengthened brand visibility, boosted conversion rates, and positioned Nordic Lamps as a premium design choice.</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="portfolio-content">
-                        <h3>Exclusive Jewelry</h3>
-                        <p>Exclusive jewelry brand combining timeless design, modern elegance, and powerful storytelling.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Section -->
-    <section class="why-us">
-        <div class="container">
-            <h2>Why Choose Advera</h2>
-            <p class="why-us-intro">Advera is more than just a marketing agency; we're a catalyst for extraordinary growth. Our unique approach sets us apart in a crowded digital landscape.</p>
-            
-            <div class="why-us-grid">
-                <div class="why-us-item">
-                    <div class="why-us-icon"></div>
-                    <h3>Precision Execution</h3>
-                    <p>Every campaign is executed with meticulous attention to detail, ensuring that your brand stands out and resonates with your audience.</p>
-                </div>
-                <div class="why-us-item">
-                    <div class="why-us-icon"></div>
-                    <h3>Customer-Centric</h3>
-                    <p>We put your customers at the heart of our strategies, creating personalized experiences that drive engagement and loyalty.</p>
-                </div>
-                <div class="why-us-item">
-                    <div class="why-us-icon"></div>
-                    <h3>Future-Focused</h3>
-                    <p>We're not just about immediate results; we're about setting you up for long-term success with forward-thinking approaches.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to elevate your business<br>with results for once? Let's talk.</h2>
-            
-            <div class="cta-benefits">
-                <div class="cta-benefit">
-                    <span class="checkmark">✓</span>
-                    <span>In-depth analysis of your current marketing</span>
-                </div>
-                <div class="cta-benefit">
-                    <span class="checkmark">✓</span>
-                    <span>No contingencies</span>
-                </div>
-                <div class="cta-benefit">
-                    <span class="checkmark">✓</span>
-                    <span>If we can't help, we won't pitch you</span>
-                </div>
-            </div>
-            
-            <a href="#" class="cta-button">Book Your Free Strategy Call</a>
-            
-            <p style="margin-top: 20px; color: var(--gray); font-size: 14px;">
-                We work with results-first partnerships<br>
-                30-Day Satisfaction Policy
-            </p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">Advera</div>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Advera. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Video Gallery Zoom Effect - Simplified and working
-        const videoGallery = document.querySelector('.video-gallery');
-        const videoGallerySection = document.querySelector('.video-gallery-section');
-        const videoItems = document.querySelectorAll('.video-item');
-        
-        // Function to handle the zoom effect
-        function handleVideoGalleryScroll() {
-            if (!videoGallerySection || !videoGallery) return;
-            
-            const sectionRect = videoGallerySection.getBoundingClientRect();
-            const sectionTop = sectionRect.top;
-            const sectionHeight = videoGallerySection.offsetHeight;
-            const windowHeight = window.innerHeight;
-            
-            // Check if section is in viewport
-            if (sectionTop < windowHeight && sectionTop > -sectionHeight) {
-                // Calculate scroll progress (0 to 1)
-                const scrollProgress = Math.max(0, Math.min(1, 
-                    (windowHeight - sectionTop) / (windowHeight + sectionHeight)
-                ));
-                
-                // Apply transforms based on scroll progress
-                if (scrollProgress < 0.2) {
-                    // Initial state - zoomed out
-                    const scale = 0.3 + (scrollProgress * 3.5);
-                    const rotateX = 45 - (scrollProgress * 225);
-                    const translateZ = -500 + (scrollProgress * 2500);
-                    videoGallery.style.transform = `scale(${scale}) rotateX(${rotateX}deg) translateZ(${translateZ}px)`;
-                    videoGallery.style.opacity = scrollProgress * 5;
-                } else if (scrollProgress < 0.5) {
-                    // Zooming in
-                    const progress = (scrollProgress - 0.2) / 0.3;
-                    const scale = 1 + (progress * 0.2);
-                    videoGallery.style.transform = `scale(${scale}) rotateX(0deg) translateZ(0)`;
-                    videoGallery.style.opacity = 1;
-                    
-                    // Add visible class to video items
-                    videoItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.classList.add('visible');
-                        }, index * 100);
-                    });
-                } else if (scrollProgress < 0.8) {
-                    // Normal view
-                    videoGallery.style.transform = 'scale(1.2) rotateX(0deg) translateZ(0)';
-                    videoGallery.style.opacity = 1;
-                } else {
-                    // Zooming out at the end
-                    const progress = (scrollProgress - 0.8) / 0.2;
-                    const scale = 1.2 - (progress * 0.4);
-                    const rotateX = progress * 20;
-                    const opacity = 1 - (progress * 0.6);
-                    videoGallery.style.transform = `scale(${scale}) rotateX(${rotateX}deg)`;
-                    videoGallery.style.opacity = opacity;
-                }
-            }
-        }
-        
-        // Add scroll listener
-        window.addEventListener('scroll', () => {
-            requestAnimationFrame(handleVideoGalleryScroll);
-            
-            // Original parallax for hero
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero && scrolled < 500) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-        
-        // Initial check
-        handleVideoGalleryScroll();
-
-        // Animate metrics on scroll
-        const observerOptions = {
-            threshold: 0.5,
-            rootMargin: '0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.metric').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Add hover effect for videos - play on hover
-        document.querySelectorAll('.video-item').forEach(item => {
-            const video = item.querySelector('video');
-            if (video) {
-                // Ensure videos are playing
-                video.play().catch(e => console.log('Video autoplay failed:', e));
-                
-                item.addEventListener('mouseenter', function() {
-                    video.playbackRate = 0.5; // Slow down on hover for effect
-                });
-                item.addEventListener('mouseleave', function() {
-                    video.playbackRate = 1; // Normal speed
-                });
-            }
-        });
-
-        // Add fadeInUp animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-</body>
-</html>
+                <div class="metric-card fade-in">
