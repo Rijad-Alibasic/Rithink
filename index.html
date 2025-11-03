@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rithink — AI + CRM Growth Engine. Never miss a lead, automate follow‑up, and keep deals moving with an AI assistant that writes, routes, and logs in your CRM." />
-  <title>Rithink — AI + CRM Growth Engine</title>
+  <meta name="description" content="Rithink — AI-first CRM. Capture every lead 24/7, reply instantly, book meetings, and keep deals moving — all in one CRM with built-in AI." />
+  <title>Rithink — AI-first CRM</title>
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Rithink — AI + CRM Growth Engine">
-  <meta property="og:description" content="Never miss a lead. Only the calls that matter. Follow‑up on autopilot. Keep deals moving.">
+  <meta property="og:title" content="Rithink — AI-first CRM">
+  <meta property="og:description" content="Never miss a lead. Only the calls that matter. Follow-up on autopilot. Keep deals moving.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="data:image/png;base64,iVBORw0KGgo=">
   <meta name="twitter:card" content="summary_large_image">
@@ -83,7 +83,7 @@
     .metric .value{display:block;font-size:42px;font-weight:800;color:var(--accent);margin-bottom:6px}
     .metric .label{font-size:15px;color:var(--muted);font-weight:600}
 
-    /* Agenda (Timeline) */
+    /* Timeline (Agenda) */
     .timeline{max-width:1000px;margin:40px auto 0;position:relative}
     .timeline::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:2px;height:100%;background:linear-gradient(180deg,var(--accent),var(--accent-light))}
     .step{display:flex;align-items:flex-start;margin:64px 0;position:relative}
@@ -94,11 +94,17 @@
     .step .content ul{margin-left:18px}
     .outcome{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);color:#2b2b2b;font-weight:700}
 
-    /* Cards / Cases */
+    /* Cards / Product / Cases */
     .card{padding:34px;background:#fff;border-radius:18px;border:1px solid var(--border);transition:.25s;position:relative;overflow:hidden}
     .card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transition:transform .25s}
     .card:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,.08);border-color:transparent}
     .card:hover::before{transform:scaleX(1)}
+
+    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+    .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;font-size:28px;margin-bottom:16px}
+    .card h3{font-size:22px;margin-bottom:8px}
+    .card p{color:var(--muted)}
+
     .cases .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
     .case .tag{font-size:12px;background:var(--gray);color:var(--accent);padding:6px 12px;border-radius:999px;font-weight:800;display:inline-block;margin-bottom:10px;border:1px solid var(--border)}
     .case .stats{display:flex;gap:18px;border-top:1px solid var(--border);padding-top:14px;margin-top:12px}
@@ -106,9 +112,9 @@
     .stat .k{font-size:12px;color:var(--muted)}
     .placeholder-note{font-size:12px;color:var(--muted);margin-top:8px}
 
-    /* Integrations */
-    .integrations .logo-wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:18px}
-    .intg{display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:12px;padding:16px;background:#fff;font-weight:700;color:#2c2c2c;min-height:72px}
+    /* Channels */
+    .channels .logo-wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:18px}
+    .chip{display:flex;align-items:center;justify-content:center;border:1px dashed var(--border);border-radius:12px;padding:16px;background:#fff;font-weight:700;color:#2c2c2c;min-height:72px}
 
     /* About */
     .about{background:linear-gradient(135deg,var(--primary) 0%,#1a2454 100%);color:#fff;position:relative;overflow:hidden}
@@ -121,7 +127,7 @@
     .privacy .policy{max-width:900px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px}
     .policy h3{margin:14px 0 8px 0}
     .policy p, .policy li{color:#333}
-    .small{font-size:12px;color:var(--muted)}
+    .small{font-size:12px;color:#6c757d}
 
     /* CTA & Footer */
     .cta{text-align:center}
@@ -153,15 +159,26 @@
     }
   </style>
 
-  <!-- JSON-LD (update the URL/logo if you have them) -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Organization",
     "name":"Rithink",
     "url":"https://www.example.com",
-    "description":"AI + CRM Growth Engine: never miss a lead, automate follow-up, and keep deals moving.",
+    "description":"AI-first CRM that captures leads, replies, books and keeps deals moving.",
     "address":{"@type":"PostalAddress","addressLocality":"Copenhagen","addressCountry":"DK"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Rithink CRM",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Web",
+    "description":"AI-first CRM for lead capture, assistive replies, scheduling and deal acceleration.",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","description":"Beta pricing placeholder"}
   }
   </script>
 </head>
@@ -172,8 +189,9 @@
       <button class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">Rithink</button>
       <ul class="nav-links" role="menubar" aria-label="Primary navigation">
         <li role="none"><a role="menuitem" href="#agenda">Agenda</a></li>
-        <li role="none"><a role="menuitem" href="#integrations">Integrations</a></li>
-        <li role="none"><a role="menuitem" href="#cases">Case Studies</a></li>
+        <li role="none"><a role="menuitem" href="#product">Product</a></li>
+        <li role="none"><a role="menuitem" href="#channels">Channels</a></li>
+        <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
         <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
         <li role="none"><a class="btn-pill" role="menuitem" href="#contact">Book a Demo</a></li>
       </ul>
@@ -186,27 +204,28 @@
   <!-- Hero -->
   <section class="hero" id="home">
     <div class="container hero-content">
-      <span class="tag">AI + CRM</span>
+      <span class="tag">AI CRM</span>
       <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
       <p>
-        Connect your ads, data and CRM with an AI assistant that captures, replies, books and logs —
-        so sales focus on high‑value conversations and deals keep moving.
+        An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
+        calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
       </p>
       <div class="cta">
-        <a class="btn btn-primary" href="#contact">Get an AI & CRM Audit</a>
+        <!-- Replace with your trial/signup URL when ready -->
+        <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
         <a class="btn btn-outline" href="#agenda">See the Agenda</a>
       </div>
     </div>
   </section>
 
-  <!-- Quick Metrics (optional placeholders) -->
-  <section class="section metrics" aria-label="Key results">
+  <!-- Metrics -->
+  <section class="section" aria-label="Key results">
     <div class="container">
       <div class="metrics-grid">
-        <div class="metric fade"><span class="value">+36%</span><span class="label">SQL rate from MQLs</span></div>
-        <div class="metric fade"><span class="value">-42%</span><span class="label">Cost per qualified lead</span></div>
-        <div class="metric fade"><span class="value">+26%</span><span class="label">Pipeline velocity</span></div>
-        <div class="metric fade"><span class="value">120h/mo</span><span class="label">Ops time saved</span></div>
+        <div class="metric fade"><span class="value">100%</span><span class="label">Lead coverage</span></div>
+        <div class="metric fade"><span class="value">2 min</span><span class="label">Median response time</span></div>
+        <div class="metric fade"><span class="value">+28%</span><span class="label">Booked meetings</span></div>
+        <div class="metric fade"><span class="value">-35%</span><span class="label">Time-to-first-touch</span></div>
       </div>
     </div>
   </section>
@@ -216,10 +235,9 @@
     <div class="container">
       <div class="section-header">
         <h2>CRM AI Agenda</h2>
-        <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster.</p>
+        <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster — built into Rithink CRM.</p>
       </div>
       <div class="timeline">
-        <!-- 1 -->
         <div class="step fade">
           <div class="bubble">1</div>
           <div class="content">
@@ -228,12 +246,11 @@
               <li>24/7 capture from forms, chat, email, and social.</li>
               <li>Instant, branded replies with light qualification.</li>
               <li>Books meetings from shared calendars.</li>
-              <li>Creates/updates CRM, assigns owner, sets SLA, escalates if untouched.</li>
+              <li>Creates/updates records, assigns owner, sets SLA, escalates if untouched.</li>
             </ul>
             <div class="outcome">Outcome: 100% coverage, minute‑level response times.</div>
           </div>
         </div>
-        <!-- 2 -->
         <div class="step fade">
           <div class="bubble">2</div>
           <div class="content">
@@ -246,7 +263,6 @@
             <div class="outcome">Outcome: reps focus on high‑value conversations.</div>
           </div>
         </div>
-        <!-- 3 -->
         <div class="step fade">
           <div class="bubble">3</div>
           <div class="content">
@@ -259,7 +275,6 @@
             <div class="outcome">Outcome: faster first meetings, higher show rates.</div>
           </div>
         </div>
-        <!-- 4 -->
         <div class="step fade">
           <div class="bubble">4</div>
           <div class="content">
@@ -272,7 +287,6 @@
             <div class="outcome">Outcome: higher reply, connect, booking, and stage‑to‑stage conversion.</div>
           </div>
         </div>
-        <!-- 5 -->
         <div class="step fade">
           <div class="bubble">5</div>
           <div class="content">
@@ -289,32 +303,75 @@
     </div>
   </section>
 
-  <!-- Integrations -->
-  <section class="section integrations" id="integrations">
+  <!-- Product -->
+  <section class="section" id="product">
     <div class="container">
       <div class="section-header">
-        <h2>Works with your stack</h2>
-        <p class="lead">HubSpot, Salesforce, and Pipedrive out‑of‑the‑box — plus messaging, email and data tools.</p>
+        <h2>Product</h2>
+        <p class="lead">Everything you need in one AI-first CRM — no external CRM required.</p>
       </div>
-      <div class="logo-wall">
-        <div class="intg fade" aria-label="HubSpot">HubSpot</div>
-        <div class="intg fade" aria-label="Salesforce">Salesforce</div>
-        <div class="intg fade" aria-label="Pipedrive">Pipedrive</div>
-        <div class="intg fade" aria-label="Intercom">Intercom</div>
-        <div class="intg fade" aria-label="Klaviyo">Klaviyo</div>
-        <div class="intg fade" aria-label="Mailchimp">Mailchimp</div>
-        <div class="intg fade" aria-label="Segment / CDP">Segment</div>
-        <div class="intg fade" aria-label="Zapier / Make">Zapier • Make</div>
+      <div class="product-grid">
+        <div class="card fade">
+          <div class="icon">📥</div>
+          <h3>Unified Inbox</h3>
+          <p>Handle form submissions, email threads, chat and social DMs in one place with assistive replies and full context.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">🗓️</div>
+          <h3>Scheduling</h3>
+          <p>Instant booking from shared calendars, confirmations, prep notes and auto‑reschedules for no‑shows.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">🤖</div>
+          <h3>Assistant</h3>
+          <p>Answers routine questions, triages urgency, creates tasks, and hands off to the right owner with summaries.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">📈</div>
+          <h3>Pipelines & SLAs</h3>
+          <p>Rule‑based routing, SLAs and escalations keep every lead and deal moving to the next best action.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">✉️</div>
+          <h3>Sequences</h3>
+          <p>Brand‑safe templates and cadences across email/SMS/chat. A/B test and auto‑promote winners.</p>
+        </div>
+        <div class="card fade">
+          <div class="icon">📊</div>
+          <h3>Analytics</h3>
+          <p>Response time, show rate, booking conversion, stage‑to‑stage and cycle time — measured and actionable.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Case Studies (fake placeholders) -->
+  <!-- Channels -->
+  <section class="section channels" id="channels">
+    <div class="container">
+      <div class="section-header">
+        <h2>Channels Rithink handles</h2>
+        <p class="lead">Capture and converse where your buyers are. Rithink is the CRM of record.</p>
+      </div>
+      <div class="logo-wall">
+        <div class="chip fade" aria-label="Web Forms">Web Forms</div>
+        <div class="chip fade" aria-label="Email (IMAP/SMTP)">Email</div>
+        <div class="chip fade" aria-label="Live Chat Widget">Live Chat</div>
+        <div class="chip fade" aria-label="SMS (connector)">SMS*</div>
+        <div class="chip fade" aria-label="WhatsApp (connector)">WhatsApp*</div>
+        <div class="chip fade" aria-label="Social DMs">Social DMs*</div>
+        <div class="chip fade" aria-label="Calendar">Calendar</div>
+        <div class="chip fade" aria-label="Webhooks & API">Webhooks & API</div>
+      </div>
+      <p class="lead" style="margin-top:14px;text-align:center"><span class="small">*Via off‑the‑shelf channel connectors. Rithink remains the CRM of record.</span></p>
+    </div>
+  </section>
+
+  <!-- Case Studies (fake demo placeholders) -->
   <section class="section cases" id="cases">
     <div class="container">
       <div class="section-header">
         <h2>Selected results (demo)</h2>
-        <p class="lead">Placeholder companies and metrics for layout — replace with real client data when ready.</p>
+        <p class="lead">Placeholder companies and metrics for layout — replace with real results when ready.</p>
       </div>
 
       <div class="case-grid">
@@ -375,23 +432,23 @@
       <div class="about-grid">
         <div>
           <h2>About Rithink</h2>
-          <p>We’re a Copenhagen‑based AI & CRM studio. We implement assistants, automations and reporting inside your CRM — HubSpot, Salesforce, or Pipedrive — so every lead is handled and every step is logged.</p>
+          <p>We’re an AI-first CRM built in Copenhagen. Capture, converse, book and advance deals in one place — with brand‑safe AI assistance and measurable outcomes.</p>
           <div class="features" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px">
             <div class="feat" style="display:flex;gap:10px">
               <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">🧪</div>
               <div class="f-t"><h4 style="margin:0 0 4px">Experiment‑driven</h4><p style="margin:0;color:rgba(255,255,255,.85)">Short cycles, clear KPIs, compounding learnings.</p></div>
             </div>
             <div class="feat" style="display:flex;gap:10px">
-              <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">🔌</div>
-              <div class="f-t"><h4 style="margin:0 0 4px">CRM‑native</h4><p style="margin:0;color:rgba(255,255,255,.85)">We build in your tools — not around them.</p></div>
-            </div>
-            <div class="feat" style="display:flex;gap:10px">
               <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">🔒</div>
-              <div class="f-t"><h4 style="margin:0 0 4px">Privacy‑aware</h4><p style="margin:0;color:rgba(255,255,255,.85)">GDPR‑friendly, consent‑first, cookieless‑ready.</p></div>
+              <div class="f-t"><h4 style="margin:0 0 4px">Privacy‑aware</h4><p style="margin:0;color:rgba(255,255,255,.85)">EU‑friendly, consent‑first, cookieless‑ready.</p></div>
             </div>
             <div class="feat" style="display:flex;gap:10px">
-              <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">🤝</div>
-              <div class="f-t"><h4 style="margin:0 0 4px">Partner mindset</h4><p style="margin:0;color:rgba(255,255,255,.85)">We act like an embedded RevOps team.</p></div>
+              <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">🧩</div>
+              <div class="f-t"><h4 style="margin:0 0 4px">All‑in‑one</h4><p style="margin:0;color:rgba(255,255,255,.85)">No external CRM required.</p></div>
+            </div>
+            <div class="feat" style="display:flex;gap:10px">
+              <div class="f-ic" style="width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center">⚡</div>
+              <div class="f-t"><h4 style="margin:0 0 4px">Built‑in AI</h4><p style="margin:0;color:rgba(255,255,255,.85)">Assist, summarize, schedule, and nudge — safely.</p></div>
             </div>
           </div>
         </div>
@@ -399,7 +456,7 @@
           <h3 style="margin-bottom:10px">What the assistant does</h3>
           <ul style="line-height:1.9;opacity:.95">
             <li>Captures, replies, books, and logs across channels.</li>
-            <li>Creates tasks, summaries and next steps in your CRM.</li>
+            <li>Creates tasks, summaries and next steps in Rithink CRM.</li>
             <li>Builds a prioritized “Today” list for reps.</li>
             <li>Optimizes messaging and cadences over time.</li>
           </ul>
@@ -412,43 +469,62 @@
   <section class="section privacy" id="privacy">
     <div class="container">
       <div class="section-header">
-        <h2>Privacy Notice</h2>
-        <p class="lead">How we handle data when we implement AI + CRM workflows. <span class="small">Last updated: November 3, 2025</span></p>
+        <h2>Privacy & Security</h2>
+        <p class="lead">How we handle data as an AI-first CRM. <span class="small">Last updated: November 3, 2025</span></p>
       </div>
       <div class="policy">
-        <p class="small"><strong>Note:</strong> The text below is a practical template and not legal advice. Please review with counsel for your use case.</p>
+        <p class="small"><strong>Note:</strong> This is a practical template and not legal advice. Review with counsel for your use case.</p>
+
+        <h3>Roles & scope</h3>
+        <p>For customer lead and contact data stored in Rithink, we act as a <em>processor</em>. For our own website visitors and marketing, we act as a <em>controller</em>.</p>
 
         <h3>What we process</h3>
         <ul>
-          <li>Lead and customer contact details (e.g., name, email, company, role)</li>
-          <li>Interaction data (forms, chat, email threads, bookings, meeting notes)</li>
-          <li>Attribution and web events (UTMs, pages viewed, session metadata)</li>
+          <li>Contact and company details (e.g., name, email, role, firmographics)</li>
+          <li>Interactions (forms, chat, email threads, bookings, summaries, notes)</li>
+          <li>Operational metadata (owners, SLAs, cadence steps, timestamps)</li>
         </ul>
 
-        <h3>Why we process</h3>
+        <h3>Purposes</h3>
         <ul>
           <li>To capture and respond to inbound leads and book meetings</li>
-          <li>To create and update CRM records, tasks, and summaries</li>
-          <li>To measure and improve conversion and response times</li>
+          <li>To operate CRM records, pipelines, tasks and messaging sequences</li>
+          <li>To measure and improve response times and conversion</li>
         </ul>
 
         <h3>Legal basis (GDPR)</h3>
         <ul>
-          <li><em>Legitimate interests</em> in responding to business inquiries and operating sales/CS processes</li>
-          <li><em>Consent</em> where required (e.g., marketing subscriptions, certain cookies)</li>
-          <li><em>Contract</em> when delivering services to clients</li>
+          <li><em>Legitimate interests</em> in responding to business inquiries and operating CRM workflows</li>
+          <li><em>Consent</em> where required (e.g., subscriptions, certain cookies)</li>
+          <li><em>Contract</em> for customers using our product</li>
+        </ul>
+
+        <h3>Security</h3>
+        <ul>
+          <li>Encryption in transit (TLS) and at rest</li>
+          <li>Role‑based access controls, 2FA/SSO options</li>
+          <li>Daily backups and disaster recovery procedures</li>
+          <li>Regular vulnerability scans and least‑privilege policies</li>
+        </ul>
+
+        <h3>AI & model usage</h3>
+        <ul>
+          <li>Customer data is <strong>not</strong> used to train foundation models by default.</li>
+          <li>Tenant‑level fine‑tuning or prompt libraries only with explicit opt‑in.</li>
+          <li>We retain operational prompts/summaries as part of your CRM records.</li>
         </ul>
 
         <h3>Retention</h3>
-        <p>We keep operational logs for as long as necessary to deliver the service and comply with obligations. Client CRM data remains in your systems per your policies.</p>
+        <p>CRM records persist while your account is active. You can export or delete data on request; backups roll off on a schedule.</p>
 
-        <h3>Processors & transfers</h3>
-        <p>We use reputable processors for hosting, messaging, and analytics. Where data leaves the EEA, we use appropriate safeguards (e.g., SCCs).</p>
+        <h3>Sub‑processors & transfers</h3>
+        <p>We use reputable providers for hosting, messaging and analytics. Where data leaves the EEA, we use appropriate safeguards (e.g., SCCs). A current sub‑processor list is available on request.</p>
 
-        <h3>Your rights</h3>
+        <h3>Data subject rights</h3>
         <ul>
-          <li>Access, rectification, erasure, restriction, portability, and objection (where applicable)</li>
+          <li>Access, rectification, erasure, restriction, portability, objection (where applicable)</li>
           <li>Contact: <a href="mailto:rijad.alibasic@hotmail.com">rijad.alibasic@hotmail.com</a></li>
+          <li>DPA: available on request</li>
         </ul>
 
         <h3>Cookies</h3>
@@ -460,16 +536,16 @@
   <!-- CTA -->
   <section class="section cta" id="contact">
     <div class="container">
-      <h2>Ready to connect AI to your CRM?</h2>
-      <p class="lead">Tell us about your stack (HubSpot, Salesforce, Pipedrive) and targets — we’ll map the fastest path to qualified pipeline.</p>
+      <h2>Ready to try an AI-first CRM?</h2>
+      <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
       <div class="benefits">
-        <div class="benefit"><span class="check">✓</span><span>Free AI & CRM audit</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Clear 90‑day plan</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Transparent pricing</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Free beta access</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Guided setup</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Cancel anytime</span></div>
       </div>
 
-      <!-- Replace mailto with CRM form or Calendly embed as needed -->
-      <a class="btn btn-primary" href="mailto:rijad.alibasic@hotmail.com?subject=Rithink%20—%20AI%20%2B%20CRM%20Audit">Book now via email</a>
+      <!-- Replace mailto with your signup or Calendly embed -->
+      <a class="btn btn-primary" href="mailto:rijad.alibasic@hotmail.com?subject=Rithink%20CRM%20—%20Beta%20Access">Start free trial</a>
       <!-- Example:
       <div id="calendly-embed"></div>
       <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
@@ -484,30 +560,29 @@
       <div class="foot">
         <div>
           <h3>Rithink</h3>
-          <p>AI + CRM Growth Engine. Based in Copenhagen. We partner with ambitious teams to unlock profitable growth.</p>
+          <p>AI-first CRM. Based in Copenhagen. Capture, converse and close — with assistive AI.</p>
         </div>
         <div class="fcol">
           <h4>Company</h4>
           <ul>
             <li><a href="#about">About</a></li>
             <li><a href="#agenda">Agenda</a></li>
-            <li><a href="#cases">Case Studies</a></li>
+            <li><a href="#cases">Cases</a></li>
           </ul>
         </div>
         <div class="fcol">
-          <h4>Solutions</h4>
+          <h4>Product</h4>
           <ul>
-            <li><a href="#agenda">Lead capture & routing</a></li>
-            <li><a href="#agenda">Follow‑up automation</a></li>
-            <li><a href="#agenda">Deal acceleration</a></li>
+            <li><a href="#product">Assistant</a></li>
+            <li><a href="#product">Sequences</a></li>
+            <li><a href="#product">Analytics</a></li>
           </ul>
         </div>
         <div class="fcol">
-          <h4>Contact</h4>
+          <h4>Legal</h4>
           <ul>
-            <li><a href="mailto:rijad.alibasic@hotmail.com">Email us</a></li>
-            <li><a href="#contact">Free audit</a></li>
             <li><a href="#privacy">Privacy</a></li>
+            <li><a href="#privacy">DPA (on request)</a></li>
           </ul>
         </div>
       </div>
