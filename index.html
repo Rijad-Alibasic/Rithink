@@ -1,882 +1,113 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Rithink — AI-first CRM. Capture every lead 24/7, reply instantly, book meetings, and keep deals moving — all in one CRM with built-in AI." />
-  <title>Rithink — AI-first CRM</title>
-
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Rithink — AI-first CRM">
-  <meta property="og:description" content="Never miss a lead. Only the calls that matter. Follow-up on autopilot. Keep deals moving.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="data:image/png;base64,iVBORw0KGgo=">
-  <meta name="twitter:card" content="summary_large_image">
-
+<!-- Video / Resources -->
+<section class="section videos" id="learn">
   <style>
-    /* ===== Theme ===== */
-    *{margin:0;padding:0;box-sizing:border-box}
-    :root{
-      --bg-1:#070B1F; --bg-2:#0E1436;
-      --accent:#7B8CFF; --accent-2:#00E0FF; --accent-3:#FF6B9A;
-      --text:#E8EAFF; --muted:#B6BCE8;
-      --surface:rgba(255,255,255,.06); --surface-2:rgba(255,255,255,.10);
-      --border:rgba(255,255,255,.18); --white:#fff;
-      --shadow:0 10px 40px rgba(0,0,0,.35);
-      --sheen-speed:9s; --parallax-intensity:0.18;
-      --progress-h:4px;
-    }
-
-    html{scroll-behavior:smooth}
-    body{
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(123,140,255,.16), transparent 60%),
-        radial-gradient(1000px 600px at 90% 10%, rgba(0,224,255,.12), transparent 60%),
-        radial-gradient(900px 900px at 20% 90%, rgba(255,107,154,.10), transparent 60%),
-        linear-gradient(160deg,var(--bg-1),var(--bg-2));
-      line-height:1.6;overflow-x:hidden;min-height:100vh;position:relative;
-    }
-    body::after{
-      content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
-      background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
-      background-size:22px 22px;opacity:.16;mix-blend-mode:overlay;
-    }
-
-    .container{max-width:1200px;margin:0 auto;padding:0 20px}
-
-    /* ===== Scroll progress bar ===== */
-    #scroll-progress{
-      position:fixed;top:0;left:0;height:var(--progress-h);width:0%;
-      background:linear-gradient(90deg,var(--accent-2),var(--accent),var(--accent-3));
-      z-index:1500;box-shadow:0 0 20px rgba(0,224,255,.45);
-      transition:width .1s linear;
-    }
-
-    /* ===== Header / Logo (glass + smooth sheen) ===== */
-    header{
-      position:fixed;inset:0 0 auto 0;
-      background:linear-gradient(180deg, rgba(14,20,54,.75), rgba(14,20,54,.38));
-      backdrop-filter:blur(12px);z-index:1000;padding:14px 0;border-bottom:1px solid var(--border);
-      transition:all .3s ease
-    }
-    header.scrolled{box-shadow:0 6px 30px rgba(0,0,0,.35)}
-    nav{display:flex;justify-content:space-between;align-items:center;gap:16px}
-
-    .logo{display:flex;align-items:center;gap:10px;cursor:pointer;border:0;background:transparent}
-    .brand-mark{
-      width:32px;height:32px;border-radius:9px;position:relative;flex:0 0 32px;
-      background:conic-gradient(from 180deg at 50% 50%, var(--accent), var(--accent-2), var(--accent-3), var(--accent));
-      box-shadow:0 8px 26px rgba(123,140,255,.35), inset 0 0 18px rgba(255,255,255,.18);
-      will-change:transform;transform:translateZ(0);
-    }
-    .brand-mark::after{
-      content:"";position:absolute;inset:2px;border-radius:7px;
-      background:radial-gradient(120px 80px at 30% 30%, rgba(255,255,255,.35), transparent 40%);
-      mix-blend-mode:screen;filter:blur(.3px);pointer-events:none;
-    }
-    .wordmark{
-      font-size:26px;font-weight:900;letter-spacing:-.6px;position:relative;
-      background:linear-gradient(90deg,#fff 0%, var(--accent-2) 35%, var(--accent) 65%, #fff 100%);
-      background-size:200% auto; /* smooth shimmer via bg-position */
-      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-      animation:wordmarkShimmer var(--sheen-speed) ease-in-out infinite;
-      will-change:background-position;
-    }
-    @keyframes wordmarkShimmer{
-      0%{background-position:0% center}
-      50%{background-position:100% center}
-      100%{background-position:0% center}
-    }
-
-    .nav-links{display:flex;gap:28px;list-style:none;align-items:center}
-    .nav-links a{
-      text-decoration:none;color:var(--text);font-size:15px;font-weight:500;position:relative;transition:.3s;opacity:.9
-    }
-    .nav-links a::after{
-      content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;
-      background:linear-gradient(90deg,var(--accent-2),var(--accent));transition:width .25s
-    }
-    .nav-links a:hover{opacity:1}
-    .nav-links a:hover::after{width:100%}
-    .btn-pill{
-      background:linear-gradient(135deg,var(--accent-2),var(--accent));
-      color:#0A0E27;padding:11px 22px;border-radius:24px;text-decoration:none;font-weight:700;
-      box-shadow:0 8px 26px rgba(123,140,255,.35);transition:.25s;border:1px solid rgba(255,255,255,.25)
-    }
-    .btn-pill:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(123,140,255,.45)}
-    .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
-    .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
-
-    /* ===== Hero with parallax beams ===== */
-    .hero{margin-top:80px;min-height:96vh;display:flex;align-items:center;position:relative;overflow:hidden;}
-    .hero::before{
-      content:"";position:absolute;inset:-40% -10% 0 -10%;z-index:-1;
-      background:
-        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.28), transparent 60%),
-        radial-gradient(60% 80% at 80% 10%, rgba(0,224,255,.25), transparent 60%),
-        radial-gradient(60% 80% at 50% 90%, rgba(255,107,154,.22), transparent 60%);
-      filter:blur(10px);
-      transform:translate3d(0,0,0);
-    }
-    .hero-content{position:relative;z-index:1;color:var(--text);padding:56px 0}
-    .tag{display:inline-block;padding:9px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--border);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;margin-bottom:22px;backdrop-filter:blur(6px)}
-    .hero h1{font-size:clamp(44px,7vw,84px);line-height:1.05;font-weight:900;letter-spacing:-2px;margin-bottom:16px}
-    .gradient-text{background:linear-gradient(135deg,#fff 0%,var(--accent-2) 50%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-    .hero p{font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px}
-    .cta{display:flex;gap:14px;flex-wrap:wrap}
-    .btn{padding:14px 28px;border-radius:28px;text-decoration:none;font-weight:800;font-size:15px;transition:.25s;display:inline-block}
-    .btn-primary{background:var(--white);color:#0A0E27;box-shadow:0 10px 28px rgba(255,255,255,.18);border:0}
-    .btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(255,255,255,.28)}
-    .btn-outline{background:var(--surface);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
-    .btn-outline:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.35)}
-
-    /* ===== Sections ===== */
-    section{scroll-margin-top:100px}
-    .section{padding:96px 0}
-    .section-header{text-align:center;margin-bottom:56px}
-    .section h2{font-size:clamp(34px,5vw,54px);font-weight:900;color:var(--text);margin-bottom:10px}
-    .section p.lead{font-size:19px;color:var(--muted);max-width:820px;margin:0 auto}
-
-    /* ===== Metrics ===== */
-    .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px;text-align:center}
-    .metric{padding:26px;background:var(--surface);border:1px solid var(--border);border-radius:18px;transition:.25s;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
-    .metric:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(0,0,0,.45)}
-    .metric .value{display:block;font-size:42px;font-weight:900;background:linear-gradient(90deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
-    .metric .label{font-size:15px;color:var(--muted);font-weight:700}
-
-    /* ===== Videos (autoplay-in-view) ===== */
-    .videos .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
+    .video-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
     .video-card{
-      position:relative;border-radius:18px;overflow:hidden;background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);
-      transition:.3s;will-change:transform;backdrop-filter:blur(10px)
+      height:280px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer;
+      background:linear-gradient(135deg,var(--accent) 0%,var(--accent-light) 100%);
+      box-shadow:0 12px 30px rgba(74,105,255,.22);transition:transform .35s ease, box-shadow .35s ease;
+      will-change:transform
     }
-    .video-card:hover{transform:translateY(-6px)}
-    .video-aspect{position:relative;width:100%;padding-top:56.25%;background:linear-gradient(135deg,rgba(123,140,255,.25),rgba(0,224,255,.2));}
-    .video-aspect video, .video-aspect iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
-    .video-info{padding:16px}
-    .video-info h3{margin-bottom:6px}
-    .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);font-weight:700;margin-left:8px;color:var(--text)}
-
-    /* ===== Agenda (timeline) ===== */
-    .timeline{max-width:1000px;margin:40px auto 0;position:relative}
-    .timeline::before{content:"";position:absolute;left:50%;transform:translateX(-50%);width:2px;height:100%;background:linear-gradient(180deg,var(--accent-2),var(--accent))}
-    .step{display:flex;align-items:flex-start;margin:64px 0;position:relative}
-    .step:nth-child(even){flex-direction:row-reverse}
-    .bubble{
-      position:absolute;left:50%;transform:translateX(-50%);width:46px;height:46px;border-radius:50%;
-      background:linear-gradient(135deg,var(--accent-2),var(--accent));color:#0A0E27;display:flex;align-items:center;justify-content:center;
-      font-weight:900;box-shadow:0 8px 22px rgba(123,140,255,.45);border:1px solid rgba(255,255,255,.35)
+    .video-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 52px rgba(74,105,255,.32)}
+    .video-card video{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;
+      filter:saturate(1.1) contrast(1.03)
     }
-    .step .content{
-      flex:1;margin:0 38px;background:var(--surface);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:24px;backdrop-filter:blur(10px)
+    .video-info{
+      position:absolute;left:0;right:0;bottom:0;padding:20px 22px;color:#fff;
+      background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.55) 100%)
     }
-    .step .content h3{margin-bottom:10px}
-    .step .content ul{margin-left:18px}
-    .step.active .content{border-color:rgba(0,224,255,.4);box-shadow:0 18px 44px rgba(0,224,255,.18)}
-    .outcome{margin-top:10px;padding-top:10px;border-top:1px dashed var(--border);color:var(--text);font-weight:800;opacity:.9}
-
-    /* ===== Product / Cases cards ===== */
-    .card{padding:34px;background:var(--surface);border-radius:18px;border:1px solid var(--border);transition:.25s;position:relative;overflow:hidden;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
-    .card::before{content:"";position:absolute;left:0;top:0;height:4px;width:100%;background:linear-gradient(90deg,var(--accent-2),var(--accent),var(--accent-3));transform:scaleX(0);transition:transform .25s}
-    .card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(0,0,0,.5)}
-    .card:hover::before{transform:scaleX(1)}
-    .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent-2),var(--accent));color:#0A0E27;font-size:28px;margin-bottom:16px;border:1px solid rgba(255,255,255,.35)}
-    .card h3{font-size:22px;margin-bottom:8px}
-    .card p{color:var(--muted)}
-
-    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
-
-    .cases .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
-    .case .tag{font-size:12px;background:var(--surface-2);color:var(--text);padding:6px 12px;border-radius:999px;font-weight:800;display:inline-block;margin-bottom:10px;border:1px solid var(--border)}
-    .case .stats{display:flex;gap:18px;border-top:1px solid var(--border);padding-top:14px;margin-top:12px}
-    .stat .v{display:block;background:linear-gradient(90deg,var(--accent-2),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900}
-    .stat .k{font-size:12px;color:var(--muted)}
-    .placeholder-note{font-size:12px;color:var(--muted);margin-top:8px}
-
-    /* ===== Channels ===== */
-    .channels .logo-wall{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:18px}
-    .chip{display:flex;align-items:center;justify-content:center;border:1px solid var(--border);border-radius:12px;padding:16px;background:var(--surface);font-weight:800;color:var(--text);min-height:72px;backdrop-filter:blur(10px)}
-
-    /* ===== Privacy ===== */
-    .privacy .policy{max-width:900px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:24px;backdrop-filter:blur(10px);box-shadow:var(--shadow)}
-    .policy h3{margin:14px 0 8px 0}
-    .policy p, .policy li{color:var(--text)}
-    .small{font-size:12px;color:var(--muted)}
-
-    /* ===== CTA & Footer ===== */
-    .cta{text-align:center}
-    .benefits{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:18px 0 28px}
-    .benefit{display:flex;align-items:center;gap:8px}
-    .check{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--accent-2),var(--accent));color:#0A0E27;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.35)}
-    footer{background:linear-gradient(180deg, rgba(14,20,54,.6), rgba(7,11,31,1));color:var(--text);padding:56px 0 28px;border-top:1px solid var(--border)}
-    .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:32px}
-    .foot h3{font-size:26px;background:linear-gradient(135deg,#fff 0%,var(--accent-2) 50%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px}
-    .fcol h4{margin-bottom:10px}
-    .fcol ul{list-style:none}
-    .fcol li{margin:8px 0}
-    .fcol a{color:var(--text);text-decoration:none;opacity:.85}
-    .fcol a:hover{opacity:1}
-    .foot-bottom{opacity:.6;border-top:1px solid var(--border);padding-top:18px;text-align:center}
-
-    /* ===== Utilities / Motion ===== */
-    .tilt{transform-style:preserve-3d;will-change:transform}
-    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
-    .fade.show{opacity:1;transform:translateY(0)}
-
-    @media(max-width:900px){
-      .nav-links{display:none}
-      .menu-toggle{display:flex}
-      .about-grid{grid-template-columns:1fr;gap:36px}
-      .timeline::before{left:28px;transform:none}
-      .bubble{left:28px;transform:none}
-      .step,.step:nth-child(even){flex-direction:row}
-      .step .content{margin-left:72px;margin-right:0}
-      .foot{grid-template-columns:1fr;text-align:center}
-    }
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important;transition:none !important}
-      .wordmark{background-position:50% 50% !important}
+    .video-info h3{font-size:18px;margin:0 0 6px 0}
+    .video-info p{font-size:14px;opacity:.95;margin:0}
+    /* subtle parallax on scroll */
+    .parallax {transform:translateY(0);transition:transform .2s ease-out}
+    @media (prefers-reduced-motion:no-preference){
+      .videos .video-card{transform:translateZ(0)}
     }
   </style>
 
-  <!-- JSON-LD -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Rithink","url":"https://www.example.com","description":"AI-first CRM that captures leads, replies, books and keeps deals moving.","address":{"@type":"PostalAddress","addressLocality":"Copenhagen","addressCountry":"DK"}}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rithink CRM","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"AI-first CRM for lead capture, assistive replies, scheduling and deal acceleration.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","description":"Beta pricing placeholder"}}
-  </script>
-</head>
-<body>
-  <div id="scroll-progress"></div>
-
-  <!-- Header -->
-  <header id="header">
-    <nav class="container" aria-label="Primary">
-      <button class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Go to top">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span class="wordmark">Rithink</span>
-      </button>
-      <ul class="nav-links" role="menubar" aria-label="Primary navigation">
-        <li role="none"><a role="menuitem" href="#agenda">Agenda</a></li>
-        <li role="none"><a role="menuitem" href="#videos">Videos</a></li>
-        <li role="none"><a role="menuitem" href="#product">Product</a></li>
-        <li role="none"><a role="menuitem" href="#channels">Channels</a></li>
-        <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
-        <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
-        <li role="none"><a class="btn-pill" role="menuitem" href="#contact">Book a Demo</a></li>
-      </ul>
-      <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero" id="home">
-    <div class="container hero-content">
-      <span class="tag">AI CRM</span>
-      <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
-      <p>
-        An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
-        calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
-      </p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
-        <a class="btn btn-outline" href="#agenda">See the Agenda</a>
-      </div>
+  <div class="container">
+    <div class="section-header">
+      <h2>Learn how our CRM+AI works</h2>
+      <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
     </div>
-  </section>
 
-  <!-- Metrics -->
-  <section class="section" aria-label="Key results">
-    <div class="container">
-      <div class="metrics-grid">
-        <div class="metric fade tilt"><span class="value">100%</span><span class="label">Lead coverage</span></div>
-        <div class="metric fade tilt"><span class="value">2 min</span><span class="label">Median response time</span></div>
-        <div class="metric fade tilt"><span class="value">+28%</span><span class="label">Booked meetings</span></div>
-        <div class="metric fade tilt"><span class="value">-35%</span><span class="label">Time-to-first-touch</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Videos -->
-  <section class="section videos" id="videos">
-    <div class="container">
-      <div class="section-header">
-        <h2>Videos</h2>
-        <p class="lead">Short demos aligned to the CRM AI agenda. Replace the sample URLs with your hosted videos (Cloudflare Stream / Mux / Vimeo / YouTube).</p>
-      </div>
-      <div class="video-grid">
-        <!-- Replace data-src with your real URLs. Provide MP4; WebM optional. -->
-        <article class="video-card fade tilt">
-          <div class="video-aspect">
-            <video muted playsinline preload="none" poster="" data-src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"></video>
-          </div>
-          <div class="video-info">
-            <h3>1) Never miss a lead <span class="badge">24/7 capture</span></h3>
-            <p>Forms, chat, email, social — instant replies & booking.</p>
-          </div>
-        </article>
-        <article class="video-card fade tilt">
-          <div class="video-aspect">
-            <video muted playsinline preload="none" poster="" data-src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"></video>
-          </div>
-          <div class="video-info">
-            <h3>2) Only the calls that matter <span class="badge">Triage</span></h3>
-            <p>Assistant handles routine Q&A; urgent handoffs with context.</p>
-          </div>
-        </article>
-        <article class="video-card fade tilt">
-          <div class="video-aspect">
-            <video muted playsinline preload="none" poster="" data-src="https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"></video>
-          </div>
-          <div class="video-info">
-            <h3>3) Follow‑up on autopilot <span class="badge">Sequences</span></h3>
-            <p>Polite, branded cadences across email/SMS/chat.</p>
-          </div>
-        </article>
-        <article class="video-card fade tilt">
-          <div class="video-aspect">
-            <video muted playsinline preload="none" poster="" data-src="https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"></video>
-          </div>
-          <div class="video-info">
-            <h3>4) Optimize conversion rate <span class="badge">A/B & tone</span></h3>
-            <p>Subject lines, CTAs and cadences — AI‑refined.</p>
-          </div>
-        </article>
-        <article class="video-card fade tilt">
-          <div class="video-aspect">
-            <video muted playsinline preload="none" poster="" data-src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"></video>
-          </div>
-          <div class="video-info">
-            <h3>5) Keep deals moving <span class="badge">Nudges</span></h3>
-            <p>Recaps, reminders, renewals and next‑step prompts.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CRM AI Agenda -->
-  <section class="section" id="agenda">
-    <div class="container">
-      <div class="section-header">
-        <h2>CRM AI Agenda</h2>
-        <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster — built into Rithink CRM.</p>
-      </div>
-      <div class="timeline">
-        <div class="step fade">
-          <div class="bubble">1</div>
-          <div class="content">
-            <h3>Never miss a lead</h3>
-            <ul>
-              <li>24/7 capture from forms, chat, email, and social.</li>
-              <li>Instant, branded replies with light qualification.</li>
-              <li>Books meetings from shared calendars.</li>
-              <li>Creates/updates records, assigns owner, sets SLA, escalates if untouched.</li>
-            </ul>
-            <div class="outcome">Outcome: 100% coverage, minute‑level response times.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">2</div>
-          <div class="content">
-            <h3>Only the calls that matter</h3>
-            <ul>
-              <li>Assistant handles routine Q&A (pricing, availability, basics).</li>
-              <li>Rule‑based triage builds a “Today” list (new replies, booking requests, SLA due, keywords).</li>
-              <li>Urgent handoffs go to the right rep with full context.</li>
-            </ul>
-            <div class="outcome">Outcome: reps focus on high‑value conversations.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">3</div>
-          <div class="content">
-            <h3>Follow‑up on autopilot</h3>
-            <ul>
-              <li>Polite, branded sequences across email/SMS/chat until connection or booking.</li>
-              <li>Auto‑reschedules no‑shows; sends confirmations and prep notes.</li>
-              <li>Auto‑logs summaries, notes, and tasks in the CRM.</li>
-            </ul>
-            <div class="outcome">Outcome: faster first meetings, higher show rates.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">4</div>
-          <div class="content">
-            <h3>Optimize conversion rate</h3>
-            <ul>
-              <li>AI refines subject lines, CTAs, and message tone (no ML scoring required).</li>
-              <li>A/B test templates and cadences; promote winners automatically.</li>
-              <li>Reduce drop‑off with quick replies, short forms, progressive profiling, instant booking links.</li>
-            </ul>
-            <div class="outcome">Outcome: higher reply, connect, booking, and stage‑to‑stage conversion.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">5</div>
-          <div class="content">
-            <h3>Keep deals moving</h3>
-            <ul>
-              <li>Spots silent threads or missing next steps and re‑engages contacts.</li>
-              <li>Sends concise recaps and nudges (“Waiting on X”).</li>
-              <li>Rule‑based reminders for trials ending, renewals, and contract deadlines.</li>
-            </ul>
-            <div class="outcome">Outcome: shorter cycles, fewer stalled deals, more renewals.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Product -->
-  <section class="section" id="product">
-    <div class="container">
-      <div class="section-header">
-        <h2>Product</h2>
-        <p class="lead">Everything you need in one AI-first CRM — no external CRM required.</p>
-      </div>
-      <div class="product-grid">
-        <div class="card fade tilt">
-          <div class="icon">📥</div><h3>Unified Inbox</h3>
-          <p>Handle form submissions, email threads, chat and social DMs in one place with assistive replies and full context.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">🗓️</div><h3>Scheduling</h3>
-          <p>Instant booking from shared calendars, confirmations, prep notes and auto‑reschedules for no‑shows.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">🤖</div><h3>Assistant</h3>
-          <p>Answers routine questions, triages urgency, creates tasks, and hands off to the right owner with summaries.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">📈</div><h3>Pipelines & SLAs</h3>
-          <p>Rule‑based routing, SLAs and escalations keep every lead and deal moving to the next best action.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">✉️</div><h3>Sequences</h3>
-          <p>Brand‑safe templates and cadences across email/SMS/chat. A/B test and auto‑promote winners.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">📊</div><h3>Analytics</h3>
-          <p>Response time, show rate, booking conversion, stage‑to‑stage and cycle time — measured and actionable.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Channels -->
-  <section class="section channels" id="channels">
-    <div class="container">
-      <div class="section-header">
-        <h2>Channels Rithink handles</h2>
-        <p class="lead">Capture and converse where your buyers are. Rithink is the CRM of record.</p>
-      </div>
-      <div class="logo-wall">
-        <div class="chip fade tilt" aria-label="Web Forms">Web Forms</div>
-        <div class="chip fade tilt" aria-label="Email (IMAP/SMTP)">Email</div>
-        <div class="chip fade tilt" aria-label="Live Chat Widget">Live Chat</div>
-        <div class="chip fade tilt" aria-label="SMS (connector)">SMS*</div>
-        <div class="chip fade tilt" aria-label="WhatsApp (connector)">WhatsApp*</div>
-        <div class="chip fade tilt" aria-label="Social DMs">Social DMs*</div>
-        <div class="chip fade tilt" aria-label="Calendar">Calendar</div>
-        <div class="chip fade tilt" aria-label="Webhooks & API">Webhooks & API</div>
-      </div>
-      <p class="lead" style="margin-top:14px;text-align:center"><span class="small">*Via off‑the‑shelf channel connectors. Rithink remains the CRM of record.</span></p>
-    </div>
-  </section>
-
-  <!-- Case Studies (expanded demo placeholders) -->
-  <section class="section cases" id="cases">
-    <div class="container">
-      <div class="section-header">
-        <h2>Selected results (demo)</h2>
-        <p class="lead">Placeholder companies and metrics for layout — replace with real results when ready.</p>
-      </div>
-
-      <div class="case-grid">
-        <div class="card case fade tilt">
-          <span class="tag">B2B SaaS • “Voltify”</span>
-          <h3>Only the calls that matter</h3>
-          <p>Assistant deflects routine questions and routes hot intent with full context.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+44%</span><span class="k">MQL→SQL</span></div>
-            <div class="stat"><span class="v">-35%</span><span class="k">Time‑to‑first‑touch</span></div>
-            <div class="stat"><span class="v">+18%</span><span class="k">Win rate</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Industrial • “Acme Industrial”</span>
+    <div class="video-grid">
+      <!-- 1) Never miss a lead -->
+      <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
+        <video muted playsinline autoplay loop
+          poster="https://cdn.pixabay.com/video/2025/06/27/280000_tiny.jpg">
+          <!-- Pixabay: Mail Notification / Email (placeholder) -->
+          <source src="https://cdn.pixabay.com/video/2025/06/27/287980-1920_1080.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
           <h3>Never miss a lead</h3>
-          <p>24/7 capture from forms, inbox and chat with instant replies and booking.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">100%</span><span class="k">Lead coverage</span></div>
-            <div class="stat"><span class="v">2 min</span><span class="k">Median response</span></div>
-            <div class="stat"><span class="v">-41%</span><span class="k">CPL</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
+          <p>24/7 capture + instant branded reply + auto‑calendar booking.</p>
         </div>
+      </a>
 
-        <div class="card case fade tilt">
-          <span class="tag">Healthcare • “Helio Health”</span>
+      <!-- 2) Only the calls that matter -->
+      <a class="video-card fade parallax" href="#process" aria-label="Only the calls that matter">
+        <video muted playsinline autoplay loop
+          poster="https://coverr.co/images/typing-poster.jpg">
+          <!-- Coverr: Typing on a Laptop (placeholder) -->
+          <source src="https://videos.pexels.com/video-files/5364907/5364907-uhd_2732_1440_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <h3>Only the calls that matter</h3>
+          <p>Assistant handles routine Q&A; reps get a clean “Today” list.</p>
+        </div>
+      </a>
+
+      <!-- 3) Follow-up on autopilot -->
+      <a class="video-card fade parallax" href="#services" aria-label="Follow-up on autopilot">
+        <video muted playsinline autoplay loop
+          poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
+          <!-- Generic laptop typing / comms -->
+          <source src="https://videos.pexels.com/video-files/7679831/7679831-hd_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
           <h3>Follow‑up on autopilot</h3>
-          <p>Polite sequences across SMS & email; auto‑reschedules no‑shows.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+29%</span><span class="k">Show rate</span></div>
-            <div class="stat"><span class="v">-22%</span><span class="k">No‑shows</span></div>
-            <div class="stat"><span class="v">+31%</span><span class="k">Booked meetings</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
+          <p>Branded sequences across email/SMS/chat until booked.</p>
         </div>
+      </a>
 
-        <div class="card case fade tilt">
-          <span class="tag">Logistics • “FreightFlow”</span>
+      <!-- 4) Optimize conversion rate -->
+      <a class="video-card fade parallax" href="#cases" aria-label="Optimize conversion rate">
+        <video muted playsinline autoplay loop
+          poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
+          <!-- Abstract digital network loop -->
+          <source src="https://videos.pexels.com/video-files/29717537/29717537-uhd_3840_2160_30fps.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
+          <h3>Optimize conversion rate</h3>
+          <p>AI refines copy & cadence; promote A/B winners automatically.</p>
+        </div>
+      </a>
+
+      <!-- 5) Keep deals moving -->
+      <a class="video-card fade parallax" href="#process" aria-label="Keep deals moving">
+        <video muted playsinline autoplay loop
+          poster="https://images.pexels.com/photos/590019/pexels-photo-590019.jpeg">
+          <!-- Planner / calendar visual -->
+          <source src="https://videos.pexels.com/video-files/9057693/9057693-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="video-info">
           <h3>Keep deals moving</h3>
-          <p>Smart nudges on silent threads, renewal reminders, and next‑step prompts.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">-19%</span><span class="k">Sales cycle</span></div>
-            <div class="stat"><span class="v">+16%</span><span class="k">Renewals</span></div>
-            <div class="stat"><span class="v">+24%</span><span class="k">Pipeline velocity</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
+          <p>Recaps, nudges & SLA reminders prevent stalls and slippage.</p>
         </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">E‑commerce • “NovaWear”</span>
-          <h3>From chats to checkouts</h3>
-          <p>Chat + email sequences recover carts and book style consults.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+22%</span><span class="k">Recoveries</span></div>
-            <div class="stat"><span class="v">+17%</span><span class="k">AOV</span></div>
-            <div class="stat"><span class="v">-28%</span><span class="k">Time‑to‑reply</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Fintech • “Finora”</span>
-          <h3>Qualification without friction</h3>
-          <p>Assistant pre‑qualifies, routes to compliance, and books docs calls.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+34%</span><span class="k">Qualified meetings</span></div>
-            <div class="stat"><span class="v">-31%</span><span class="k">Drop‑off</span></div>
-            <div class="stat"><span class="v">+12%</span><span class="k">Approval rate</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Education • “Edulink”</span>
-          <h3>From inquiry to enrollment</h3>
-          <p>Sequenced nudges, open‑day bookings, and instant answers.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+26%</span><span class="k">Enrollments</span></div>
-            <div class="stat"><span class="v">+33%</span><span class="k">Show rate</span></div>
-            <div class="stat"><span class="v">-40%</span><span class="k">Response time</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Real Estate • “Brick & Bond”</span>
-          <h3>Speed to lead</h3>
-          <p>Instant replies and viewing bookings, with neighborhood Q&A.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">-48%</span><span class="k">Time‑to‑first‑touch</span></div>
-            <div class="stat"><span class="v">+21%</span><span class="k">Viewings booked</span></div>
-            <div class="stat"><span class="v">+15%</span><span class="k">Close rate</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-      </div>
+      </a>
     </div>
-  </section>
-
-  <!-- About -->
-  <section class="section about" id="about">
-    <div class="container">
-      <div class="about-grid">
-        <div>
-          <h2>About Rithink</h2>
-          <p>We’re an AI-first CRM built in Copenhagen. Capture, converse, book and advance deals in one place — with brand‑safe AI assistance and measurable outcomes.</p>
-          <div class="features" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px">
-            <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧪</div>
-              <div class="f-t"><h3 style="margin:0 0 4px;font-size:16px">Experiment‑driven</h3><p style="margin:0;color:var(--muted)">Short cycles, clear KPIs, compounding learnings.</p></div>
-            </div>
-            <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🔒</div>
-              <div class="f-t"><h3 style="margin:0 0 4px;font-size:16px">Privacy‑aware</h3><p style="margin:0;color:var(--muted)">EU‑friendly, consent‑first, cookieless‑ready.</p></div>
-            </div>
-            <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧩</div>
-              <div class="f-t"><h3 style="margin:0 0 4px;font-size:16px">All‑in‑one</h3><p style="margin:0;color:var(--muted)">No external CRM required.</p></div>
-            </div>
-            <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">⚡</div>
-              <div class="f-t"><h3 style="margin:0 0 4px;font-size:16px">Built‑in AI</h3><p style="margin:0;color:var(--muted)">Assist, summarize, schedule, and nudge — safely.</p></div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 style="margin-bottom:10px">What the assistant does</h3>
-          <ul style="line-height:1.9;opacity:.95">
-            <li>Captures, replies, books, and logs across channels.</li>
-            <li>Creates tasks, summaries and next steps in Rithink CRM.</li>
-            <li>Builds a prioritized “Today” list for reps.</li>
-            <li>Optimizes messaging and cadences over time.</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Privacy -->
-  <section class="section privacy" id="privacy">
-    <div class="container">
-      <div class="section-header">
-        <h2>Privacy & Security</h2>
-        <p class="lead">How we handle data as an AI-first CRM. <span class="small">Last updated: November 3, 2025</span></p>
-      </div>
-      <div class="policy">
-        <p class="small"><strong>Note:</strong> This is a practical template and not legal advice. Review with counsel for your use case.</p>
-
-        <h3>Roles & scope</h3>
-        <p>For customer lead and contact data stored in Rithink, we act as a <em>processor</em>. For our own website visitors and marketing, we act as a <em>controller</em>.</p>
-
-        <h3>What we process</h3>
-        <ul>
-          <li>Contact and company details (e.g., name, email, role, firmographics)</li>
-          <li>Interactions (forms, chat, email threads, bookings, summaries, notes)</li>
-          <li>Operational metadata (owners, SLAs, cadence steps, timestamps)</li>
-        </ul>
-
-        <h3>Purposes</h3>
-        <ul>
-          <li>To capture and respond to inbound leads and book meetings</li>
-          <li>To operate CRM records, pipelines, tasks and messaging sequences</li>
-          <li>To measure and improve response times and conversion</li>
-        </ul>
-
-        <h3>Legal basis (GDPR)</h3>
-        <ul>
-          <li><em>Legitimate interests</em> in responding to business inquiries and operating CRM workflows</li>
-          <li><em>Consent</em> where required (e.g., subscriptions, certain cookies)</li>
-          <li><em>Contract</em> for customers using our product</li>
-        </ul>
-
-        <h3>Security</h3>
-        <ul>
-          <li>Encryption in transit (TLS) and at rest</li>
-          <li>Role‑based access controls, 2FA/SSO options</li>
-          <li>Daily backups and disaster recovery procedures</li>
-          <li>Regular vulnerability scans and least‑privilege policies</li>
-        </ul>
-
-        <h3>AI & model usage</h3>
-        <ul>
-          <li>Customer data is <strong>not</strong> used to train foundation models by default.</li>
-          <li>Tenant‑level fine‑tuning or prompt libraries only with explicit opt‑in.</li>
-          <li>We retain operational prompts/summaries as part of your CRM records.</li>
-        </ul>
-
-        <h3>Retention</h3>
-        <p>CRM records persist while your account is active. You can export or delete data on request; backups roll off on a schedule.</p>
-
-        <h3>Sub‑processors & transfers</h3>
-        <p>We use reputable providers for hosting, messaging and analytics. Where data leaves the EEA, we use appropriate safeguards (e.g., SCCs). A current sub‑processor list is available on request.</p>
-
-        <h3>Data subject rights</h3>
-        <ul>
-          <li>Access, rectification, erasure, restriction, portability, objection (where applicable)</li>
-          <li>Contact: <a href="mailto:rijad.alibasic@hotmail.com">rijad.alibasic@hotmail.com</a></li>
-          <li>DPA: available on request</li>
-        </ul>
-
-        <h3>Cookies</h3>
-        <p>We use essential cookies and may use analytics with consent. You can change preferences at any time.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section cta" id="contact">
-    <div class="container">
-      <h2>Ready to try an AI-first CRM?</h2>
-      <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
-      <div class="benefits">
-        <div class="benefit"><span class="check">✓</span><span>Free beta access</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Guided setup</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Cancel anytime</span></div>
-      </div>
-      <a class="btn btn-primary" href="mailto:rijad.alibasic@hotmail.com?subject=Rithink%20CRM%20—%20Beta%20Access">Start free trial</a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="foot">
-        <div>
-          <h3>Rithink</h3>
-          <p>AI-first CRM. Capture, converse and close — with assistive AI.</p>
-        </div>
-        <div class="fcol">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#agenda">Agenda</a></li>
-            <li><a href="#cases">Cases</a></li>
-          </ul>
-        </div>
-        <div class="fcol">
-          <h4>Product</h4>
-          <ul>
-            <li><a href="#product">Assistant</a></li>
-            <li><a href="#product">Sequences</a></li>
-            <li><a href="#product">Analytics</a></li>
-          </ul>
-        </div>
-        <div class="fcol">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#privacy">Privacy</a></li>
-            <li><a href="#privacy">DPA (on request)</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="foot-bottom">© <span id="yr"></span> Rithink. All rights reserved.</div>
-    </div>
-  </footer>
+  </div>
 
   <script>
-    // Mobile menu
-    const toggleMenu = () => {
-      const btn = document.querySelector('.menu-toggle');
-      const existing = document.getElementById('mobile-nav');
-      const open = !existing;
-      btn.setAttribute('aria-expanded', String(open));
-      if (existing){ existing.remove(); return; }
-      const ul = document.querySelector('.nav-links').cloneNode(true);
-      ul.id = 'mobile-nav'; ul.className = 'mobile-nav'; ul.setAttribute('role','menu');
-      Object.assign(ul.style,{
-        position:'fixed',top:'64px',left:'0',right:'0',
-        background:'linear-gradient(180deg, rgba(14,20,54,.95), rgba(14,20,54,.85))',
-        padding:'16px 20px 24px',display:'grid',gap:'14px',
-        borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.5)',zIndex:'999',backdropFilter:'blur(10px)'
-      });
-      document.body.appendChild(ul);
-    };
-
-    const hdr = document.getElementById('header');
-    const progressBar = document.getElementById('scroll-progress');
-
-    // Reveal + header scroll + progress bar + hero parallax
-    const onScroll = () => {
-      if (window.scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
-
-      // Reveal
-      document.querySelectorAll('.fade').forEach(el=>{
+    // lightweight parallax: moves cards slightly on scroll
+    document.addEventListener('scroll', () => {
+      document.querySelectorAll('.parallax').forEach((el, i) => {
         const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight - 80) el.classList.add('show');
+        const pct = Math.min(Math.max((window.innerHeight - r.top) / window.innerHeight, 0), 1);
+        el.style.transform = `translateY(${(1 - pct) * 14}px)`;
       });
-
-      // Progress bar
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const pct = Math.max(0, Math.min(1, scrollTop / height));
-      progressBar.style.width = (pct * 100) + '%';
-
-      // Parallax hero beams
-      const hero = document.querySelector('.hero');
-      if (hero){
-        const offset = window.scrollY * parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--parallax-intensity'));
-        hero.style.setProperty('--parallax-y', offset + 'px');
-        hero.style.transform = 'translate3d(0,' + (offset * 0.02) + 'px,0)';
-        hero.style.willChange = 'transform';
-        hero.previousParallax = offset;
-        hero.querySelector(':scope').style;
-        hero.style;
-      }
-      // Agenda active step highlight
-      stepsObserver && stepsObserver.check && stepsObserver.check();
-    };
-    document.addEventListener('scroll', onScroll, {passive:true});
-
-    // Year + initial
-    window.addEventListener('load', ()=>{
-      document.getElementById('yr').textContent = new Date().getFullYear();
-      setupVideoObserver();
-      setupTilt();
-      setupAgendaObserver();
-      onScroll();
-    });
-
-    // ===== Smooth autoplay/pause for videos when in view + lazy load =====
-    function setupVideoObserver(){
-      const vids = Array.from(document.querySelectorAll('.video-aspect video'));
-      if (!('IntersectionObserver' in window)) {
-        vids.forEach(v => { if (v.dataset.src) v.src = v.dataset.src; });
-        return;
-      }
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          const v = entry.target;
-          if (entry.isIntersecting){
-            if (v.dataset.src && !v.src){ v.src = v.dataset.src; }
-            const play = () => v.play().catch(()=>{});
-            // small delay for smoother start
-            setTimeout(play, 50);
-          } else {
-            v.pause();
-          }
-        });
-      }, {threshold: .5});
-      vids.forEach(v=>io.observe(v));
-    }
-
-    // ===== Light 3D tilt on hover (cards & metrics) =====
-    function setupTilt(){
-      const els = document.querySelectorAll('.tilt');
-      const limit = 8; // degrees
-      els.forEach(el=>{
-        el.addEventListener('pointermove', (e)=>{
-          const r = el.getBoundingClientRect();
-          const x = e.clientX - r.left, y = e.clientY - r.top;
-          const rx = ((y / r.height) - 0.5) * -2 * limit;
-          const ry = ((x / r.width) - 0.5) * 2 * limit;
-          el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(0)`;
-        });
-        el.addEventListener('pointerleave', ()=>{
-          el.style.transform = 'rotateX(0) rotateY(0)';
-        });
-      });
-    }
-
-    // ===== Agenda active step highlight =====
-    let stepsObserver = null;
-    function setupAgendaObserver(){
-      const steps = Array.from(document.querySelectorAll('.timeline .step'));
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if (entry.isIntersecting) entry.target.classList.add('active');
-          else entry.target.classList.remove('active');
-        });
-      }, {threshold: 0.35});
-      steps.forEach(s=>io.observe(s));
-      // simple check fallback used in onScroll
-      stepsObserver = {check:()=>steps.forEach(s=>{
-        const r = s.getBoundingClientRect();
-        if (r.top < window.innerHeight * .65 && r.bottom > window.innerHeight * .35) s.classList.add('active');
-        else s.classList.remove('active');
-      })};
-    }
+    }, {passive:true});
   </script>
-</body>
-</html>
+</section>
