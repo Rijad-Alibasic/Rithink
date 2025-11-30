@@ -33,8 +33,12 @@
       --progress-h:4px;
     }
 
-    html{scroll-behavior:smooth}
+    html{
+      scroll-behavior:smooth;
+      height:100%;
+    }
     body{
+      height:100%;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       color:var(--text);
       background:
@@ -46,6 +50,7 @@
       overflow-x:hidden;
       min-height:100vh;
       position:relative;
+      scroll-snap-type:y mandatory; /* slide-like scrolling */
     }
     body::after{
       content:"";
@@ -143,12 +148,28 @@
     .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
+    /* ===== Scroll snap panels ===== */
+    .snap-panel{
+      scroll-snap-align:start;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      position:relative;
+    }
+    .snap-inner{
+      width:100%;
+      transition:transform .6s ease, opacity .6s ease;
+      transform:scale(.96);
+      opacity:.45;
+    }
+    .snap-panel.active .snap-inner{
+      transform:scale(1);
+      opacity:1;
+    }
+
     /* ===== Hero ===== */
     .hero{
       margin-top:80px;
-      min-height:96vh;
-      display:flex;align-items:center;
-      position:relative;overflow:hidden;
     }
     /* Background video container */
     .hero-video-bg{
@@ -476,7 +497,7 @@
   </header>
 
   <!-- Hero with background video -->
-  <section class="hero" id="home">
+  <section class="hero snap-panel" id="home">
     <div class="hero-video-bg" aria-hidden="true">
       <video
         muted
@@ -487,7 +508,7 @@
         <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
       </video>
     </div>
-    <div class="container hero-content">
+    <div class="container hero-content snap-inner">
       <span class="tag">AI CRM</span>
       <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
       <p>
@@ -502,8 +523,8 @@
   </section>
 
   <!-- Metrics -->
-  <section class="section" aria-label="Key results">
-    <div class="container">
+  <section class="section snap-panel" aria-label="Key results">
+    <div class="container snap-inner">
       <div class="metrics-grid">
         <div class="metric fade tilt"><span class="value">100%</span><span class="label">Lead coverage</span></div>
         <div class="metric fade tilt"><span class="value">2 min</span><span class="label">Median response time</span></div>
@@ -514,8 +535,8 @@
   </section>
 
   <!-- Videos -->
-  <section class="section videos" id="videos">
-    <div class="container">
+  <section class="section videos snap-panel" id="videos">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>Learn how our CRM + AI works</h2>
         <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
@@ -590,8 +611,8 @@
   </section>
 
   <!-- CRM AI Agenda -->
-  <section class="section" id="agenda">
-    <div class="container">
+  <section class="section snap-panel" id="agenda">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>CRM AI Agenda</h2>
         <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster — built into Rithink CRM.</p>
@@ -663,8 +684,8 @@
   </section>
 
   <!-- Product -->
-  <section class="section" id="product">
-    <div class="container">
+  <section class="section snap-panel" id="product">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>Product</h2>
         <p class="lead">Everything you need in one AI-first CRM — no external CRM required.</p>
@@ -705,8 +726,8 @@
   </section>
 
   <!-- Channels -->
-  <section class="section channels" id="channels">
-    <div class="container">
+  <section class="section channels snap-panel" id="channels">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>Channels Rithink handles</h2>
         <p class="lead">Capture and converse where your buyers are. Rithink is the CRM of record.</p>
@@ -728,8 +749,8 @@
   </section>
 
   <!-- Case Studies -->
-  <section class="section cases" id="cases">
-    <div class="container">
+  <section class="section cases snap-panel" id="cases">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>Selected results (demo)</h2>
         <p class="lead">Placeholder companies and metrics for layout — replace with real results when ready.</p>
@@ -836,8 +857,8 @@
   </section>
 
   <!-- About -->
-  <section class="section about" id="about">
-    <div class="container">
+  <section class="section about snap-panel" id="about">
+    <div class="container snap-inner">
       <div class="about-grid">
         <div>
           <h2>About Rithink</h2>
@@ -887,8 +908,8 @@
   </section>
 
   <!-- Privacy -->
-  <section class="section privacy" id="privacy">
-    <div class="container">
+  <section class="section privacy snap-panel" id="privacy">
+    <div class="container snap-inner">
       <div class="section-header">
         <h2>Privacy & Security</h2>
         <p class="lead">How we handle data as an AI-first CRM. <span class="small">Last updated: November 3, 2025</span></p>
@@ -955,8 +976,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="section cta" id="contact">
-    <div class="container">
+  <section class="section cta snap-panel" id="contact">
+    <div class="container snap-inner">
       <h2>Ready to try an AI-first CRM?</h2>
       <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
       <div class="benefits">
@@ -968,9 +989,9 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
+  <!-- Footer as last snap panel -->
+  <footer class="snap-panel">
+    <div class="container snap-inner">
       <div class="foot">
         <div>
           <h3>Rithink</h3>
@@ -1029,8 +1050,27 @@
     const hdr = document.getElementById('header');
     const progressBar = document.getElementById('scroll-progress');
     let stepsObserver = null;
+    let snapPanels = [];
 
-    // Scroll handler: header, reveal, progress, parallax, agenda
+    function updateActivePanel(){
+      if (!snapPanels.length) return;
+      const mid = window.innerHeight / 2;
+      let best = null;
+      let bestDist = Infinity;
+      snapPanels.forEach(panel => {
+        const rect = panel.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const dist = Math.abs(center - mid);
+        if (dist < bestDist){
+          bestDist = dist;
+          best = panel;
+        }
+      });
+      snapPanels.forEach(p => p.classList.remove('active'));
+      if (best) best.classList.add('active');
+    }
+
+    // Scroll handler: header, reveal, progress, parallax, agenda, snap highlight
     const onScroll = () => {
       if (window.scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
 
@@ -1056,6 +1096,9 @@
 
       // Agenda highlight fallback
       stepsObserver && stepsObserver.check && stepsObserver.check();
+
+      // Active snap panel
+      updateActivePanel();
     };
     document.addEventListener('scroll', onScroll, {passive:true});
 
@@ -1099,6 +1142,7 @@
 
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
+      snapPanels = Array.from(document.querySelectorAll('.snap-panel'));
       setupTilt();
       setupAgendaObserver();
       onScroll();
