@@ -143,152 +143,54 @@
     .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
-    /* ===== Hero ===== */
+    /* ===== HERO – VIDEO BACKGROUND + ADVANCED SCROLL ===== */
     .hero{
       margin-top:80px;
-      min-height:96vh;
-      display:flex;
-      align-items:center;
+      height:170vh;           /* gør sektionen længere end viewport -> mere “scroll oplevelse” */
       position:relative;
       overflow:hidden;
     }
-    .hero::before{
-      content:"";position:absolute;inset:-40% -10% 0 -10%;z-index:-1;
-      background:
-        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.28), transparent 60%),
-        radial-gradient(60% 80% at 80% 10%, rgba(0,224,255,.25), transparent 60%),
-        radial-gradient(60% 80% at 50% 90%, rgba(255,107,154,.22), transparent 60%);
-      filter:blur(10px);
-    }
-    .hero-content{
-      position:relative;
-      z-index:1;
-      color:var(--text);
-      padding:56px 0;
-      width:100%;
-    }
 
-    /* NEW: layout like Advera – text + animated collage */
-    .hero-layout{
-      display:grid;
-      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-      gap:40px;
-      align-items:center;
-    }
-    .hero-copy{}
-
-    .hero-media{
-      position:relative;
-      perspective:1200px;
-    }
-    .hero-media-bg{
+    .hero-bg{
       position:absolute;
-      inset:-18%;
-      background:
-        radial-gradient(circle at 20% 15%, rgba(123,140,255,.45), transparent 55%),
-        radial-gradient(circle at 80% 85%, rgba(0,224,255,.35), transparent 55%),
-        radial-gradient(circle at 10% 90%, rgba(255,107,154,.35), transparent 55%);
-      opacity:.75;
-      filter:blur(20px);
-      z-index:-1;
-    }
-    .hero-media-layout{
-      position:relative;
-      display:grid;
-      grid-template-columns:1.15fr .9fr;
-      grid-auto-rows:minmax(120px,auto);
-      gap:14px;
-      transform-style:preserve-3d;
-      will-change:transform;
-    }
-    .hero-media-card{
-      position:relative;
-      border-radius:20px;
+      inset:0;
+      z-index:-2;
       overflow:hidden;
-      background:var(--surface-2);
-      border:1px solid var(--border);
-      box-shadow:0 16px 40px rgba(0,0,0,.55);
-      backdrop-filter:blur(14px);
-      min-height:150px;
-      transform-origin:center;
-      transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
     }
-    .hero-media-card img,
-    .hero-media-card video{
+    .hero-bg video{
       width:100%;
-      height:100%;
+      height:120%;
       object-fit:cover;
-      display:block;
+      transform:scale(1.08);
+      filter:saturate(1.1) contrast(1.05) brightness(0.9);
+      transition:transform .25s ease-out;
     }
-    .hero-media-card:hover{
-      transform:translateY(-6px) scale(1.02);
-      box-shadow:0 22px 52px rgba(0,0,0,.7);
-      border-color:rgba(0,224,255,.5);
-      background:rgba(9,12,40,.9);
-    }
-
-    .hero-media-main{
-      grid-column:1/3;
-      min-height:260px;
-    }
-    .hero-media-secondary:nth-of-type(2){
-      grid-column:1/2;
-    }
-    .hero-media-secondary:nth-of-type(3){
-      grid-column:2/3;
-    }
-    .hero-media-bottom{
-      grid-column:1/3;
-      min-height:130px;
-      opacity:.95;
-    }
-
-    .hero-media-pill{
+    .hero-bg-overlay{
       position:absolute;
-      top:14px;
-      left:14px;
-      padding:7px 12px;
-      border-radius:999px;
-      background:rgba(6,10,40,.8);
-      border:1px solid rgba(255,255,255,.18);
-      font-size:11px;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-    }
-    .hero-media-pill-dot{
-      width:8px;height:8px;border-radius:50%;
-      background:radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
-      box-shadow:0 0 10px rgba(0,224,255,.8);
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(123,140,255,.55), transparent 60%),
+        radial-gradient(circle at 85% 20%, rgba(0,224,255,.4), transparent 60%),
+        radial-gradient(circle at 50% 90%, rgba(0,0,0,.9), rgba(0,0,0,1)),
+        linear-gradient(160deg, rgba(7,11,31,.95), rgba(7,11,31,.95));
+      opacity:.9;
+      mix-blend-mode:normal;
+      transition:opacity .25s ease-out;
     }
 
-    .hero-media-caption{
-      position:absolute;
-      bottom:12px;
-      left:14px;
-      right:14px;
-      padding:8px 10px;
-      border-radius:12px;
-      background:linear-gradient(135deg, rgba(7,11,31,.85), rgba(7,11,31,.65));
-      border:1px solid rgba(255,255,255,.18);
-      font-size:12px;
-      color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      gap:8px;
+    .hero-inner{
+      position:sticky;
+      top:88px; /* under header */
+      min-height:calc(100vh - 110px);
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+      gap:42px;
       align-items:center;
-    }
-    .hero-media-caption span{
-      white-space:nowrap;
-      font-weight:600;
-      color:var(--text);
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.06em;
+      padding:40px 0 60px;
+      will-change:transform,opacity;
     }
 
+    .hero-left{}
     .tag{
       display:inline-block;padding:9px 16px;border-radius:999px;
       background:var(--surface);border:1px solid var(--border);
@@ -321,6 +223,112 @@
       border:1px solid var(--border);backdrop-filter:blur(10px);
     }
     .btn-outline:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.35)}
+
+    .hero-right{
+      position:relative;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:16px;
+      transform-style:preserve-3d;
+    }
+    .hero-card{
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      box-shadow:0 18px 40px rgba(0,0,0,.6);
+      backdrop-filter:blur(14px);
+      padding:16px 18px;
+      min-height:110px;
+      transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
+    }
+    .hero-card-primary{
+      min-height:180px;
+    }
+    .hero-card h3{
+      font-size:16px;
+      margin-bottom:6px;
+    }
+    .hero-card p{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .hero-card-pill{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      padding:4px 9px;
+      border-radius:999px;
+      background:rgba(0,0,0,.5);
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      margin-bottom:10px;
+    }
+    .hero-card-dot{
+      width:7px;height:7px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
+      box-shadow:0 0 8px rgba(0,224,255,.8);
+    }
+
+    .hero-card-metric{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      margin-top:10px;
+      font-size:12px;
+    }
+    .hero-card-metric strong{
+      font-size:20px;
+      background:linear-gradient(90deg,var(--accent-2),var(--accent));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    }
+    .hero-card-secondary{transform-origin:top right;}
+    .hero-card-mini{transform-origin:top left;}
+
+    .hero-card:hover{
+      box-shadow:0 26px 56px rgba(0,0,0,.75);
+      border-color:rgba(0,224,255,.5);
+      background:rgba(9,12,40,.92);
+    }
+
+    .scroll-hint{
+      position:absolute;
+      left:50%;
+      bottom:28px;
+      transform:translateX(-50%);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      color:var(--muted);
+      opacity:.85;
+      pointer-events:none;
+    }
+    .scroll-hint span{
+      width:22px;height:38px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .scroll-hint span::after{
+      content:"";
+      position:absolute;
+      top:6px;left:50%;
+      width:4px;height:8px;
+      border-radius:999px;
+      background:var(--accent-2);
+      transform:translateX(-50%);
+      animation:scrollDot 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollDot{
+      0%{opacity:0;transform:translate(-50%,0)}
+      20%{opacity:1}
+      80%{opacity:0;transform:translate(-50%,16px)}
+      100%{opacity:0;transform:translate(-50%,16px)}
+    }
 
     /* ===== Sections ===== */
     section{scroll-margin-top:100px}
@@ -549,23 +557,25 @@
       .foot{grid-template-columns:1fr;text-align:center}
 
       .hero{
+        height:auto;
+      }
+      .hero-inner{
+        position:relative;
+        top:0;
         min-height:auto;
-        padding-top:96px;
-        padding-bottom:40px;
-      }
-      .hero-layout{
+        padding:96px 0 54px;
         grid-template-columns:1fr;
-        gap:28px;
+        gap:26px;
       }
-      .hero-media-layout{
-        transform:none !important;
+      .hero-right{
+        order:-1;
       }
+      .scroll-hint{display:none;}
     }
 
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important;transition:none !important}
       .wordmark{background-position:50% 50% !important}
-      .hero-media-layout{transform:none !important}
     }
   </style>
 
@@ -602,84 +612,79 @@
     </nav>
   </header>
 
-  <!-- Hero with Advera-like collage -->
+  <!-- HERO – VIDEO BACKGROUND + ADVANCED SCROLL -->
   <section class="hero" id="home">
-    <div class="container hero-content">
-      <div class="hero-layout">
-        <!-- Left: copy -->
-        <div class="hero-copy">
-          <span class="tag">AI CRM</span>
-          <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
-          <p>
-            An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
-            calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
-          </p>
-          <div class="cta">
-            <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
-            <a class="btn btn-outline" href="#agenda">See the Agenda</a>
-          </div>
+    <div class="hero-bg">
+      <video
+        muted
+        autoplay
+        playsinline
+        loop
+        poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
+        <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+      </video>
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="container hero-inner">
+      <!-- Left side copy -->
+      <div class="hero-left">
+        <span class="tag">AI CRM</span>
+        <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
+        <p>
+          An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
+          calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
+        </p>
+        <div class="cta">
+          <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
+          <a class="btn btn-outline" href="#agenda">See the Agenda</a>
         </div>
-
-        <!-- Right: animated media layout inspired by Advera -->
-        <div class="hero-media">
-          <div class="hero-media-bg" aria-hidden="true"></div>
-          <div class="hero-media-layout parallax">
-            <!-- Main video card -->
-            <div class="hero-media-card hero-media-main">
-              <video
-                muted
-                autoplay
-                playsinline
-                loop
-                poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-                <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
-              </video>
-              <div class="hero-media-pill">
-                <span class="hero-media-pill-dot"></span>
-                Live inbox • 24/7 leads
-              </div>
-              <div class="hero-media-caption">
-                <div>New lead: <strong>Head of Sales</strong> · “Demo next week?”</div>
-                <span>Auto-qualified</span>
-              </div>
-            </div>
-
-            <!-- Secondary card 1 -->
-            <div class="hero-media-card hero-media-secondary">
-              <img
-                src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
-                alt="Pipeline board with deals in stages" />
-              <div class="hero-media-caption">
-                <div>Pipeline view · Deals by stage</div>
-                <span>Keep deals moving</span>
-              </div>
-            </div>
-
-            <!-- Secondary card 2 -->
-            <div class="hero-media-card hero-media-secondary">
-              <img
-                src="https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg"
-                alt="Calendar and booked meetings" />
-              <div class="hero-media-caption">
-                <div>3 new meetings booked today</div>
-                <span>Auto-scheduling</span>
-              </div>
-            </div>
-
-            <!-- Bottom card -->
-            <div class="hero-media-card hero-media-bottom">
-              <img
-                src="https://images.pexels.com/photos/7652052/pexels-photo-7652052.jpeg"
-                alt="Analytics dashboard with growing charts" />
-              <div class="hero-media-caption">
-                <div>+28% booked meetings · -35% time-to-first-touch</div>
-                <span>AI CRM impact</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
       </div>
+
+      <!-- Right side “Advera style” cards that move on scroll -->
+      <div class="hero-right">
+        <div class="hero-card hero-card-primary">
+          <div class="hero-card-pill">
+            <span class="hero-card-dot"></span>
+            Live inbox · 24/7 leads
+          </div>
+          <h3>Never miss a lead</h3>
+          <p>Forms, chat, email and social all land in one inbox, with instant AI replies and suggested next steps.</p>
+          <div class="hero-card-metric">
+            <div>
+              <strong>100%</strong><br />
+              coverage
+            </div>
+            <div>
+              <span>2 min</span><br />
+              median response
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card hero-card-secondary">
+          <div class="hero-card-pill">
+            <span class="hero-card-dot"></span>
+            Today view
+          </div>
+          <h3>Only the calls that matter</h3>
+          <p>Your reps get a “Today” list with hot replies, booking requests and SLA-due leads.</p>
+        </div>
+
+        <div class="hero-card hero-card-mini">
+          <div class="hero-card-pill">
+            <span class="hero-card-dot"></span>
+            Autopilot
+          </div>
+          <h3>Follow-up sequences</h3>
+          <p>Polite, branded nudges across email/SMS/chat until there’s a real booking or clear no.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span></span>
+      <p>Scroll to see the CRM AI agenda</p>
     </div>
   </section>
 
@@ -695,7 +700,7 @@
     </div>
   </section>
 
-  <!-- Videos (MATCHING TITLES) -->
+  <!-- Videos -->
   <section class="section videos" id="videos">
     <div class="container">
       <div class="section-header">
@@ -708,7 +713,6 @@
         <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
-            <!-- Gem din fil som fx /media/notification-on-phone.mp4 -->
             <source src="/media/notification-on-phone.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -721,7 +725,6 @@
         <a class="video-card fade parallax" href="#agenda" aria-label="Only the calls that matter">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
-            <!-- Gem din fil som fx /media/call-center-headset.mp4 -->
             <source src="/media/call-center-headset.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -734,7 +737,6 @@
         <a class="video-card fade parallax" href="#product" aria-label="Follow-up on autopilot">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
-            <!-- Gem din fil som fx /media/email-automation.mp4 -->
             <source src="/media/email-automation.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -747,7 +749,6 @@
         <a class="video-card fade parallax" href="#cases" aria-label="Optimize conversion rate">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-            <!-- Gem din fil som fx /media/analytics-dashboard.mp4 -->
             <source src="/media/analytics-dashboard.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -760,7 +761,6 @@
         <a class="video-card fade parallax" href="#process" aria-label="Keep deals moving">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg">
-            <!-- Gem din fil som fx /media/kanban-pipeline.mp4 -->
             <source src="/media/kanban-pipeline.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -1213,9 +1213,12 @@
     const progressBar = document.getElementById('scroll-progress');
     let stepsObserver = null;
 
-    // Scroll handler: header, reveal, progress, parallax, agenda
+    // Scroll handler: header, reveal, progress, parallax, hero advanced scroll
     const onScroll = () => {
-      if (window.scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // Header shadow
+      if (scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
 
       // Reveal
       document.querySelectorAll('.fade').forEach(el=>{
@@ -1224,27 +1227,70 @@
       });
 
       // Progress bar
-      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const pct = height > 0 ? Math.max(0, Math.min(1, scrollTop / height)) : 0;
+      const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
 
-      // Parallax for video cards + hero media layout
+      // Parallax for video cards etc.
       document.querySelectorAll('.parallax').forEach(el => {
         const r = el.getBoundingClientRect();
         const center = window.innerHeight / 2;
         const offset = (r.top + r.height/2 - center) / window.innerHeight;
-
-        if (el.classList.contains('hero-media-layout')) {
-          const translateY = offset * -40;
-          const rotateX = offset * 6;
-          const rotateY = offset * -4;
-          const scale = 1 + Math.min(0.08, Math.abs(offset) * 0.08);
-          el.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        } else {
-          el.style.transform = `translateY(${offset * -20}px)`;
-        }
+        el.style.transform = `translateY(${offset * -20}px)`;
       });
+
+      // Advanced hero scroll (Advera-style)
+      const hero = document.querySelector('.hero');
+      const heroVideo = document.querySelector('.hero-bg video');
+      const heroOverlay = document.querySelector('.hero-bg-overlay');
+      const heroInner = document.querySelector('.hero-inner');
+      const heroCardPrimary = document.querySelector('.hero-card-primary');
+      const heroCardSecondary = document.querySelector('.hero-card-secondary');
+      const heroCardMini = document.querySelector('.hero-card-mini');
+
+      if (hero && heroInner) {
+        const heroTop = hero.offsetTop;
+        const heroHeight = hero.offsetHeight;
+        const vh = window.innerHeight;
+        const start = heroTop;
+        const end = heroTop + heroHeight - vh;
+
+        let progress = 0;
+        if (scrollY <= start) progress = 0;
+        else if (scrollY >= end) progress = 1;
+        else progress = (scrollY - start) / (end - start);
+        progress = Math.min(1, Math.max(0, progress));
+
+        // Video zoom + drift
+        if (heroVideo) {
+          const scale = 1.08 + progress * 0.25;
+          const translateY = progress * 60;
+          heroVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        }
+        // Overlay lysner lidt når man scroller
+        if (heroOverlay) {
+          const o = 0.9 - progress * 0.3;
+          heroOverlay.style.opacity = Math.max(0.5, o);
+        }
+
+        // Teksten glider lidt op
+        heroInner.style.transform = `translateY(${progress * -80}px)`;
+        heroInner.style.opacity = 1 - progress * 0.08;
+
+        // Kortene bevæger sig forskelligt
+        if (heroCardPrimary) {
+          heroCardPrimary.style.transform =
+            `translateY(${progress * -30}px) scale(${1 + progress * 0.03})`;
+        }
+        if (heroCardSecondary) {
+          heroCardSecondary.style.transform =
+            `translateY(${progress * 24}px) translateX(${progress * 10}px)`;
+        }
+        if (heroCardMini) {
+          heroCardMini.style.transform =
+            `translateY(${progress * -18}px) translateX(${progress * -14}px)`;
+        }
+      }
 
       // Agenda highlight fallback
       stepsObserver && stepsObserver.check && stepsObserver.check();
