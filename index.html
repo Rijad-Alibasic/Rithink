@@ -150,10 +150,23 @@
       display:flex;align-items:center;
       position:relative;overflow:hidden;
     }
+    /* Background video container */
+    .hero-video-bg{
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      overflow:hidden;
+    }
+    .hero-video-bg video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(1.1) contrast(1.05) brightness(0.85);
+    }
     .hero::before{
       content:"";position:absolute;inset:-40% -10% 0 -10%;z-index:-1;
       background:
-        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.28), transparent 60%),
+        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.35), transparent 60%),
         radial-gradient(60% 80% at 80% 10%, rgba(0,224,255,.25), transparent 60%),
         radial-gradient(60% 80% at 50% 90%, rgba(255,107,154,.22), transparent 60%);
       filter:blur(10px);
@@ -169,12 +182,16 @@
       font-size:clamp(44px,7vw,84px);
       line-height:1.05;font-weight:900;
       letter-spacing:-2px;margin-bottom:16px;
+      text-shadow:0 10px 30px rgba(0,0,0,.7);
     }
     .gradient-text{
       background:linear-gradient(135deg,#fff 0%,var(--accent-2) 50%,var(--accent) 100%);
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .hero p{font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px}
+    .hero p{
+      font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px;
+      text-shadow:0 8px 26px rgba(0,0,0,.7);
+    }
     .cta{display:flex;gap:14px;flex-wrap:wrap}
     .btn{
       padding:14px 28px;border-radius:28px;
@@ -458,8 +475,18 @@
     </nav>
   </header>
 
-  <!-- Hero -->
+  <!-- Hero with background video -->
   <section class="hero" id="home">
+    <div class="hero-video-bg" aria-hidden="true">
+      <video
+        muted
+        autoplay
+        playsinline
+        loop
+        poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
+        <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="container hero-content">
       <span class="tag">AI CRM</span>
       <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
@@ -486,7 +513,7 @@
     </div>
   </section>
 
-  <!-- Videos (MATCHING TITLES) -->
+  <!-- Videos -->
   <section class="section videos" id="videos">
     <div class="container">
       <div class="section-header">
@@ -499,7 +526,6 @@
         <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
-            <!-- Cloudinary-hosted video -->
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
           </video>
           <div class="video-info">
