@@ -33,12 +33,8 @@
       --progress-h:4px;
     }
 
-    html{
-      scroll-behavior:smooth;
-      height:100%;
-    }
+    html{scroll-behavior:smooth}
     body{
-      height:100%;
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       color:var(--text);
       background:
@@ -50,7 +46,6 @@
       overflow-x:hidden;
       min-height:100vh;
       position:relative;
-      scroll-snap-type:y mandatory; /* slide-like scrolling */
     }
     body::after{
       content:"";
@@ -148,51 +143,152 @@
     .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
-    /* ===== Scroll snap panels ===== */
-    .snap-panel{
-      scroll-snap-align:start;
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      position:relative;
-    }
-    .snap-inner{
-      width:100%;
-      transition:transform .6s ease, opacity .6s ease;
-      transform:scale(.96);
-      opacity:.45;
-    }
-    .snap-panel.active .snap-inner{
-      transform:scale(1);
-      opacity:1;
-    }
-
     /* ===== Hero ===== */
     .hero{
       margin-top:80px;
-    }
-    /* Background video container */
-    .hero-video-bg{
-      position:absolute;
-      inset:0;
-      z-index:-2;
+      min-height:96vh;
+      display:flex;
+      align-items:center;
+      position:relative;
       overflow:hidden;
-    }
-    .hero-video-bg video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      filter:saturate(1.1) contrast(1.05) brightness(0.85);
     }
     .hero::before{
       content:"";position:absolute;inset:-40% -10% 0 -10%;z-index:-1;
       background:
-        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.35), transparent 60%),
+        radial-gradient(60% 80% at 20% 20%, rgba(123,140,255,.28), transparent 60%),
         radial-gradient(60% 80% at 80% 10%, rgba(0,224,255,.25), transparent 60%),
         radial-gradient(60% 80% at 50% 90%, rgba(255,107,154,.22), transparent 60%);
       filter:blur(10px);
     }
-    .hero-content{position:relative;z-index:1;color:var(--text);padding:56px 0}
+    .hero-content{
+      position:relative;
+      z-index:1;
+      color:var(--text);
+      padding:56px 0;
+      width:100%;
+    }
+
+    /* NEW: layout like Advera – text + animated collage */
+    .hero-layout{
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:40px;
+      align-items:center;
+    }
+    .hero-copy{}
+
+    .hero-media{
+      position:relative;
+      perspective:1200px;
+    }
+    .hero-media-bg{
+      position:absolute;
+      inset:-18%;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(123,140,255,.45), transparent 55%),
+        radial-gradient(circle at 80% 85%, rgba(0,224,255,.35), transparent 55%),
+        radial-gradient(circle at 10% 90%, rgba(255,107,154,.35), transparent 55%);
+      opacity:.75;
+      filter:blur(20px);
+      z-index:-1;
+    }
+    .hero-media-layout{
+      position:relative;
+      display:grid;
+      grid-template-columns:1.15fr .9fr;
+      grid-auto-rows:minmax(120px,auto);
+      gap:14px;
+      transform-style:preserve-3d;
+      will-change:transform;
+    }
+    .hero-media-card{
+      position:relative;
+      border-radius:20px;
+      overflow:hidden;
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      box-shadow:0 16px 40px rgba(0,0,0,.55);
+      backdrop-filter:blur(14px);
+      min-height:150px;
+      transform-origin:center;
+      transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
+    }
+    .hero-media-card img,
+    .hero-media-card video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .hero-media-card:hover{
+      transform:translateY(-6px) scale(1.02);
+      box-shadow:0 22px 52px rgba(0,0,0,.7);
+      border-color:rgba(0,224,255,.5);
+      background:rgba(9,12,40,.9);
+    }
+
+    .hero-media-main{
+      grid-column:1/3;
+      min-height:260px;
+    }
+    .hero-media-secondary:nth-of-type(2){
+      grid-column:1/2;
+    }
+    .hero-media-secondary:nth-of-type(3){
+      grid-column:2/3;
+    }
+    .hero-media-bottom{
+      grid-column:1/3;
+      min-height:130px;
+      opacity:.95;
+    }
+
+    .hero-media-pill{
+      position:absolute;
+      top:14px;
+      left:14px;
+      padding:7px 12px;
+      border-radius:999px;
+      background:rgba(6,10,40,.8);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:11px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+    .hero-media-pill-dot{
+      width:8px;height:8px;border-radius:50%;
+      background:radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
+      box-shadow:0 0 10px rgba(0,224,255,.8);
+    }
+
+    .hero-media-caption{
+      position:absolute;
+      bottom:12px;
+      left:14px;
+      right:14px;
+      padding:8px 10px;
+      border-radius:12px;
+      background:linear-gradient(135deg, rgba(7,11,31,.85), rgba(7,11,31,.65));
+      border:1px solid rgba(255,255,255,.18);
+      font-size:12px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      gap:8px;
+      align-items:center;
+    }
+    .hero-media-caption span{
+      white-space:nowrap;
+      font-weight:600;
+      color:var(--text);
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.06em;
+    }
+
     .tag{
       display:inline-block;padding:9px 16px;border-radius:999px;
       background:var(--surface);border:1px solid var(--border);
@@ -203,16 +299,12 @@
       font-size:clamp(44px,7vw,84px);
       line-height:1.05;font-weight:900;
       letter-spacing:-2px;margin-bottom:16px;
-      text-shadow:0 10px 30px rgba(0,0,0,.7);
     }
     .gradient-text{
       background:linear-gradient(135deg,#fff 0%,var(--accent-2) 50%,var(--accent) 100%);
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .hero p{
-      font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px;
-      text-shadow:0 8px 26px rgba(0,0,0,.7);
-    }
+    .hero p{font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px}
     .cta{display:flex;gap:14px;flex-wrap:wrap}
     .btn{
       padding:14px 28px;border-radius:28px;
@@ -455,11 +547,25 @@
       .step,.step:nth-child(even){flex-direction:row}
       .step .content{margin-left:72px;margin-right:0}
       .foot{grid-template-columns:1fr;text-align:center}
+
+      .hero{
+        min-height:auto;
+        padding-top:96px;
+        padding-bottom:40px;
+      }
+      .hero-layout{
+        grid-template-columns:1fr;
+        gap:28px;
+      }
+      .hero-media-layout{
+        transform:none !important;
+      }
     }
 
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important;transition:none !important}
       .wordmark{background-position:50% 50% !important}
+      .hero-media-layout{transform:none !important}
     }
   </style>
 
@@ -496,35 +602,90 @@
     </nav>
   </header>
 
-  <!-- Hero with background video -->
-  <section class="hero snap-panel" id="home">
-    <div class="hero-video-bg" aria-hidden="true">
-      <video
-        muted
-        autoplay
-        playsinline
-        loop
-        poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-        <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="container hero-content snap-inner">
-      <span class="tag">AI CRM</span>
-      <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
-      <p>
-        An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
-        calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
-      </p>
-      <div class="cta">
-        <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
-        <a class="btn btn-outline" href="#agenda">See the Agenda</a>
+  <!-- Hero with Advera-like collage -->
+  <section class="hero" id="home">
+    <div class="container hero-content">
+      <div class="hero-layout">
+        <!-- Left: copy -->
+        <div class="hero-copy">
+          <span class="tag">AI CRM</span>
+          <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
+          <p>
+            An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
+            calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
+          </p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
+            <a class="btn btn-outline" href="#agenda">See the Agenda</a>
+          </div>
+        </div>
+
+        <!-- Right: animated media layout inspired by Advera -->
+        <div class="hero-media">
+          <div class="hero-media-bg" aria-hidden="true"></div>
+          <div class="hero-media-layout parallax">
+            <!-- Main video card -->
+            <div class="hero-media-card hero-media-main">
+              <video
+                muted
+                autoplay
+                playsinline
+                loop
+                poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
+                <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+              </video>
+              <div class="hero-media-pill">
+                <span class="hero-media-pill-dot"></span>
+                Live inbox • 24/7 leads
+              </div>
+              <div class="hero-media-caption">
+                <div>New lead: <strong>Head of Sales</strong> · “Demo next week?”</div>
+                <span>Auto-qualified</span>
+              </div>
+            </div>
+
+            <!-- Secondary card 1 -->
+            <div class="hero-media-card hero-media-secondary">
+              <img
+                src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg"
+                alt="Pipeline board with deals in stages" />
+              <div class="hero-media-caption">
+                <div>Pipeline view · Deals by stage</div>
+                <span>Keep deals moving</span>
+              </div>
+            </div>
+
+            <!-- Secondary card 2 -->
+            <div class="hero-media-card hero-media-secondary">
+              <img
+                src="https://images.pexels.com/photos/6476584/pexels-photo-6476584.jpeg"
+                alt="Calendar and booked meetings" />
+              <div class="hero-media-caption">
+                <div>3 new meetings booked today</div>
+                <span>Auto-scheduling</span>
+              </div>
+            </div>
+
+            <!-- Bottom card -->
+            <div class="hero-media-card hero-media-bottom">
+              <img
+                src="https://images.pexels.com/photos/7652052/pexels-photo-7652052.jpeg"
+                alt="Analytics dashboard with growing charts" />
+              <div class="hero-media-caption">
+                <div>+28% booked meetings · -35% time-to-first-touch</div>
+                <span>AI CRM impact</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- Metrics -->
-  <section class="section snap-panel" aria-label="Key results">
-    <div class="container snap-inner">
+  <section class="section" aria-label="Key results">
+    <div class="container">
       <div class="metrics-grid">
         <div class="metric fade tilt"><span class="value">100%</span><span class="label">Lead coverage</span></div>
         <div class="metric fade tilt"><span class="value">2 min</span><span class="label">Median response time</span></div>
@@ -534,9 +695,9 @@
     </div>
   </section>
 
-  <!-- Videos -->
-  <section class="section videos snap-panel" id="videos">
-    <div class="container snap-inner">
+  <!-- Videos (MATCHING TITLES) -->
+  <section class="section videos" id="videos">
+    <div class="container">
       <div class="section-header">
         <h2>Learn how our CRM + AI works</h2>
         <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
@@ -547,7 +708,8 @@
         <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
-            <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+            <!-- Gem din fil som fx /media/notification-on-phone.mp4 -->
+            <source src="/media/notification-on-phone.mp4" type="video/mp4">
           </video>
           <div class="video-info">
             <h3>Never miss a lead <span class="badge">24/7 capture</span></h3>
@@ -559,7 +721,7 @@
         <a class="video-card fade parallax" href="#agenda" aria-label="Only the calls that matter">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
-            <!-- Replace src with your own Cloudinary URL when ready -->
+            <!-- Gem din fil som fx /media/call-center-headset.mp4 -->
             <source src="/media/call-center-headset.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -572,7 +734,7 @@
         <a class="video-card fade parallax" href="#product" aria-label="Follow-up on autopilot">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
-            <!-- Replace src with your own Cloudinary URL when ready -->
+            <!-- Gem din fil som fx /media/email-automation.mp4 -->
             <source src="/media/email-automation.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -585,7 +747,7 @@
         <a class="video-card fade parallax" href="#cases" aria-label="Optimize conversion rate">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-            <!-- Replace src with your own Cloudinary URL when ready -->
+            <!-- Gem din fil som fx /media/analytics-dashboard.mp4 -->
             <source src="/media/analytics-dashboard.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -598,7 +760,7 @@
         <a class="video-card fade parallax" href="#process" aria-label="Keep deals moving">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg">
-            <!-- Replace src with your own Cloudinary URL when ready -->
+            <!-- Gem din fil som fx /media/kanban-pipeline.mp4 -->
             <source src="/media/kanban-pipeline.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -611,8 +773,8 @@
   </section>
 
   <!-- CRM AI Agenda -->
-  <section class="section snap-panel" id="agenda">
-    <div class="container snap-inner">
+  <section class="section" id="agenda">
+    <div class="container">
       <div class="section-header">
         <h2>CRM AI Agenda</h2>
         <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster — built into Rithink CRM.</p>
@@ -684,8 +846,8 @@
   </section>
 
   <!-- Product -->
-  <section class="section snap-panel" id="product">
-    <div class="container snap-inner">
+  <section class="section" id="product">
+    <div class="container">
       <div class="section-header">
         <h2>Product</h2>
         <p class="lead">Everything you need in one AI-first CRM — no external CRM required.</p>
@@ -726,8 +888,8 @@
   </section>
 
   <!-- Channels -->
-  <section class="section channels snap-panel" id="channels">
-    <div class="container snap-inner">
+  <section class="section channels" id="channels">
+    <div class="container">
       <div class="section-header">
         <h2>Channels Rithink handles</h2>
         <p class="lead">Capture and converse where your buyers are. Rithink is the CRM of record.</p>
@@ -749,8 +911,8 @@
   </section>
 
   <!-- Case Studies -->
-  <section class="section cases snap-panel" id="cases">
-    <div class="container snap-inner">
+  <section class="section cases" id="cases">
+    <div class="container">
       <div class="section-header">
         <h2>Selected results (demo)</h2>
         <p class="lead">Placeholder companies and metrics for layout — replace with real results when ready.</p>
@@ -857,8 +1019,8 @@
   </section>
 
   <!-- About -->
-  <section class="section about snap-panel" id="about">
-    <div class="container snap-inner">
+  <section class="section about" id="about">
+    <div class="container">
       <div class="about-grid">
         <div>
           <h2>About Rithink</h2>
@@ -908,8 +1070,8 @@
   </section>
 
   <!-- Privacy -->
-  <section class="section privacy snap-panel" id="privacy">
-    <div class="container snap-inner">
+  <section class="section privacy" id="privacy">
+    <div class="container">
       <div class="section-header">
         <h2>Privacy & Security</h2>
         <p class="lead">How we handle data as an AI-first CRM. <span class="small">Last updated: November 3, 2025</span></p>
@@ -976,8 +1138,8 @@
   </section>
 
   <!-- CTA -->
-  <section class="section cta snap-panel" id="contact">
-    <div class="container snap-inner">
+  <section class="section cta" id="contact">
+    <div class="container">
       <h2>Ready to try an AI-first CRM?</h2>
       <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
       <div class="benefits">
@@ -989,9 +1151,9 @@
     </div>
   </section>
 
-  <!-- Footer as last snap panel -->
-  <footer class="snap-panel">
-    <div class="container snap-inner">
+  <!-- Footer -->
+  <footer>
+    <div class="container">
       <div class="foot">
         <div>
           <h3>Rithink</h3>
@@ -1050,27 +1212,8 @@
     const hdr = document.getElementById('header');
     const progressBar = document.getElementById('scroll-progress');
     let stepsObserver = null;
-    let snapPanels = [];
 
-    function updateActivePanel(){
-      if (!snapPanels.length) return;
-      const mid = window.innerHeight / 2;
-      let best = null;
-      let bestDist = Infinity;
-      snapPanels.forEach(panel => {
-        const rect = panel.getBoundingClientRect();
-        const center = rect.top + rect.height / 2;
-        const dist = Math.abs(center - mid);
-        if (dist < bestDist){
-          bestDist = dist;
-          best = panel;
-        }
-      });
-      snapPanels.forEach(p => p.classList.remove('active'));
-      if (best) best.classList.add('active');
-    }
-
-    // Scroll handler: header, reveal, progress, parallax, agenda, snap highlight
+    // Scroll handler: header, reveal, progress, parallax, agenda
     const onScroll = () => {
       if (window.scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
 
@@ -1086,19 +1229,25 @@
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollTop / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
 
-      // Parallax for video cards
+      // Parallax for video cards + hero media layout
       document.querySelectorAll('.parallax').forEach(el => {
         const r = el.getBoundingClientRect();
         const center = window.innerHeight / 2;
         const offset = (r.top + r.height/2 - center) / window.innerHeight;
-        el.style.transform = `translateY(${offset * -20}px)`;
+
+        if (el.classList.contains('hero-media-layout')) {
+          const translateY = offset * -40;
+          const rotateX = offset * 6;
+          const rotateY = offset * -4;
+          const scale = 1 + Math.min(0.08, Math.abs(offset) * 0.08);
+          el.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        } else {
+          el.style.transform = `translateY(${offset * -20}px)`;
+        }
       });
 
       // Agenda highlight fallback
       stepsObserver && stepsObserver.check && stepsObserver.check();
-
-      // Active snap panel
-      updateActivePanel();
     };
     document.addEventListener('scroll', onScroll, {passive:true});
 
@@ -1142,7 +1291,6 @@
 
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
-      snapPanels = Array.from(document.querySelectorAll('.snap-panel'));
       setupTilt();
       setupAgendaObserver();
       onScroll();
