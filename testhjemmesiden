@@ -418,7 +418,7 @@
       color:var(--text);font-weight:800;opacity:.9;
     }
 
-    /* ===== Cards / Product / Cases ===== */
+    /* ===== Cards / Cases ===== */
     .card{
       padding:34px;background:var(--surface);
       border-radius:18px;border:1px solid var(--border);
@@ -460,19 +460,6 @@
     }
     .stat .k{font-size:12px;color:var(--muted)}
     .placeholder-note{font-size:12px;color:var(--muted);margin-top:8px}
-
-    /* ===== Channels ===== */
-    .channels .logo-wall{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-      gap:14px;margin-top:18px;
-    }
-    .chip{
-      display:flex;align-items:center;justify-content:center;
-      border:1px solid var(--border);border-radius:12px;
-      padding:16px;background:var(--surface);
-      font-weight:800;color:var(--text);
-      min-height:72px;backdrop-filter:blur(10px);
-    }
 
     /* ===== About ===== */
     .about{position:relative;overflow:hidden}
@@ -609,8 +596,6 @@
       <ul class="nav-links" role="menubar" aria-label="Primary navigation">
         <li role="none"><a role="menuitem" href="#agenda">Agenda</a></li>
         <li role="none"><a role="menuitem" href="#videos">Videos</a></li>
-        <li role="none"><a role="menuitem" href="#product">Product</a></li>
-        <li role="none"><a role="menuitem" href="#channels">Channels</a></li>
         <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
         <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
         <li role="none"><a class="btn-pill" role="menuitem" href="#contact">Book a Demo</a></li>
@@ -834,71 +819,6 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Product -->
-  <section class="section" id="product">
-    <div class="container">
-      <div class="section-header">
-        <h2>Product</h2>
-        <p class="lead">Everything you need in one AI-first CRM — no external CRM required.</p>
-      </div>
-      <div class="product-grid">
-        <div class="card fade tilt">
-          <div class="icon">📥</div>
-          <h3>Unified Inbox</h3>
-          <p>Handle form submissions, email threads, chat and social DMs in one place with assistive replies and full context.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">🗓️</div>
-          <h3>Scheduling</h3>
-          <p>Instant booking from shared calendars, confirmations, prep notes and auto-reschedules for no-shows.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">🤖</div>
-          <h3>Assistant</h3>
-          <p>Answers routine questions, triages urgency, creates tasks, and hands off to the right owner with summaries.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">📈</div>
-          <h3>Pipelines & SLAs</h3>
-          <p>Rule-based routing, SLAs and escalations keep every lead and deal moving to the next best action.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">✉️</div>
-          <h3>Sequences</h3>
-          <p>Brand-safe templates and cadences across email/SMS/chat. A/B test and auto-promote winners.</p>
-        </div>
-        <div class="card fade tilt">
-          <div class="icon">📊</div>
-          <h3>Analytics</h3>
-          <p>Response time, show rate, booking conversion, stage-to-stage and cycle time — measured and actionable.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Channels -->
-  <section class="section channels" id="channels">
-    <div class="container">
-      <div class="section-header">
-        <h2>Channels Rithink handles</h2>
-        <p class="lead">Capture and converse where your buyers are. Rithink is the CRM of record.</p>
-      </div>
-      <div class="logo-wall">
-        <div class="chip fade tilt" aria-label="Web Forms">Web Forms</div>
-        <div class="chip fade tilt" aria-label="Email (IMAP/SMTP)">Email</div>
-        <div class="chip fade tilt" aria-label="Live Chat Widget">Live Chat</div>
-        <div class="chip fade tilt" aria-label="SMS (connector)">SMS*</div>
-        <div class="chip fade tilt" aria-label="WhatsApp (connector)">WhatsApp*</div>
-        <div class="chip fade tilt" aria-label="Social DMs">Social DMs*</div>
-        <div class="chip fade tilt" aria-label="Calendar">Calendar</div>
-        <div class="chip fade tilt" aria-label="Webhooks & API">Webhooks & API</div>
-      </div>
-      <p class="lead" style="margin-top:14px;text-align:center">
-        <span class="small">*Via off-the-shelf channel connectors. Rithink remains the CRM of record.</span>
-      </p>
     </div>
   </section>
 
