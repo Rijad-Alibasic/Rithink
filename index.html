@@ -1181,7 +1181,7 @@
   </footer>
 
   <script>
-    // Mobile menu
+  // Mobile menu
     const toggleMenu = () => {
       const btn = document.querySelector('.menu-toggle');
       const existing = document.getElementById('mobile-nav');
@@ -1201,28 +1201,28 @@
       });
       document.body.appendChild(ul);
     };
-
+  
     const hdr = document.getElementById('header');
     const progressBar = document.getElementById('scroll-progress');
     let stepsObserver = null;
-
+  
     const onScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset;
-
+  
       // Header shadow
       if (scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
-
+  
       // Reveal
       document.querySelectorAll('.fade').forEach(el=>{
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight - 80) el.classList.add('show');
       });
-
+  
       // Progress bar
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
-
+  
       // Parallax for video cards
       document.querySelectorAll('.parallax').forEach(el => {
         const r = el.getBoundingClientRect();
@@ -1230,30 +1230,32 @@
         const offset = (r.top + r.height/2 - center) / window.innerHeight;
         el.style.transform = `translateY(${offset * -20}px)`;
       });
-
+  
       // Advanced hero scroll
       const hero = document.querySelector('.hero');
       const bgVideo = document.querySelector('.site-bg video');
       const bgOverlay = document.querySelector('.site-bg-overlay');
       const heroInner = document.querySelector('.hero-inner');
+      const heroLeft = document.querySelector('.hero-left');
+      const heroRight = document.querySelector('.hero-right');
       const heroCardPrimary = document.querySelector('.hero-card-primary');
       const heroCardSecondary = document.querySelector('.hero-card-secondary');
       const heroCardMini = document.querySelector('.hero-card-mini');
-
+  
       if (hero && heroInner) {
         const heroTop = hero.offsetTop;
         const heroHeight = hero.offsetHeight;
         const vh = window.innerHeight;
         const start = heroTop;
         const end = heroTop + heroHeight - vh;
-
+  
         let progress = 0;
         if (scrollY <= start) progress = 0;
         else if (scrollY >= end) progress = 1;
         else progress = (scrollY - start) / (end - start);
         progress = Math.min(1, Math.max(0, progress));
-
-        // Video zoom + drift (global baggrund)
+  
+        // Video zoom + drift (global background)
         if (bgVideo) {
           const scale = 1.08 + progress * 0.25;
           const translateY = progress * 60;
@@ -1264,12 +1266,24 @@
           const o = 0.9 - progress * 0.3;
           bgOverlay.style.opacity = Math.max(0.5, o);
         }
-
-        // Teksten glider lidt op
+  
+        // Hero wrapper let vertical drift
         heroInner.style.transform = `translateY(${progress * -80}px)`;
-        heroInner.style.opacity = 1 - progress * 0.08;
-
-        // Kortene bevæger sig forskelligt
+  
+        // >>> NYT: tekst til venstre og bokse til højre glider ud til siden og fader <<<
+        const sideOffset = progress * 120;          // hvor langt de skal glide (px)
+        const sideOpacity = Math.max(0, 1 - progress * 1.4); // hvor meget de skal fade
+  
+        if (heroLeft) {
+          heroLeft.style.transform = `translateX(${-sideOffset}px)`;
+          heroLeft.style.opacity = sideOpacity;
+        }
+        if (heroRight) {
+          heroRight.style.transform = `translateX(${sideOffset}px)`;
+          heroRight.style.opacity = sideOpacity;
+        }
+  
+        // Kortene bevæger sig forskelligt oven i heroRight-transformen
         if (heroCardPrimary) {
           heroCardPrimary.style.transform =
             `translateY(${progress * -30}px) scale(${1 + progress * 0.03})`;
@@ -1283,12 +1297,12 @@
             `translateY(${progress * -18}px) translateX(${progress * -14}px)`;
         }
       }
-
+  
       // Agenda highlight fallback
       stepsObserver && stepsObserver.check && stepsObserver.check();
     };
     document.addEventListener('scroll', onScroll, {passive:true});
-
+  
     function setupTilt(){
       const els = document.querySelectorAll('.tilt');
       const limit = 8;
@@ -1305,7 +1319,7 @@
         });
       });
     }
-
+  
     function setupAgendaObserver(){
       const steps = Array.from(document.querySelectorAll('.timeline .step'));
       if (!steps.length) return;
@@ -1326,7 +1340,7 @@
         })
       };
     }
-
+  
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
       setupTilt();
