@@ -37,11 +37,7 @@
     body{
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(123,140,255,.16), transparent 60%),
-        radial-gradient(1000px 600px at 90% 10%, rgba(0,224,255,.12), transparent 60%),
-        radial-gradient(900px 900px at 20% 90%, rgba(255,107,154,.10), transparent 60%),
-        linear-gradient(160deg,var(--bg-1),var(--bg-2));
+      background:linear-gradient(160deg,var(--bg-1),var(--bg-2));
       line-height:1.6;
       overflow-x:hidden;
       min-height:100vh;
@@ -59,6 +55,34 @@
     }
 
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* ===== Global video background ===== */
+    .site-bg{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      overflow:hidden;
+    }
+    .site-bg video{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transform:scale(1.08);
+      filter:saturate(1.1) contrast(1.05) brightness(0.9);
+      transition:transform .25s ease-out;
+    }
+    .site-bg-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(123,140,255,.55), transparent 60%),
+        radial-gradient(circle at 85% 20%, rgba(0,224,255,.4), transparent 60%),
+        radial-gradient(circle at 50% 90%, rgba(0,0,0,.9), rgba(0,0,0,1)),
+        linear-gradient(160deg, rgba(7,11,31,.95), rgba(7,11,31,.95));
+      opacity:.9;
+      mix-blend-mode:normal;
+      transition:opacity .25s ease-out;
+    }
 
     /* ===== Scroll progress bar ===== */
     #scroll-progress{
@@ -143,44 +167,17 @@
     .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
-    /* ===== HERO – VIDEO BACKGROUND + ADVANCED SCROLL ===== */
+    /* ===== HERO – sticky content, video baggrund global ===== */
     .hero{
       margin-top:80px;
-      height:170vh;           /* gør sektionen længere end viewport -> mere “scroll oplevelse” */
+      height:170vh;
       position:relative;
-      overflow:hidden;
-    }
-
-    .hero-bg{
-      position:absolute;
-      inset:0;
-      z-index:-2;
-      overflow:hidden;
-    }
-    .hero-bg video{
-      width:100%;
-      height:120%;
-      object-fit:cover;
-      transform:scale(1.08);
-      filter:saturate(1.1) contrast(1.05) brightness(0.9);
-      transition:transform .25s ease-out;
-    }
-    .hero-bg-overlay{
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(123,140,255,.55), transparent 60%),
-        radial-gradient(circle at 85% 20%, rgba(0,224,255,.4), transparent 60%),
-        radial-gradient(circle at 50% 90%, rgba(0,0,0,.9), rgba(0,0,0,1)),
-        linear-gradient(160deg, rgba(7,11,31,.95), rgba(7,11,31,.95));
-      opacity:.9;
-      mix-blend-mode:normal;
-      transition:opacity .25s ease-out;
+      overflow:visible;
     }
 
     .hero-inner{
       position:sticky;
-      top:88px; /* under header */
+      top:88px;
       min-height:calc(100vh - 110px);
       display:grid;
       grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
@@ -590,6 +587,19 @@
 <body>
   <div id="scroll-progress"></div>
 
+  <!-- GLOBAL VIDEO BACKGROUND -->
+  <div class="site-bg">
+    <video
+      muted
+      autoplay
+      playsinline
+      loop
+      poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
+      <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+    </video>
+    <div class="site-bg-overlay"></div>
+  </div>
+
   <!-- Header -->
   <header id="header">
     <nav class="container" aria-label="Primary">
@@ -612,20 +622,8 @@
     </nav>
   </header>
 
-  <!-- HERO – VIDEO BACKGROUND + ADVANCED SCROLL -->
+  <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-bg">
-      <video
-        muted
-        autoplay
-        playsinline
-        loop
-        poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-        <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
-      </video>
-      <div class="hero-bg-overlay"></div>
-    </div>
-
     <div class="container hero-inner">
       <!-- Left side copy -->
       <div class="hero-left">
@@ -641,7 +639,7 @@
         </div>
       </div>
 
-      <!-- Right side “Advera style” cards that move on scroll -->
+      <!-- Right side cards -->
       <div class="hero-right">
         <div class="hero-card hero-card-primary">
           <div class="hero-card-pill">
@@ -709,7 +707,6 @@
       </div>
 
       <div class="video-grid">
-        <!-- 1) Never miss a lead  -->
         <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
@@ -721,7 +718,6 @@
           </div>
         </a>
 
-        <!-- 2) Only the calls that matter -->
         <a class="video-card fade parallax" href="#agenda" aria-label="Only the calls that matter">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
@@ -733,7 +729,6 @@
           </div>
         </a>
 
-        <!-- 3) Follow-up on autopilot -->
         <a class="video-card fade parallax" href="#product" aria-label="Follow-up on autopilot">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
@@ -745,7 +740,6 @@
           </div>
         </a>
 
-        <!-- 4) Optimize conversion rate -->
         <a class="video-card fade parallax" href="#cases" aria-label="Optimize conversion rate">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
@@ -757,7 +751,6 @@
           </div>
         </a>
 
-        <!-- 5) Keep deals moving -->
         <a class="video-card fade parallax" href="#process" aria-label="Keep deals moving">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg">
@@ -1213,7 +1206,6 @@
     const progressBar = document.getElementById('scroll-progress');
     let stepsObserver = null;
 
-    // Scroll handler: header, reveal, progress, parallax, hero advanced scroll
     const onScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset;
 
@@ -1231,7 +1223,7 @@
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
 
-      // Parallax for video cards etc.
+      // Parallax for video cards
       document.querySelectorAll('.parallax').forEach(el => {
         const r = el.getBoundingClientRect();
         const center = window.innerHeight / 2;
@@ -1239,10 +1231,10 @@
         el.style.transform = `translateY(${offset * -20}px)`;
       });
 
-      // Advanced hero scroll (Advera-style)
+      // Advanced hero scroll
       const hero = document.querySelector('.hero');
-      const heroVideo = document.querySelector('.hero-bg video');
-      const heroOverlay = document.querySelector('.hero-bg-overlay');
+      const bgVideo = document.querySelector('.site-bg video');
+      const bgOverlay = document.querySelector('.site-bg-overlay');
       const heroInner = document.querySelector('.hero-inner');
       const heroCardPrimary = document.querySelector('.hero-card-primary');
       const heroCardSecondary = document.querySelector('.hero-card-secondary');
@@ -1261,16 +1253,16 @@
         else progress = (scrollY - start) / (end - start);
         progress = Math.min(1, Math.max(0, progress));
 
-        // Video zoom + drift
-        if (heroVideo) {
+        // Video zoom + drift (global baggrund)
+        if (bgVideo) {
           const scale = 1.08 + progress * 0.25;
           const translateY = progress * 60;
-          heroVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+          bgVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
         }
         // Overlay lysner lidt når man scroller
-        if (heroOverlay) {
+        if (bgOverlay) {
           const o = 0.9 - progress * 0.3;
-          heroOverlay.style.opacity = Math.max(0.5, o);
+          bgOverlay.style.opacity = Math.max(0.5, o);
         }
 
         // Teksten glider lidt op
