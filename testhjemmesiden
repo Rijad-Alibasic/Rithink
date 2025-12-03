@@ -689,66 +689,46 @@
         <h2>Learn how our CRM + AI works</h2>
         <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
       </div>
-
+  
       <div class="video-grid">
+        <!-- 1) Never miss a lead – Cloudinary -->
         <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
-            <source src="/media/notification-on-phone.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
           </video>
           <div class="video-info">
             <h3>Never miss a lead <span class="badge">24/7 capture</span></h3>
             <p>Phone and inbox notifications lighting up as leads come in — always answered.</p>
           </div>
         </a>
-
+  
+        <!-- 2) Only the calls that matter – Cloudinary -->
         <a class="video-card fade parallax" href="#agenda" aria-label="Only the calls that matter">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
-            <source src="/media/call-center-headset.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
             <h3>Only the calls that matter <span class="badge">Triage</span></h3>
             <p>Focused sales rep on a headset, talking to a qualified prospect.</p>
           </div>
         </a>
-
+  
+        <!-- 3) Follow-up on autopilot – Cloudinary -->
         <a class="video-card fade parallax" href="#product" aria-label="Follow-up on autopilot">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
-            <source src="/media/email-automation.mp4" type="video/mp4">
+            <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
           </video>
           <div class="video-info">
             <h3>Follow-up on autopilot <span class="badge">Sequences</span></h3>
             <p>Sequences and email flows running automatically in a marketing dashboard.</p>
           </div>
         </a>
-
-        <a class="video-card fade parallax" href="#cases" aria-label="Optimize conversion rate">
-          <video muted playsinline autoplay loop
-            poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg">
-            <source src="/media/analytics-dashboard.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h3>Optimize conversion rate <span class="badge">A/B & analytics</span></h3>
-            <p>Conversion graphs and dashboards moving upward as campaigns improve.</p>
-          </div>
-        </a>
-
-        <a class="video-card fade parallax" href="#process" aria-label="Keep deals moving">
-          <video muted playsinline autoplay loop
-            poster="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg">
-            <source src="/media/kanban-pipeline.mp4" type="video/mp4">
-          </video>
-          <div class="video-info">
-            <h3>Keep deals moving <span class="badge">Pipeline</span></h3>
-            <p>Kanban-style board with sticky notes moving through stages.</p>
-          </div>
-        </a>
-      </div>
+        </div>
     </div>
   </section>
-
   <!-- CRM AI Agenda -->
   <section class="section" id="agenda">
     <div class="container">
