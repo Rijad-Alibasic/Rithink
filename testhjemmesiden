@@ -791,30 +791,6 @@
             <div class="outcome">Outcome: faster first meetings, higher show rates.</div>
           </div>
         </div>
-        <div class="step fade">
-          <div class="bubble">4</div>
-          <div class="content">
-            <h3>Optimize conversion rate</h3>
-            <ul>
-              <li>AI refines subject lines, CTAs, and message tone (no ML scoring required).</li>
-              <li>A/B test templates and cadences; promote winners automatically.</li>
-              <li>Reduce drop-off with quick replies, short forms, progressive profiling, instant booking links.</li>
-            </ul>
-            <div class="outcome">Outcome: higher reply, connect, booking, and stage-to-stage conversion.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">5</div>
-          <div class="content">
-            <h3>Keep deals moving</h3>
-            <ul>
-              <li>Spots silent threads or missing next steps and re-engages contacts.</li>
-              <li>Sends concise recaps and nudges (“Waiting on X”).</li>
-              <li>Rule-based reminders for trials ending, renewals, and contract deadlines.</li>
-            </ul>
-            <div class="outcome">Outcome: shorter cycles, fewer stalled deals, more renewals.</div>
-          </div>
-        </div>
       </div>
     </div>
   </section>
