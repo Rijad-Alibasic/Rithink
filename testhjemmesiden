@@ -386,6 +386,26 @@
     }
     .parallax{transform:translateY(0);}
 
+    /* ==== Scroll-in animation for the three CRM+AI video cards ==== */
+    .video-card.fade{
+      opacity:0;
+      transform:translateY(40px);
+      transition:transform .6s ease, opacity .6s ease;
+    }
+    .video-card.fade.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+    .videos .video-grid .video-card.fade:nth-child(1).show{
+      transition-delay:0s;
+    }
+    .videos .video-grid .video-card.fade:nth-child(2).show{
+      transition-delay:0.12s;
+    }
+    .videos .video-grid .video-card.fade:nth-child(3).show{
+      transition-delay:0.24s;
+    }
+
     /* ===== Timeline / Agenda ===== */
     .timeline{max-width:1000px;margin:40px auto 0;position:relative}
     .timeline::before{
@@ -558,7 +578,7 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      *{animation:none !important;transition:none !important}
+      *{animation:none !important;transition:none !Important}
       .wordmark{background-position:50% 50% !important}
     }
   </style>
@@ -576,11 +596,7 @@
 
   <!-- GLOBAL VIDEO BACKGROUND -->
   <div class="site-bg">
-    <video
-      muted
-      autoplay
-      playsinline
-      loop
+    <video muted autoplay playsinline loop>
       <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
     </video>
     <div class="site-bg-overlay"></div>
@@ -692,7 +708,7 @@
   
       <div class="video-grid">
         <!-- 1) Never miss a lead – Cloudinary -->
-        <a class="video-card fade parallax" href="#contact" aria-label="Never miss a lead">
+        <a class="video-card fade" href="#contact" aria-label="Never miss a lead">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
@@ -704,7 +720,7 @@
         </a>
   
         <!-- 2) Only the calls that matter – Cloudinary -->
-        <a class="video-card fade parallax" href="#agenda" aria-label="Only the calls that matter">
+        <a class="video-card fade" href="#agenda" aria-label="Only the calls that matter">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
@@ -716,7 +732,7 @@
         </a>
   
         <!-- 3) Follow-up on autopilot – Cloudinary -->
-        <a class="video-card fade parallax" href="#product" aria-label="Follow-up on autopilot">
+        <a class="video-card fade" href="#product" aria-label="Follow-up on autopilot">
           <video muted playsinline autoplay loop
             poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
@@ -729,6 +745,7 @@
         </div>
     </div>
   </section>
+
   <!-- CRM AI Agenda -->
   <section class="section" id="agenda">
     <div class="container">
@@ -1122,7 +1139,7 @@
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
   
-      // Parallax for video cards
+      // Parallax for video cards (no elements now use .parallax, but left in case you add others)
       document.querySelectorAll('.parallax').forEach(el => {
         const r = el.getBoundingClientRect();
         const center = window.innerHeight / 2;
@@ -1169,9 +1186,9 @@
         // Hero wrapper let vertical drift
         heroInner.style.transform = `translateY(${progress * -80}px)`;
   
-        // >>> NYT: tekst til venstre og bokse til højre glider ud til siden og fader <<<
-        const sideOffset = progress * 120;          // hvor langt de skal glide (px)
-        const sideOpacity = Math.max(0, 1 - progress * 1.4); // hvor meget de skal fade
+        // tekst venstre og bokse højre glider ud til siden og fader
+        const sideOffset = progress * 120;
+        const sideOpacity = Math.max(0, 1 - progress * 1.4);
   
         if (heroLeft) {
           heroLeft.style.transform = `translateX(${-sideOffset}px)`;
