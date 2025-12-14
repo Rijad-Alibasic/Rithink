@@ -1316,73 +1316,100 @@
     });
 
     /* ===== Chat demo runner (scoped) ===== */
-    (function(){
-      const msgsEl = document.getElementById("chatMsgs");
-      if (!msgsEl) return;
+/* ===== Chat demo runner (starts on scroll into view) ===== */
+(function(){
+  const msgsEl = document.getElementById("chatMsgs");
+  if (!msgsEl) return;
 
-      const script = [
-        { side: "in",  text: "Hi! I’m Rithink AI 👋 What can I help you with today?", delay: 700 },
-        { side: "out", text: "I want to see how you handle inbound leads.",          delay: 1100 },
-        { side: "in",  typing: true,                                                 delay: 700 },
-        { side: "in",  text: "Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay: 700 },
-        { side: "out", text: "Website form + email inbox.",                           delay: 1000 },
-        { side: "in",  typing: true,                                                  delay: 650 },
-        { side: "in",  text: "Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay: 800 },
-        { side: "out", text: "Yes — Thursday afternoon.",                             delay: 950 },
-        { side: "in",  typing: true,                                                  delay: 700 },
-        { side: "in",  text: "Done ✅ I can do 14:30 or 15:00. Which one works?",      delay: 700 },
-      ];
+  const script = [
+    { side: "in",  text: "Hi! I’m Rithink AI 👋 What can I help you with today?", delay: 700 },
+    { side: "out", text: "I want to see how you handle inbound leads.",          delay: 1100 },
+    { side: "in",  typing: true,                                                 delay: 700 },
+    { side: "in",  text: "Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay: 700 },
+    { side: "out", text: "Website form + email inbox.",                           delay: 1000 },
+    { side: "in",  typing: true,                                                  delay: 650 },
+    { side: "in",  text: "Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay: 800 },
+    { side: "out", text: "Yes — Thursday afternoon.",                             delay: 950 },
+    { side: "in",  typing: true,                                                  delay: 700 },
+    { side: "in",  text: "Done ✅ I can do 14:30 or 15:00. Which one works?",      delay: 700 },
+  ];
 
-      function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
+  let started = false;
 
-      function addBubble(side, node){
-        const row = document.createElement("div");
-        row.className = `chat-row ${side}`;
-        row.appendChild(node);
-        msgsEl.appendChild(row);
-        scrollToBottom();
-        requestAnimationFrame(() => node.classList.add("show"));
-        return row;
+  function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+  function addBubble(side, node){
+    const row = document.createElement("div");
+    row.className = `chat-row ${side}`;
+    row.appendChild(node);
+    msgsEl.appendChild(row);
+    scrollToBottom();
+    requestAnimationFrame(() => node.classList.add("show"));
+    return row;
+  }
+
+  function makeTextBubble(text){
+    const b = document.createElement("div");
+    b.className = "chat-bubble";
+    b.textContent = text;
+    return b;
+  }
+
+  function makeTypingBubble(){
+    const b = document.createElement("div");
+    b.className = "chat-bubble chat-typing";
+    b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
+    return b;
+  }
+
+  async function run(){
+    if (started) return;
+    started = true;
+
+    let typingRow = null;
+
+    for (const step of script){
+      await new Promise(r => setTimeout(r, step.delay));
+
+      if (typingRow){
+        typingRow.remove();
+        typingRow = null;
       }
 
-      function makeTextBubble(text){
-        const b = document.createElement("div");
-        b.className = "chat-bubble";
-        b.textContent = text;
-        return b;
+      if (step.typing){
+        typingRow = addBubble(step.side, makeTypingBubble());
+        continue;
       }
 
-      function makeTypingBubble(){
-        const b = document.createElement("div");
-        b.className = "chat-bubble chat-typing";
-        b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
-        return b;
+      addBubble(step.side, makeTextBubble(step.text));
+    }
+  }
+
+  // Start when visible
+  const target = document.getElementById("chat-demo") || msgsEl;
+
+  if ("IntersectionObserver" in window){
+    const io = new IntersectionObserver((entries)=>{
+      if (entries.some(e => e.isIntersecting)){
+        io.disconnect();
+        run();
       }
+    }, { threshold: 0.25 });
 
-      async function run(){
-        let typingRow = null;
-
-        for (const step of script){
-          await new Promise(r => setTimeout(r, step.delay));
-
-          if (typingRow){
-            typingRow.remove();
-            typingRow = null;
-          }
-
-          if (step.typing){
-            const typing = makeTypingBubble();
-            typingRow = addBubble(step.side, typing);
-            continue;
-          }
-
-          addBubble(step.side, makeTextBubble(step.text));
-        }
+    io.observe(target);
+  } else {
+    // Fallback: start on first scroll that reaches it
+    const onScroll = () => {
+      const r = target.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.75){
+        window.removeEventListener("scroll", onScroll);
+        run();
       }
-
-      run();
-    })();
-
+    };
+    window.addEventListener("scroll", onScroll, { passive:true });
+    onScroll();
+  }
+})();
     // On load
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
