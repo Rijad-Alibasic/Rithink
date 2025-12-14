@@ -408,11 +408,7 @@
 
     /* ===== Timeline / Agenda ===== */
     .timeline{max-width:1000px;margin:40px auto 0;position:relative}
-    .timeline::before{
-      content:"";position:absolute;left:50%;transform:translateX(-50%);
-      width:2px;height:100%;
-      background:linear-gradient(180deg,var(--accent-2),var(--accent));
-    }
+
     .step{display:flex;align-items:flex-start;margin:64px 0;position:relative}
     .step:nth-child(even){flex-direction:row-reverse}
     .bubble{
@@ -875,55 +871,6 @@
           </div>
         </a>
         </div>
-    </div>
-  </section>
-
-  <!-- CRM AI Agenda -->
-  <section class="section" id="agenda">
-    <div class="container">
-      <div class="section-header">
-        <h2>CRM AI Agenda</h2>
-        <p class="lead">Five pillars to capture every lead, cut busywork, and move revenue faster — built into Rithink CRM.</p>
-      </div>
-      <div class="timeline" id="process">
-        <div class="step fade">
-          <div class="bubble">1</div>
-          <div class="content">
-            <h3>Never miss a lead</h3>
-            <ul>
-              <li>24/7 capture from forms, chat, email, and social.</li>
-              <li>Instant, branded replies with light qualification.</li>
-              <li>Books meetings from shared calendars.</li>
-              <li>Creates/updates records, assigns owner, sets SLA, escalates if untouched.</li>
-            </ul>
-            <div class="outcome">Outcome: 100% coverage, minute-level response times.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">2</div>
-          <div class="content">
-            <h3>Only the calls that matter</h3>
-            <ul>
-              <li>Assistant handles routine Q&A (pricing, availability, basics).</li>
-              <li>Rule-based triage builds a “Today” list (new replies, booking requests, SLA due, keywords).</li>
-              <li>Urgent handoffs go to the right rep with full context.</li>
-            </ul>
-            <div class="outcome">Outcome: reps focus on high-value conversations.</div>
-          </div>
-        </div>
-        <div class="step fade">
-          <div class="bubble">3</div>
-          <div class="content">
-            <h3>Follow-up on autopilot</h3>
-            <ul>
-              <li>Polite, branded sequences across email/SMS/chat until connection or booking.</li>
-              <li>Auto-reschedules no-shows; sends confirmations and prep notes.</li>
-              <li>Auto-logs summaries, notes, and tasks in the CRM.</li>
-            </ul>
-            <div class="outcome">Outcome: faster first meetings, higher show rates.</div>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
