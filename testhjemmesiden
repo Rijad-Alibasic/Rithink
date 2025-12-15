@@ -261,9 +261,6 @@
       background:linear-gradient(90deg,var(--accent-2),var(--accent));
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .hero-card-secondary{transform-origin:top right;}
-    .hero-card-mini{transform-origin:top left;}
-
     .hero-card:hover{
       box-shadow:0 26px 56px rgba(0,0,0,.75);
       border-color:rgba(0,224,255,.5);
@@ -372,13 +369,163 @@
       transform:translateY(40px);
       transition:transform .6s ease, opacity .6s ease;
     }
-    .video-card.fade.show{
-      opacity:1;
-      transform:translateY(0);
-    }
+    .video-card.fade.show{opacity:1;transform:translateY(0)}
     .videos .video-grid .video-card.fade:nth-child(1).show{transition-delay:0s;}
     .videos .video-grid .video-card.fade:nth-child(2).show{transition-delay:0.12s;}
     .videos .video-grid .video-card.fade:nth-child(3).show{transition-delay:0.24s;}
+
+    /* ===== Utilities / Motion ===== */
+    .tilt{transform-style:preserve-3d;will-change:transform}
+    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
+    .fade.show{opacity:1;transform:translateY(0)}
+
+    /* ===== Story scroll (phone left + text right) ===== */
+    .story-scroll{
+      position:relative;
+      padding:40px 0;
+    }
+    .story-sticky{
+      position:sticky;
+      top:88px;
+      height:calc(100vh - 110px);
+      display:flex;
+      align-items:center;
+    }
+    .story-layout{
+      width:100%;
+      max-width:1200px;
+      margin:0 auto;
+      padding:0 20px;
+      display:grid;
+      grid-template-columns:minmax(0,420px) minmax(0,1fr);
+      gap:clamp(22px, 5vw, 64px);
+      align-items:center;
+    }
+
+    /* phone */
+    .story-scroll .phone{
+      width:min(360px, 92vw);
+      height:min(720px, 76vh);
+      border-radius:44px;
+      background:linear-gradient(180deg,#0b1220,#111827);
+      padding:14px;
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
+      position:relative;
+      border:1px solid rgba(255,255,255,.10);
+    }
+    .story-scroll .screen{
+      height:100%;
+      border-radius:34px;
+      background:linear-gradient(180deg,#0b1220,#0f172a);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .story-scroll .topbar{
+      height:64px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding:10px 14px 12px;
+      color:rgba(255,255,255,.9);
+      position:relative;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+      backdrop-filter:blur(8px);
+    }
+    .story-scroll .notch{
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      width:160px; height:26px; border-radius:0 0 18px 18px;
+      background:rgba(0,0,0,.55);
+    }
+    .story-scroll .name{font-weight:600;font-size:14px;padding-top:6px}
+    .story-scroll .msgs{
+      flex:1;
+      padding:14px 12px;
+      overflow:auto;
+      scroll-behavior:smooth;
+    }
+    .story-scroll .composer{
+      height:66px;
+      padding:10px 12px 12px;
+      border-top:1px solid rgba(255,255,255,.08);
+      display:flex; gap:10px; align-items:center;
+      background:rgba(255,255,255,.02);
+    }
+    .story-scroll .fakeInput{
+      flex:1;height:40px;border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .story-scroll .sendBtn{
+      width:40px;height:40px;border-radius:999px;
+      display:grid;place-items:center;
+      background:rgba(59,130,246,.9);
+      color:#fff;font-weight:700;
+      user-select:none;
+    }
+    .story-phoneWrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .story-phoneLabel{font-size:12px;color:rgba(255,255,255,.75)}
+
+    /* bubbles */
+    .story-scroll .row{display:flex;margin:8px 0}
+    .story-scroll .row.in{justify-content:flex-start}
+    .story-scroll .row.out{justify-content:flex-end}
+    .story-scroll .bubble{
+      max-width:78%;
+      padding:10px 12px;
+      border-radius:18px;
+      line-height:1.25;
+      font-size:14px;
+      opacity:0;
+      transform:translateY(10px) scale(.98);
+      transition:opacity .35s ease, transform .35s ease;
+      box-shadow:0 10px 20px rgba(0,0,0,.22);
+      white-space:pre-wrap;
+    }
+    .story-scroll .in .bubble{background:#e5e7eb;color:#0b0f16;border-bottom-left-radius:6px}
+    .story-scroll .out .bubble{background:#3b82f6;color:#fff;border-bottom-right-radius:6px}
+    .story-scroll .bubble.show{opacity:1;transform:translateY(0) scale(1)}
+    .story-scroll .typing{
+      display:inline-flex;gap:6px;padding:10px 12px;
+      background:rgba(229,231,235,.92);
+      border-radius:18px;border-bottom-left-radius:6px;
+    }
+    .story-scroll .dot{
+      width:6px;height:6px;border-radius:999px;
+      background:rgba(17,24,39,.65);
+      animation:bounce 1s infinite;
+    }
+    .story-scroll .dot:nth-child(2){animation-delay:.15s}
+    .story-scroll .dot:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.6}40%{transform:translateY(-5px);opacity:1}}
+
+    /* copy */
+    .story-copy{
+      will-change:opacity,transform;
+      opacity:0;
+      transform:translateY(14px);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    .story-copy.show{opacity:1;transform:translateY(0)}
+    .story-kicker{margin-bottom:14px}
+    .story-title{
+      font-size:clamp(30px, 4.8vw, 60px);
+      line-height:1.05;
+      font-weight:900;
+      letter-spacing:-1.6px;
+      margin:0 0 14px 0;
+    }
+    .story-lead{
+      font-size:18px;
+      color:var(--muted);
+      max-width:680px;
+    }
+
+    /* scroll steps (empty blocks to create scroll + trigger) */
+    .story-steps{position:relative;}
+    .story-step{height:100vh}
 
     /* ===== Cards / Cases ===== */
     .card{
@@ -394,17 +541,6 @@
     }
     .card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(0,0,0,.5)}
     .card:hover::before{transform:scaleX(1)}
-
-    .icon{
-      width:64px;height:64px;border-radius:16px;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,var(--accent-2),var(--accent));
-      color:#0A0E27;font-size:28px;margin-bottom:16px;
-      border:1px solid rgba(255,255,255,.35);
-    }
-    .card h3{font-size:22px;margin-bottom:8px}
-    .card p{color:var(--muted)}
-
     .cases .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
     .case .tag{
       font-size:12px;background:var(--surface-2);color:var(--text);
@@ -432,6 +568,13 @@
     }
     .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
     .about p{color:var(--muted)}
+    .icon{
+      width:64px;height:64px;border-radius:16px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent-2),var(--accent));
+      color:#0A0E27;font-size:28px;margin-bottom:16px;
+      border:1px solid rgba(255,255,255,.35);
+    }
 
     /* ===== Privacy ===== */
     .privacy .policy{
@@ -487,7 +630,6 @@
     }
 
     /* ===== CTA & Footer ===== */
-    .cta{text-align:center}
     .benefits{
       display:flex;gap:22px;
       flex-wrap:wrap;justify-content:center;
@@ -527,148 +669,6 @@
       padding-top:18px;text-align:center;
     }
 
-    /* ===== Utilities / Motion ===== */
-    .tilt{transform-style:preserve-3d;will-change:transform}
-    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
-    .fade.show{opacity:1;transform:translateY(0)}
-
-    /* ===== Chat demo (scoped) ===== */
-    #chat-demo{ padding: 96px 0; }
-    .chat-phone{
-      width: 360px; height: 720px;
-      border-radius: 44px;
-      background: linear-gradient(180deg, #0b1220, #111827);
-      padding: 14px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.55);
-      position: relative;
-    }
-    .chat-screen{
-      height:100%;
-      border-radius: 34px;
-      background: linear-gradient(180deg, #0b1220, #0f172a);
-      overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .chat-topbar{
-      height: 64px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding: 10px 14px 12px;
-      color: rgba(255,255,255,.9);
-      position: relative;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      backdrop-filter: blur(8px);
-    }
-    .chat-notch{
-      position:absolute; top:10px; left:50%; transform:translateX(-50%);
-      width: 160px; height: 26px; border-radius: 0 0 18px 18px;
-      background: rgba(0,0,0,.55);
-    }
-    .chat-name{ font-weight:600; font-size:14px; padding-top: 6px; }
-
-    .chat-msgs{
-      flex:1;
-      padding: 14px 12px;
-      overflow:auto;
-      scroll-behavior:smooth;
-    }
-    .chat-row{ display:flex; margin: 8px 0; }
-    .chat-row.in{ justify-content:flex-start; }
-    .chat-row.out{ justify-content:flex-end; }
-
-    .chat-bubble{
-      max-width: 78%;
-      padding: 10px 12px;
-      border-radius: 18px;
-      line-height: 1.25;
-      font-size: 14px;
-      opacity: 0;
-      transform: translateY(10px) scale(.98);
-      transition: opacity .35s ease, transform .35s ease;
-      box-shadow: 0 10px 20px rgba(0,0,0,.22);
-      white-space: pre-wrap;
-    }
-    .chat-row.in .chat-bubble{
-      background: #e5e7eb;
-      color: #0b0f16;
-      border-bottom-left-radius: 6px;
-    }
-    .chat-row.out .chat-bubble{
-      background: #3b82f6;
-      color: #ffffff;
-      border-bottom-right-radius: 6px;
-    }
-    .chat-bubble.show{
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .chat-typing{
-      display:inline-flex;
-      gap:6px;
-      padding: 10px 12px;
-      background: rgba(229,231,235,.92);
-      border-radius: 18px;
-      border-bottom-left-radius: 6px;
-      box-shadow: 0 10px 20px rgba(0,0,0,.18);
-    }
-    .chat-dot{
-      width:6px; height:6px; border-radius:999px;
-      background: rgba(17,24,39,.65);
-      animation: chatBounce 1s infinite;
-    }
-    .chat-dot:nth-child(2){ animation-delay:.15s; }
-    .chat-dot:nth-child(3){ animation-delay:.3s; }
-    @keyframes chatBounce{
-      0%, 80%, 100%{ transform: translateY(0); opacity:.6; }
-      40%{ transform: translateY(-5px); opacity:1; }
-    }
-
-    .chat-composer{
-      height: 66px;
-      padding: 10px 12px 12px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      display:flex; gap:10px; align-items:center;
-      background: rgba(255,255,255,.02);
-    }
-    .chat-fakeInput{
-      flex:1;
-      height: 40px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .chat-sendBtn{
-      width:40px; height:40px; border-radius:999px;
-      display:grid; place-items:center;
-      background: rgba(59,130,246,.9);
-      color:white; font-weight:700;
-      user-select:none;
-    }
-/* ... all your current CSS ... */
-
-  /* Chat demo: responsive */
-  .chat-phone{
-    width: min(360px, 92vw);
-    height: min(720px, 78vh);
-  }
-
-  @media (max-width: 480px){
-    .chat-phone{
-      width: 92vw;
-      height: 70vh;
-      border-radius: 34px;
-    }
-    .chat-screen{ border-radius: 26px; }
-    .chat-msgs{ padding: 12px 10px; }
-    .chat-bubble{ max-width: 86%; font-size: 13px; }
-    .chat-topbar{ height: 56px; }
-  }
-
     @media(max-width:900px){
       .nav-links{display:none}
       .menu-toggle{display:flex}
@@ -701,12 +701,16 @@
       .hero-right{display:none;}
       .scroll-hint{display:none;}
 
-      .chat-phone{ width: 320px; height: 640px; }
+      .story-layout{grid-template-columns:1fr;justify-items:center;text-align:center}
+      .story-copy{max-width:720px}
+      .story-sticky{height:auto}
     }
 
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important;transition:none !important}
       .wordmark{background-position:50% 50% !important}
+      .story-copy{opacity:1 !important;transform:none !important}
+      .story-scroll .bubble{opacity:1 !important;transform:none !important}
     }
   </style>
 
@@ -740,7 +744,7 @@
 
       <ul class="nav-links" role="menubar" aria-label="Primary navigation">
         <li role="none"><a role="menuitem" href="#videos">Videos</a></li>
-        <li role="none"><a role="menuitem" href="#chat-demo">Chat Demo</a></li>
+        <li role="none"><a role="menuitem" href="#industry-demos">Demos</a></li>
         <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
         <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
         <li role="none"><a class="btn-pill" role="menuitem" href="#" onclick="openDemoModal(event)">Book a Demo</a></li>
@@ -768,7 +772,6 @@
         </div>
       </div>
 
-      <!-- Right side cards (hidden on mobile via CSS) -->
       <div class="hero-right">
         <div class="hero-card hero-card-primary">
           <div class="hero-card-pill">
@@ -789,7 +792,7 @@
           </div>
         </div>
 
-        <div class="hero-card hero-card-secondary">
+        <div class="hero-card">
           <div class="hero-card-pill">
             <span class="hero-card-dot"></span>
             Today view
@@ -798,7 +801,7 @@
           <p>Your reps get a “Today” list with hot replies, booking requests and SLA-due leads.</p>
         </div>
 
-        <div class="hero-card hero-card-mini">
+        <div class="hero-card">
           <div class="hero-card-pill">
             <span class="hero-card-dot"></span>
             Autopilot
@@ -846,13 +849,13 @@
           </div>
         </a>
 
-        <a class="video-card fade" href="#chat-demo" aria-label="Only the calls that matter">
+        <a class="video-card fade" href="#industry-demos" aria-label="Demos">
           <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
-            <h3>Only the calls that matter <span class="badge">Triage</span></h3>
-            <p>Focused sales rep on a headset, talking to a qualified prospect.</p>
+            <h3>See industry demos <span class="badge">Scrollytelling</span></h3>
+            <p>Scroll through examples: booking, qualification, and follow-ups.</p>
           </div>
         </a>
 
@@ -869,31 +872,49 @@
     </div>
   </section>
 
-  <!-- Chat demo (new) -->
-  <section class="section" id="chat-demo">
-    <div class="container">
-      <div class="section-header">
-        <h2>Chat Demo</h2>
-        <p class="lead">A short example of how your AI assistant can handle inbound leads.</p>
-      </div>
-
-      <div style="display:flex;justify-content:center;">
-        <div class="chat-phone" aria-label="Chat demo">
-          <div class="chat-screen">
-            <div class="chat-topbar">
-              <div class="chat-notch" aria-hidden="true"></div>
-              <div class="chat-name">Rithink AI</div>
-            </div>
-
-            <div class="chat-msgs" id="chatMsgs"></div>
-
-            <div class="chat-composer">
-              <div class="chat-fakeInput" aria-hidden="true"></div>
-              <div class="chat-sendBtn" aria-hidden="true">↑</div>
+  <!-- Story scroll: phone left, text right -->
+  <section class="story-scroll" id="industry-demos" aria-label="Industry demos">
+    <div class="story-sticky">
+      <div class="story-layout">
+        <!-- LEFT: phone -->
+        <div class="story-phoneWrap">
+          <div class="phone" aria-label="Demo phone">
+            <div class="screen">
+              <div class="topbar">
+                <div class="notch" aria-hidden="true"></div>
+                <div class="name" id="storyName">Rithink AI</div>
+              </div>
+              <div class="msgs" id="storyMsgs"></div>
+              <div class="composer" aria-hidden="true">
+                <div class="fakeInput"></div>
+                <div class="sendBtn">↑</div>
+              </div>
             </div>
           </div>
+          <div class="story-phoneLabel" id="storyLabel">General demo</div>
+        </div>
+
+        <!-- RIGHT: copy -->
+        <div class="story-copy" id="storyCopy">
+          <span class="tag story-kicker" id="storyKicker">DEMO</span>
+          <h2 class="story-title" id="storyTitle">
+            Turn every interaction into <span class="gradient-text">qualified pipeline</span>
+          </h2>
+          <p class="story-lead" id="storyLead">
+            Scroll to see one scenario at a time — the phone stays left, and the context updates on the right.
+          </p>
         </div>
       </div>
+    </div>
+
+    <!-- Scroll steps (one “screen” per phone) -->
+    <div class="story-steps" aria-hidden="true">
+      <div class="story-step" data-step="0"></div>
+      <div class="story-step" data-step="1"></div>
+      <div class="story-step" data-step="2"></div>
+      <div class="story-step" data-step="3"></div>
+      <div class="story-step" data-step="4"></div>
+      <div class="story-step" data-step="5"></div>
     </div>
   </section>
 
@@ -938,42 +959,6 @@
             <div class="stat"><span class="v">+29%</span><span class="k">Show rate</span></div>
             <div class="stat"><span class="v">-22%</span><span class="k">No-shows</span></div>
             <div class="stat"><span class="v">+31%</span><span class="k">Booked meetings</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Logistics • “FreightFlow”</span>
-          <h3>Keep deals moving</h3>
-          <p>Smart nudges on silent threads, renewal reminders, and next-step prompts.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">-19%</span><span class="k">Sales cycle</span></div>
-            <div class="stat"><span class="v">+16%</span><span class="k">Renewals</span></div>
-            <div class="stat"><span class="v">+24%</span><span class="k">Pipeline velocity</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">E-commerce • “NovaWear”</span>
-          <h3>From chats to checkouts</h3>
-          <p>Chat + email sequences recover carts and book style consults.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+22%</span><span class="k">Recoveries</span></div>
-            <div class="stat"><span class="v">+17%</span><span class="k">AOV</span></div>
-            <div class="stat"><span class="v">-28%</span><span class="k">Time-to-reply</span></div>
-          </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
-        </div>
-
-        <div class="card case fade tilt">
-          <span class="tag">Fintech • “Finora”</span>
-          <h3>Qualification without friction</h3>
-          <p>Assistant pre-qualifies, routes to compliance, and books docs calls.</p>
-          <div class="stats">
-            <div class="stat"><span class="v">+34%</span><span class="k">Qualified meetings</span></div>
-            <div class="stat"><span class="v">-31%</span><span class="k">Drop-off</span></div>
-            <div class="stat"><span class="v">+12%</span><span class="k">Approval rate</span></div>
           </div>
           <div class="placeholder-note">Demo data • Replace with real case.</div>
         </div>
@@ -1101,7 +1086,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="section cta" id="contact">
+  <section class="section" id="contact" style="text-align:center">
     <div class="container">
       <h2>Ready to try an AI-first CRM?</h2>
       <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
@@ -1133,7 +1118,7 @@
         <div class="fcol">
           <h4>Product</h4>
           <ul>
-            <li><a href="#chat-demo">Assistant</a></li>
+            <li><a href="#industry-demos">Assistant</a></li>
             <li><a href="#contact">Sequences</a></li>
             <li><a href="#contact">Analytics</a></li>
           </ul>
@@ -1232,8 +1217,6 @@
       const heroLeft = document.querySelector('.hero-left');
       const heroRight = document.querySelector('.hero-right');
       const heroCardPrimary = document.querySelector('.hero-card-primary');
-      const heroCardSecondary = document.querySelector('.hero-card-secondary');
-      const heroCardMini = document.querySelector('.hero-card-mini');
 
       if (hero && heroInner) {
         const heroTop = hero.offsetTop;
@@ -1271,16 +1254,7 @@
           heroRight.style.transform = `translateX(${sideOffset}px)`;
           heroRight.style.opacity = sideOpacity;
         }
-
-        if (heroCardPrimary) {
-          heroCardPrimary.style.transform = `translateY(${progress * 200}px)`;
-        }
-        if (heroCardSecondary) {
-          heroCardSecondary.style.transform = `translateY(0px) translateX(0px)`;
-        }
-        if (heroCardMini) {
-          heroCardMini.style.transform = `translateY(${progress * -200}px) translateX(0px)`;
-        }
+        if (heroCardPrimary) heroCardPrimary.style.transform = `translateY(${progress * 200}px)`;
       }
     };
     document.addEventListener('scroll', onScroll, {passive:true});
@@ -1334,107 +1308,212 @@
       if (e.key === 'Escape') closeDemoModal();
     });
 
-    /* ===== Chat demo runner (scoped) ===== */
-/* ===== Chat demo runner (starts on scroll into view) ===== */
-(function(){
-  const msgsEl = document.getElementById("chatMsgs");
-  if (!msgsEl) return;
-
-  const script = [
-    { side: "in",  text: "Hi! I’m Rithink AI 👋 What can I help you with today?", delay: 700 },
-    { side: "out", text: "I want to see how you handle inbound leads.",          delay: 1100 },
-    { side: "in",  typing: true,                                                 delay: 700 },
-    { side: "in",  text: "Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay: 700 },
-    { side: "out", text: "Website form + email inbox.",                           delay: 1000 },
-    { side: "in",  typing: true,                                                  delay: 650 },
-    { side: "in",  text: "Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay: 800 },
-    { side: "out", text: "Yes — Thursday afternoon.",                             delay: 950 },
-    { side: "in",  typing: true,                                                  delay: 700 },
-    { side: "in",  text: "Done ✅ I can do 14:30 or 15:00. Which one works?",      delay: 700 },
-  ];
-
-  let started = false;
-
-  function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
-
-  function addBubble(side, node){
-    const row = document.createElement("div");
-    row.className = `chat-row ${side}`;
-    row.appendChild(node);
-    msgsEl.appendChild(row);
-    scrollToBottom();
-    requestAnimationFrame(() => node.classList.add("show"));
-    return row;
-  }
-
-  function makeTextBubble(text){
-    const b = document.createElement("div");
-    b.className = "chat-bubble";
-    b.textContent = text;
-    return b;
-  }
-
-  function makeTypingBubble(){
-    const b = document.createElement("div");
-    b.className = "chat-bubble chat-typing";
-    b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
-    return b;
-  }
-
-  async function run(){
-    if (started) return;
-    started = true;
-
-    let typingRow = null;
-
-    for (const step of script){
-      await new Promise(r => setTimeout(r, step.delay));
-
-      if (typingRow){
-        typingRow.remove();
-        typingRow = null;
-      }
-
-      if (step.typing){
-        typingRow = addBubble(step.side, makeTypingBubble());
-        continue;
-      }
-
-      addBubble(step.side, makeTextBubble(step.text));
-    }
-  }
-
-  // Start when visible
-  const target = document.getElementById("chat-demo") || msgsEl;
-
-  if ("IntersectionObserver" in window){
-    const io = new IntersectionObserver((entries)=>{
-      if (entries.some(e => e.isIntersecting)){
-        io.disconnect();
-        run();
-      }
-    }, { threshold: 0.25 });
-
-    io.observe(target);
-  } else {
-    // Fallback: start on first scroll that reaches it
-    const onScroll = () => {
-      const r = target.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.75){
-        window.removeEventListener("scroll", onScroll);
-        run();
-      }
-    };
-    window.addEventListener("scroll", onScroll, { passive:true });
-    onScroll();
-  }
-})();
-    // On load
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
       setupTilt();
       onScroll();
     });
+  </script>
+
+  <script>
+    // ===== Story scroll: change phone + text per step =====
+    (function(){
+      const section = document.getElementById('industry-demos');
+      const msgsEl  = document.getElementById('storyMsgs');
+      const nameEl  = document.getElementById('storyName');
+      const labelEl = document.getElementById('storyLabel');
+      const titleEl = document.getElementById('storyTitle');
+      const leadEl  = document.getElementById('storyLead');
+      const kickerEl= document.getElementById('storyKicker');
+      const copyEl  = document.getElementById('storyCopy');
+
+      if (!section || !msgsEl || !titleEl || !leadEl || !copyEl) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const steps = [
+        {
+          name: "Rithink AI",
+          label: "General demo",
+          kicker: "DEMO",
+          title: `Turn every interaction into <span class="gradient-text">qualified pipeline</span>`,
+          lead: "A short example of qualifying an inbound lead and booking a time — automatically.",
+          script: [
+            { side:"in",  text:"Hi! I’m Rithink AI 👋 What can I help you with today?", delay:700 },
+            { side:"out", text:"I want to see how you handle inbound leads.",          delay:1100 },
+            { side:"in",  typing:true,                                               delay:700 },
+            { side:"in",  text:"Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay:700 },
+            { side:"out", text:"Website form + email inbox.",                         delay:1000 },
+            { side:"in",  typing:true,                                               delay:650 },
+            { side:"in",  text:"Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay:800 },
+            { side:"out", text:"Yes — Thursday afternoon.",                           delay:950 },
+            { side:"in",  typing:true,                                               delay:700 },
+            { side:"in",  text:"Done ✅ I can do 14:30 or 15:00. Which one works?",    delay:700 },
+          ]
+        },
+        {
+          name: "Realtor",
+          label: "Real estate · Viewing booking",
+          kicker: "REAL ESTATE",
+          title: `Turn inquiries into <span class="gradient-text">booked viewings</span>`,
+          lead: "Answer instantly and propose time slots — no back-and-forth.",
+          script: [
+            { side:"in",  text:"Hi! Can I book a viewing for the apartment on Strandvej?", delay:650 },
+            { side:"out", text:"Yes — what day suits you? I have Wed 17:30 or Sat 11:00.", delay:900 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Saturday 11:00 please. Two people.", delay:550 },
+            { side:"out", text:"Booked ✅ What’s your email for confirmation?", delay:850 },
+          ]
+        },
+        {
+          name: "Salon",
+          label: "Hair salon · Appointment",
+          kicker: "SALON",
+          title: `Fill the calendar with <span class="gradient-text">smart scheduling</span>`,
+          lead: "The assistant offers times, captures preferences, and confirms.",
+          script: [
+            { side:"in",  text:"Do you have time for a haircut this week?", delay:650 },
+            { side:"out", text:"Yes — would you prefer Tue 14:00 or Fri 10:30?", delay:900 },
+            { side:"in",  text:"Friday 10:30!", delay:600 },
+            { side:"out", text:"Perfect. Any notes? (short/medium/long + beard?)", delay:900 },
+          ]
+        },
+        {
+          name: "Dealer",
+          label: "Car dealer · Test drive",
+          kicker: "AUTOMOTIVE",
+          title: `Qualify and book <span class="gradient-text">test drives</span>`,
+          lead: "Ask the right questions first — then book the slot.",
+          script: [
+            { side:"in",  text:"Can I book a test drive for the ID.4?", delay:650 },
+            { side:"out", text:"Sure. Automatic or manual, and which city?", delay:850 },
+            { side:"in",  text:"Automatic. Copenhagen.", delay:550 },
+            { side:"out", text:"Great — I can offer Thu 12:00 or Sat 13:30. Which one?", delay:950 },
+          ]
+        },
+        {
+          name: "Coach",
+          label: "Private coach · Discovery call",
+          kicker: "COACHING",
+          title: `Turn questions into <span class="gradient-text">booked calls</span>`,
+          lead: "Move from “how does it work?” to a concrete next step.",
+          script: [
+            { side:"in",  text:"I’m looking for a coach. How does it work?", delay:650 },
+            { side:"out", text:"We start with a 20-min discovery call. What’s your main goal right now?", delay:950 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Better routines + focus.", delay:550 },
+            { side:"out", text:"Got it. Want to book Tue 09:00 or Wed 18:00?", delay:950 },
+          ]
+        },
+        {
+          name: "Clinic",
+          label: "Clinic · Booking",
+          kicker: "HEALTH",
+          title: `Handle bookings with <span class="gradient-text">care</span>`,
+          lead: "Ask urgency + preference, then confirm the appointment.",
+          script: [
+            { side:"in",  text:"Can I book an appointment for a consultation?", delay:650 },
+            { side:"out", text:"Yes. Is this urgent, and do you prefer morning or afternoon?", delay:900 },
+            { side:"in",  text:"Not urgent. Afternoon.", delay:550 },
+            { side:"out", text:"Okay — I can do Thu 14:20 or Fri 15:10. Which fits?", delay:950 },
+          ]
+        },
+      ];
+
+      function addBubble(side, node){
+        const row = document.createElement('div');
+        row.className = `row ${side}`;
+        row.appendChild(node);
+        msgsEl.appendChild(row);
+        msgsEl.scrollTop = msgsEl.scrollHeight;
+        requestAnimationFrame(()=>node.classList.add('show'));
+        return row;
+      }
+      function makeTextBubble(text){
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        b.textContent = text;
+        return b;
+      }
+      function makeTypingBubble(){
+        const b = document.createElement('div');
+        b.className = 'typing bubble';
+        b.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+        return b;
+      }
+
+      let runToken = 0;
+
+      async function runChat(script, token){
+        let typingRow = null;
+
+        for (const step of script){
+          if (token !== runToken) return;
+
+          if (!reduceMotion) {
+            await new Promise(r=>setTimeout(r, step.delay || 650));
+            if (token !== runToken) return;
+          }
+
+          if (typingRow){ typingRow.remove(); typingRow = null; }
+
+          if (step.typing){
+            if (reduceMotion) continue;
+            typingRow = addBubble(step.side || 'in', makeTypingBubble());
+            continue;
+          }
+
+          addBubble(step.side || 'in', makeTextBubble(step.text || ""));
+        }
+      }
+
+      function renderStep(i){
+        const s = steps[i];
+        if (!s) return;
+
+        runToken++;
+        const token = runToken;
+
+        msgsEl.innerHTML = "";
+        if (nameEl) nameEl.textContent = s.name;
+        if (labelEl) labelEl.textContent = s.label;
+        if (kickerEl) kickerEl.textContent = s.kicker;
+        titleEl.innerHTML = s.title;
+        leadEl.textContent = s.lead;
+
+        copyEl.classList.remove('show');
+        requestAnimationFrame(()=>copyEl.classList.add('show'));
+
+        // Reduced motion: show all instantly
+        if (reduceMotion){
+          for (const step of s.script){
+            if (step.typing) continue;
+            addBubble(step.side || 'in', makeTextBubble(step.text || ""));
+          }
+          return;
+        }
+
+        runChat(s.script, token);
+      }
+
+      // Observe scroll steps
+      const stepEls = Array.from(section.querySelectorAll('.story-step'));
+      if ('IntersectionObserver' in window && stepEls.length){
+        const io = new IntersectionObserver((entries)=>{
+          for (const e of entries){
+            if (e.isIntersecting){
+              const idx = Number(e.target.dataset.step || 0);
+              renderStep(idx);
+            }
+          }
+        }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+
+        stepEls.forEach(el=>io.observe(el));
+      }
+
+      // initial
+      renderStep(0);
+    })();
   </script>
 </body>
 </html>
