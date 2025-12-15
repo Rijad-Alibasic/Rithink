@@ -649,6 +649,25 @@
       color:white; font-weight:700;
       user-select:none;
     }
+/* ... all your current CSS ... */
+
+  /* Chat demo: responsive */
+  .chat-phone{
+    width: min(360px, 92vw);
+    height: min(720px, 78vh);
+  }
+
+  @media (max-width: 480px){
+    .chat-phone{
+      width: 92vw;
+      height: 70vh;
+      border-radius: 34px;
+    }
+    .chat-screen{ border-radius: 26px; }
+    .chat-msgs{ padding: 12px 10px; }
+    .chat-bubble{ max-width: 86%; font-size: 13px; }
+    .chat-topbar{ height: 56px; }
+  }
 
     @media(max-width:900px){
       .nav-links{display:none}
