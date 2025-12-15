@@ -167,7 +167,7 @@
     .menu-toggle{display:none;flex-direction:column;gap:4px;cursor:pointer;border:0;background:transparent}
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
-    /* ===== HERO – sticky content, video baggrund global ===== */
+    /* ===== HERO ===== */
     .hero{
       margin-top:80px;
       height:170vh;
@@ -187,7 +187,6 @@
       will-change:transform,opacity;
     }
 
-    .hero-left{}
     .tag{
       display:inline-block;padding:9px 16px;border-radius:999px;
       background:var(--surface);border:1px solid var(--border);
@@ -240,41 +239,22 @@
       min-height:110px;
       transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
     }
-    .hero-card-primary{
-      min-height:180px;
-    }
-    .hero-card h3{
-      font-size:16px;
-      margin-bottom:6px;
-    }
-    .hero-card p{
-      font-size:13px;
-      color:var(--muted);
-    }
+    .hero-card-primary{min-height:180px;}
+    .hero-card h3{font-size:16px;margin-bottom:6px;}
+    .hero-card p{font-size:13px;color:var(--muted);}
     .hero-card-pill{
-      font-size:11px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      padding:4px 9px;
-      border-radius:999px;
-      background:rgba(0,0,0,.5);
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      margin-bottom:10px;
+      font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+      padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.5);
+      display:inline-flex;align-items:center;gap:6px;margin-bottom:10px;
     }
     .hero-card-dot{
       width:7px;height:7px;border-radius:50%;
       background:radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
       box-shadow:0 0 8px rgba(0,224,255,.8);
     }
-
     .hero-card-metric{
-      display:flex;
-      justify-content:space-between;
-      align-items:baseline;
-      margin-top:10px;
-      font-size:12px;
+      display:flex;justify-content:space-between;align-items:baseline;
+      margin-top:10px;font-size:12px;
     }
     .hero-card-metric strong{
       font-size:20px;
@@ -364,6 +344,7 @@
       box-shadow:0 12px 30px rgba(74,105,255,.22);
       transition:transform .35s ease, box-shadow .35s ease;
       will-change:transform;
+      text-decoration:none;
     }
     .video-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 52px rgba(74,105,255,.32)}
     .video-card video{
@@ -384,9 +365,8 @@
       text-transform:uppercase;letter-spacing:.7px;
       margin-left:8px;
     }
-    .parallax{transform:translateY(0);}
 
-    /* ==== Scroll-in animation for the three CRM+AI video cards ==== */
+    /* ==== Scroll-in animation ==== */
     .video-card.fade{
       opacity:0;
       transform:translateY(40px);
@@ -396,43 +376,9 @@
       opacity:1;
       transform:translateY(0);
     }
-    .videos .video-grid .video-card.fade:nth-child(1).show{
-      transition-delay:0s;
-    }
-    .videos .video-grid .video-card.fade:nth-child(2).show{
-      transition-delay:0.12s;
-    }
-    .videos .video-grid .video-card.fade:nth-child(3).show{
-      transition-delay:0.24s;
-    }
-
-    /* ===== Timeline / Agenda ===== */
-    .timeline{max-width:1000px;margin:40px auto 0;position:relative}
-
-    .step{display:flex;align-items:flex-start;margin:64px 0;position:relative}
-    .step:nth-child(even){flex-direction:row-reverse}
-    .bubble{
-      position:absolute;left:50%;transform:translateX(-50%);
-      width:46px;height:46px;border-radius:50%;
-      background:linear-gradient(135deg,var(--accent-2),var(--accent));
-      color:#0A0E27;display:flex;align-items:center;justify-content:center;
-      font-weight:900;box-shadow:0 8px 22px rgba(123,140,255,.45);
-      border:1px solid rgba(255,255,255,.35);
-    }
-    .step .content{
-      flex:1;margin:0 38px;
-      background:var(--surface);border:1px solid var(--border);
-      border-radius:18px;box-shadow:var(--shadow);
-      padding:24px;backdrop-filter:blur(10px);
-    }
-    .step .content h3{margin-bottom:10px}
-    .step .content ul{margin-left:18px}
-    .step.active .content{border-color:rgba(0,224,255,.4);box-shadow:0 18px 44px rgba(0,224,255,.18)}
-    .outcome{
-      margin-top:10px;padding-top:10px;
-      border-top:1px dashed var(--border);
-      color:var(--text);font-weight:800;opacity:.9;
-    }
+    .videos .video-grid .video-card.fade:nth-child(1).show{transition-delay:0s;}
+    .videos .video-grid .video-card.fade:nth-child(2).show{transition-delay:0.12s;}
+    .videos .video-grid .video-card.fade:nth-child(3).show{transition-delay:0.24s;}
 
     /* ===== Cards / Cases ===== */
     .card{
@@ -458,8 +404,6 @@
     }
     .card h3{font-size:22px;margin-bottom:8px}
     .card p{color:var(--muted)}
-
-    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
 
     .cases .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
     .case .tag{
@@ -499,68 +443,48 @@
     .policy h3{margin:14px 0 8px 0}
     .policy p, .policy li{color:var(--text)}
     .small{font-size:12px;color:var(--muted)}
+
+    /* ===== Modal ===== */
     .modal-backdrop{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:2000;
-}
-
-.modal-backdrop.show{
-  display:flex;
-}
-
-.modal{
-  width:100%;
-  max-width:420px;
-  background:var(--surface);
-  border-radius:18px;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
-  padding:22px 22px 24px;
-  backdrop-filter:blur(14px);
-  position:relative;
-}
-
-.modal h2{
-  margin-bottom:8px;
-}
-
-.modal-close{
-  position:absolute;
-  top:10px;
-  right:12px;
-  border:0;
-  background:transparent;
-  color:var(--text);
-  font-size:20px;
-  cursor:pointer;
-}
-
-.modal .field{
-  margin-bottom:10px;
-}
-
-.modal label{
-  display:block;
-  font-size:13px;
-  margin-bottom:4px;
-  color:var(--muted);
-}
-
-.modal input,
-.modal textarea{
-  width:100%;
-  padding:8px 10px;
-  border-radius:10px;
-  border:1px solid var(--border);
-  background:rgba(5,8,30,.9);
-  color:var(--text);
-  font-size:14px;
-}
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.7);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:2000;
+    }
+    .modal-backdrop.show{display:flex;}
+    .modal{
+      width:100%;
+      max-width:420px;
+      background:var(--surface);
+      border-radius:18px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      padding:22px 22px 24px;
+      backdrop-filter:blur(14px);
+      position:relative;
+    }
+    .modal h2{margin-bottom:8px;}
+    .modal-close{
+      position:absolute;top:10px;right:12px;
+      border:0;background:transparent;color:var(--text);
+      font-size:20px;cursor:pointer;
+    }
+    .modal .field{margin-bottom:10px;}
+    .modal label{
+      display:block;font-size:13px;margin-bottom:4px;color:var(--muted);
+    }
+    .modal input,.modal textarea{
+      width:100%;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:rgba(5,8,30,.9);
+      color:var(--text);
+      font-size:14px;
+    }
 
     /* ===== CTA & Footer ===== */
     .cta{text-align:center}
@@ -608,105 +532,161 @@
     .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
     .fade.show{opacity:1;transform:translateY(0)}
 
-@media(max-width:900px){
+    /* ===== Chat demo (scoped) ===== */
+    #chat-demo{ padding: 96px 0; }
+    .chat-phone{
+      width: 360px; height: 720px;
+      border-radius: 44px;
+      background: linear-gradient(180deg, #0b1220, #111827);
+      padding: 14px;
+      box-shadow: 0 30px 90px rgba(0,0,0,.55);
+      position: relative;
+    }
+    .chat-screen{
+      height:100%;
+      border-radius: 34px;
+      background: linear-gradient(180deg, #0b1220, #0f172a);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .chat-topbar{
+      height: 64px;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding: 10px 14px 12px;
+      color: rgba(255,255,255,.9);
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.02);
+      backdrop-filter: blur(8px);
+    }
+    .chat-notch{
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      width: 160px; height: 26px; border-radius: 0 0 18px 18px;
+      background: rgba(0,0,0,.55);
+    }
+    .chat-name{ font-weight:600; font-size:14px; padding-top: 6px; }
 
-  .nav-links{display:none}
-  .menu-toggle{display:flex}
+    .chat-msgs{
+      flex:1;
+      padding: 14px 12px;
+      overflow:auto;
+      scroll-behavior:smooth;
+    }
+    .chat-row{ display:flex; margin: 8px 0; }
+    .chat-row.in{ justify-content:flex-start; }
+    .chat-row.out{ justify-content:flex-end; }
 
-  /* --- HERO forbedret --- */
-  .hero-left h1{
-    font-size:30px;
-    line-height:1.15;
-  }
+    .chat-bubble{
+      max-width: 78%;
+      padding: 10px 12px;
+      border-radius: 18px;
+      line-height: 1.25;
+      font-size: 14px;
+      opacity: 0;
+      transform: translateY(10px) scale(.98);
+      transition: opacity .35s ease, transform .35s ease;
+      box-shadow: 0 10px 20px rgba(0,0,0,.22);
+      white-space: pre-wrap;
+    }
+    .chat-row.in .chat-bubble{
+      background: #e5e7eb;
+      color: #0b0f16;
+      border-bottom-left-radius: 6px;
+    }
+    .chat-row.out .chat-bubble{
+      background: #3b82f6;
+      color: #ffffff;
+      border-bottom-right-radius: 6px;
+    }
+    .chat-bubble.show{
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
 
-  .hero p{
-    font-size:15px;
-  }
+    .chat-typing{
+      display:inline-flex;
+      gap:6px;
+      padding: 10px 12px;
+      background: rgba(229,231,235,.92);
+      border-radius: 18px;
+      border-bottom-left-radius: 6px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.18);
+    }
+    .chat-dot{
+      width:6px; height:6px; border-radius:999px;
+      background: rgba(17,24,39,.65);
+      animation: chatBounce 1s infinite;
+    }
+    .chat-dot:nth-child(2){ animation-delay:.15s; }
+    .chat-dot:nth-child(3){ animation-delay:.3s; }
+    @keyframes chatBounce{
+      0%, 80%, 100%{ transform: translateY(0); opacity:.6; }
+      40%{ transform: translateY(-5px); opacity:1; }
+    }
 
-  .cta{
-    flex-direction:column;
-    align-items:stretch;
-  }
+    .chat-composer{
+      height: 66px;
+      padding: 10px 12px 12px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      display:flex; gap:10px; align-items:center;
+      background: rgba(255,255,255,.02);
+    }
+    .chat-fakeInput{
+      flex:1;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .chat-sendBtn{
+      width:40px; height:40px; border-radius:999px;
+      display:grid; place-items:center;
+      background: rgba(59,130,246,.9);
+      color:white; font-weight:700;
+      user-select:none;
+    }
 
-  .btn{
-    width:100%;
-    text-align:center;
-  }
+    @media(max-width:900px){
+      .nav-links{display:none}
+      .menu-toggle{display:flex}
 
-  .hero-right{
-    gap:10px;
-  }
+      .hero-left h1{font-size:30px;line-height:1.15;}
+      .hero p{font-size:15px;}
+      .cta{flex-direction:column;align-items:stretch;}
+      .btn{width:100%;text-align:center;}
 
-  .hero-card{
-    padding:12px 14px;
-    min-height:auto;
-  }
+      .about-grid{grid-template-columns:1fr;gap:36px}
+      .videos .video-grid{grid-template-columns:1fr;gap:18px;}
+      .video-card{height:210px;}
+      .video-info h3{font-size:16px;}
+      .video-info p{font-size:13px;}
+      .case-grid{grid-template-columns:1fr;gap:20px;}
+      .card{padding:20px;}
+      .card h3{font-size:18px;}
+      .card p{font-size:14px;}
+      .foot{grid-template-columns:1fr;text-align:center}
 
-  /* Eksisterende layout-regler */
-  .about-grid{grid-template-columns:1fr;gap:36px}
-  .timeline::before{left:20px;transform:none}
-  .bubble{left:20px;transform:none}
-  .step,.step:nth-child(even){flex-direction:row}
-  .step .content{
-    margin-left:64px;
-    margin-right:0;
-    padding:18px;
-  }
+      .hero{height:auto;}
+      .hero-inner{
+        position:relative;
+        top:0;
+        min-height:auto;
+        padding:96px 0 54px;
+        grid-template-columns:1fr;
+        gap:26px;
+      }
+      .hero-right{display:none;}
+      .scroll-hint{display:none;}
 
-  /* Video cards */
-  .videos .video-grid{
-    grid-template-columns:1fr;
-    gap:18px;
-  }
-  .video-card{
-    height:210px;
-  }
-  .video-info h3{
-    font-size:16px;
-  }
-  .video-info p{
-    font-size:13px;
-  }
-
-  /* Cases */
-  .case-grid{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-  .card{
-    padding:20px;
-  }
-  .card h3{
-    font-size:18px;
-  }
-  .card p{
-    font-size:14px;
-  }
-
-  /* Footer */
-  .foot{grid-template-columns:1fr;text-align:center}
-
-  /* Hero mobile */
-  .hero{
-    height:auto;
-  }
-  .hero-inner{
-    position:relative;
-    top:0;
-    min-height:auto;
-    padding:96px 0 54px;
-    grid-template-columns:1fr;
-    gap:26px;
-  }
-  .hero-right{
-    display:none;
-  }
-  .scroll-hint{display:none;}
-
-}
+      .chat-phone{ width: 320px; height: 640px; }
+    }
 
     @media (prefers-reduced-motion: reduce){
-      *{animation:none !important;transition:none !Important}
+      *{animation:none !important;transition:none !important}
       .wordmark{background-position:50% 50% !important}
     }
   </style>
@@ -719,6 +699,7 @@
   {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rithink CRM","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"AI-first CRM for lead capture, assistive replies, scheduling and deal acceleration.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","description":"Beta pricing placeholder"}}
   </script>
 </head>
+
 <body>
   <div id="scroll-progress"></div>
 
@@ -737,13 +718,15 @@
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="wordmark">Rithink</span>
       </button>
+
       <ul class="nav-links" role="menubar" aria-label="Primary navigation">
-        <li role="none"><a role="menuitem" href="#agenda">Agenda</a></li>
         <li role="none"><a role="menuitem" href="#videos">Videos</a></li>
+        <li role="none"><a role="menuitem" href="#chat-demo">Chat Demo</a></li>
         <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
         <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
-        <li role="none">   <a class="btn-pill" role="menuitem" href="#"      onclick="openDemoModal(event)">Book a Demo</a> </li>
+        <li role="none"><a class="btn-pill" role="menuitem" href="#" onclick="openDemoModal(event)">Book a Demo</a></li>
       </ul>
+
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
@@ -753,7 +736,6 @@
   <!-- HERO -->
   <section class="hero" id="home">
     <div class="container hero-inner">
-      <!-- Left side copy -->
       <div class="hero-left">
         <span class="tag">AI CRM</span>
         <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
@@ -763,11 +745,11 @@
         </p>
         <div class="cta">
           <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
-          <a class="btn btn-outline" href="#agenda">See the Agenda</a>
+          <a class="btn btn-outline" href="#videos">See Videos</a>
         </div>
       </div>
 
-      <!-- Right side cards -->
+      <!-- Right side cards (hidden on mobile via CSS) -->
       <div class="hero-right">
         <div class="hero-card hero-card-primary">
           <div class="hero-card-pill">
@@ -810,7 +792,7 @@
 
     <div class="scroll-hint">
       <span></span>
-      <p>Scroll to see the CRM AI agenda</p>
+      <p>Scroll</p>
     </div>
   </section>
 
@@ -833,12 +815,10 @@
         <h2>Learn how our CRM + AI works</h2>
         <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
       </div>
-  
+
       <div class="video-grid">
-        <!-- 1) Never miss a lead – Cloudinary -->
         <a class="video-card fade" href="#contact" aria-label="Never miss a lead">
-          <video muted playsinline autoplay loop
-            poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
+          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -846,11 +826,9 @@
             <p>Phone and inbox notifications lighting up as leads come in — always answered.</p>
           </div>
         </a>
-  
-        <!-- 2) Only the calls that matter – Cloudinary -->
-        <a class="video-card fade" href="#agenda" aria-label="Only the calls that matter">
-          <video muted playsinline autoplay loop
-            poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
+
+        <a class="video-card fade" href="#chat-demo" aria-label="Only the calls that matter">
+          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -858,11 +836,9 @@
             <p>Focused sales rep on a headset, talking to a qualified prospect.</p>
           </div>
         </a>
-  
-        <!-- 3) Follow-up on autopilot – Cloudinary -->
-        <a class="video-card fade" href="#product" aria-label="Follow-up on autopilot">
-          <video muted playsinline autoplay loop
-            poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
+
+        <a class="video-card fade" href="#contact" aria-label="Follow-up on autopilot">
+          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -870,7 +846,35 @@
             <p>Sequences and email flows running automatically in a marketing dashboard.</p>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chat demo (new) -->
+  <section class="section" id="chat-demo">
+    <div class="container">
+      <div class="section-header">
+        <h2>Chat Demo</h2>
+        <p class="lead">A short example of how your AI assistant can handle inbound leads.</p>
+      </div>
+
+      <div style="display:flex;justify-content:center;">
+        <div class="chat-phone" aria-label="Chat demo">
+          <div class="chat-screen">
+            <div class="chat-topbar">
+              <div class="chat-notch" aria-hidden="true"></div>
+              <div class="chat-name">Rithink AI</div>
+            </div>
+
+            <div class="chat-msgs" id="chatMsgs"></div>
+
+            <div class="chat-composer">
+              <div class="chat-fakeInput" aria-hidden="true"></div>
+              <div class="chat-sendBtn" aria-hidden="true">↑</div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
   </section>
 
@@ -1087,7 +1091,7 @@
         <div class="benefit"><span class="check">✓</span><span>Guided setup</span></div>
         <div class="benefit"><span class="check">✓</span><span>Cancel anytime</span></div>
       </div>
-      <a class="btn btn-primary" href="#" onclick="openDemoModal(event)">   Start free trial </a>
+      <a class="btn btn-primary" href="#" onclick="openDemoModal(event)">Start free trial</a>
     </div>
   </section>
 
@@ -1103,16 +1107,16 @@
           <h4>Company</h4>
           <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#videos">Videos</a></li>
             <li><a href="#cases">Cases</a></li>
           </ul>
         </div>
         <div class="fcol">
           <h4>Product</h4>
           <ul>
-            <li><a href="#product">Assistant</a></li>
-            <li><a href="#product">Sequences</a></li>
-            <li><a href="#product">Analytics</a></li>
+            <li><a href="#chat-demo">Assistant</a></li>
+            <li><a href="#contact">Sequences</a></li>
+            <li><a href="#contact">Analytics</a></li>
           </ul>
         </div>
         <div class="fcol">
@@ -1126,242 +1130,292 @@
       <div class="foot-bottom">© <span id="yr"></span> Rithink. All rights reserved.</div>
     </div>
   </footer>
+
   <!-- Demo / trial popup -->
-<div id="demo-modal-backdrop" class="modal-backdrop" aria-hidden="true">
-  <div class="modal">
-    <button class="modal-close" aria-label="Close" onclick="closeDemoModal()">×</button>
-    <h2>Book a demo</h2>
-    <p style="margin-bottom:16px;color:var(--muted);font-size:14px">
-      Skriv dine oplysninger, så vender vi tilbage med en tid.
-    </p>
-    <form onsubmit="submitDemoForm(event)">
-      <div class="field">
-        <label>Navn</label>
-        <input type="text" name="name" required />
-      </div>
-      <div class="field">
-        <label>Firma</label>
-        <input type="text" name="company" />
-      </div>
-      <div class="field">
-        <label>E-mail</label>
-        <input type="email" name="email" required />
-      </div>
-      <div class="field">
-        <label>Besked</label>
-        <textarea name="message" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">
-        Send
-      </button>
-    </form>
+  <div id="demo-modal-backdrop" class="modal-backdrop" aria-hidden="true">
+    <div class="modal">
+      <button class="modal-close" aria-label="Close" onclick="closeDemoModal()">×</button>
+      <h2>Book a demo</h2>
+      <p style="margin-bottom:16px;color:var(--muted);font-size:14px">
+        Skriv dine oplysninger, så vender vi tilbage med en tid.
+      </p>
+      <form onsubmit="submitDemoForm(event)">
+        <div class="field">
+          <label>Navn</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="field">
+          <label>Firma</label>
+          <input type="text" name="company" />
+        </div>
+        <div class="field">
+          <label>E-mail</label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="field">
+          <label>Besked</label>
+          <textarea name="message" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">
+          Send
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 
-<script>
-  // Mobile menu
-  const toggleMenu = () => {
-    const btn = document.querySelector('.menu-toggle');
-    const existing = document.getElementById('mobile-nav');
-    const open = !existing;
-    btn.setAttribute('aria-expanded', String(open));
-    if (existing){ existing.remove(); return; }
-    const ul = document.querySelector('.nav-links').cloneNode(true);
-    ul.id = 'mobile-nav';
-    ul.className = 'mobile-nav';
-    ul.setAttribute('role','menu');
-    Object.assign(ul.style,{
-      position:'fixed',top:'64px',left:'0',right:'0',
-      background:'linear-gradient(180deg, rgba(14,20,54,.95), rgba(14,20,54,.85))',
-      padding:'16px 20px 24px',display:'grid',gap:'14px',
-      borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.5)',
-      zIndex:'999',backdropFilter:'blur(10px)'
-    });
-    document.body.appendChild(ul);
-  };
-
-  const hdr = document.getElementById('header');
-  const progressBar = document.getElementById('scroll-progress');
-  let stepsObserver = null;
-
-  const onScroll = () => {
-    const scrollY = window.scrollY || window.pageYOffset;
-
-    // Header shadow
-    if (scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
-
-    // Reveal
-    document.querySelectorAll('.fade').forEach(el=>{
-      const r = el.getBoundingClientRect();
-      if (r.top < window.innerHeight - 80) el.classList.add('show');
-    });
-
-    // Progress bar
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
-    progressBar.style.width = (pct * 100) + '%';
-
-    // Parallax (hvis du senere bruger .parallax)
-    document.querySelectorAll('.parallax').forEach(el => {
-      const r = el.getBoundingClientRect();
-      const center = window.innerHeight / 2;
-      const offset = (r.top + r.height/2 - center) / window.innerHeight;
-      el.style.transform = `translateY(${offset * -20}px)`;
-    });
-
-    // Advanced hero scroll
-    const hero = document.querySelector('.hero');
-    const bgVideo = document.querySelector('.site-bg video');
-    const bgOverlay = document.querySelector('.site-bg-overlay');
-    const heroInner = document.querySelector('.hero-inner');
-    const heroLeft = document.querySelector('.hero-left');
-    const heroRight = document.querySelector('.hero-right');
-    const heroCardPrimary = document.querySelector('.hero-card-primary');
-    const heroCardSecondary = document.querySelector('.hero-card-secondary');
-    const heroCardMini = document.querySelector('.hero-card-mini');
-
-    if (hero && heroInner) {
-      const heroTop = hero.offsetTop;
-      const heroHeight = hero.offsetHeight;
-      const vh = window.innerHeight;
-      const start = heroTop;
-      const end = heroTop + heroHeight - vh;
-
-      let progress = 0;
-      if (scrollY <= start) progress = 0;
-      else if (scrollY >= end) progress = 1;
-      else progress = (scrollY - start) / (end - start);
-      progress = Math.min(1, Math.max(0, progress));
-
-      // Video zoom + drift (global background)
-      if (bgVideo) {
-        const scale = 1.08 + progress * 0.25;
-        const translateY = progress * 60;
-        bgVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-      }
-      // Overlay lysner lidt når man scroller
-      if (bgOverlay) {
-        const o = 0.9 - progress * 0.3;
-        bgOverlay.style.opacity = Math.max(0.5, o);
-      }
-
-      // Hero wrapper let vertical drift
-      heroInner.style.transform = `translateY(${progress * -80}px)`;
-
-      // tekst venstre og bokse højre glider ud til siden og fader
-      const sideOffset = progress * 120;
-      const sideOpacity = Math.max(0, 1 - progress * 1.4);
-
-      if (heroLeft) {
-        heroLeft.style.transform = `translateX(${-sideOffset}px)`;
-        heroLeft.style.opacity = sideOpacity;
-      }
-      if (heroRight) {
-        heroRight.style.transform = `translateX(${sideOffset}px)`;
-        heroRight.style.opacity = sideOpacity;
-      }
-
-      // Kortene bevæger sig forskelligt oven i heroRight-transformen
-      if (heroCardPrimary) {
-        heroCardPrimary.style.transform =
-          `translateY(${progress * 200}px) scale(${1 + progress * 0})`;
-      }
-      if (heroCardSecondary) {
-        heroCardSecondary.style.transform =
-          `translateY(${progress * 0}px) translateX(${progress * 0}px)`;
-      }
-      if (heroCardMini) {
-        heroCardMini.style.transform =
-          `translateY(${progress * -200}px) translateX(${progress * 0}px)`;
-      }
-    }
-
-    // Agenda highlight fallback
-    stepsObserver && stepsObserver.check && stepsObserver.check();
-  };
-  document.addEventListener('scroll', onScroll, {passive:true});
-
-  function setupTilt(){
-    const els = document.querySelectorAll('.tilt');
-    const limit = 8;
-    els.forEach(el=>{
-      el.addEventListener('pointermove', (e)=>{
-        const r = el.getBoundingClientRect();
-        const x = e.clientX - r.left, y = e.clientY - r.top;
-        const rx = ((y / r.height) - 0.5) * -2 * limit;
-        const ry = ((x / r.width) - 0.5) * 2 * limit;
-        el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(0)`;
+  <script>
+    // Mobile menu
+    const toggleMenu = () => {
+      const btn = document.querySelector('.menu-toggle');
+      const existing = document.getElementById('mobile-nav');
+      const open = !existing;
+      btn.setAttribute('aria-expanded', String(open));
+      if (existing){ existing.remove(); return; }
+      const ul = document.querySelector('.nav-links').cloneNode(true);
+      ul.id = 'mobile-nav';
+      ul.className = 'mobile-nav';
+      ul.setAttribute('role','menu');
+      Object.assign(ul.style,{
+        position:'fixed',top:'64px',left:'0',right:'0',
+        background:'linear-gradient(180deg, rgba(14,20,54,.95), rgba(14,20,54,.85))',
+        padding:'16px 20px 24px',display:'grid',gap:'14px',
+        borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.5)',
+        zIndex:'999',backdropFilter:'blur(10px)'
       });
-      el.addEventListener('pointerleave', ()=>{
-        el.style.transform = 'rotateX(0) rotateY(0)';
-      });
-    });
-  }
-
-  function setupAgendaObserver(){
-    const steps = Array.from(document.querySelectorAll('.timeline .step'));
-    if (!steps.length) return;
-    if ('IntersectionObserver' in window){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if (entry.isIntersecting) entry.target.classList.add('active');
-          else entry.target.classList.remove('active');
-        });
-      }, {threshold:0.35});
-      steps.forEach(s=>io.observe(s));
-    }
-    stepsObserver = {
-      check: () => steps.forEach(s=>{
-        const r = s.getBoundingClientRect();
-        if (r.top < window.innerHeight * .65 && r.bottom > window.innerHeight * .35) s.classList.add('active');
-        else s.classList.remove('active');
-      })
+      document.body.appendChild(ul);
     };
+
+    const hdr = document.getElementById('header');
+    const progressBar = document.getElementById('scroll-progress');
+
+    const onScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      // Header shadow
+      if (scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+
+      // Reveal
+      document.querySelectorAll('.fade').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight - 80) el.classList.add('show');
+      });
+
+      // Progress bar
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
+      progressBar.style.width = (pct * 100) + '%';
+
+      // Advanced hero scroll
+      const hero = document.querySelector('.hero');
+      const bgVideo = document.querySelector('.site-bg video');
+      const bgOverlay = document.querySelector('.site-bg-overlay');
+      const heroInner = document.querySelector('.hero-inner');
+      const heroLeft = document.querySelector('.hero-left');
+      const heroRight = document.querySelector('.hero-right');
+      const heroCardPrimary = document.querySelector('.hero-card-primary');
+      const heroCardSecondary = document.querySelector('.hero-card-secondary');
+      const heroCardMini = document.querySelector('.hero-card-mini');
+
+      if (hero && heroInner) {
+        const heroTop = hero.offsetTop;
+        const heroHeight = hero.offsetHeight;
+        const vh = window.innerHeight;
+        const start = heroTop;
+        const end = heroTop + heroHeight - vh;
+
+        let progress = 0;
+        if (scrollY <= start) progress = 0;
+        else if (scrollY >= end) progress = 1;
+        else progress = (scrollY - start) / (end - start);
+        progress = Math.min(1, Math.max(0, progress));
+
+        if (bgVideo) {
+          const scale = 1.08 + progress * 0.25;
+          const translateY = progress * 60;
+          bgVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
+        }
+        if (bgOverlay) {
+          const o = 0.9 - progress * 0.3;
+          bgOverlay.style.opacity = Math.max(0.5, o);
+        }
+
+        heroInner.style.transform = `translateY(${progress * -80}px)`;
+
+        const sideOffset = progress * 120;
+        const sideOpacity = Math.max(0, 1 - progress * 1.4);
+
+        if (heroLeft) {
+          heroLeft.style.transform = `translateX(${-sideOffset}px)`;
+          heroLeft.style.opacity = sideOpacity;
+        }
+        if (heroRight) {
+          heroRight.style.transform = `translateX(${sideOffset}px)`;
+          heroRight.style.opacity = sideOpacity;
+        }
+
+        if (heroCardPrimary) {
+          heroCardPrimary.style.transform = `translateY(${progress * 200}px)`;
+        }
+        if (heroCardSecondary) {
+          heroCardSecondary.style.transform = `translateY(0px) translateX(0px)`;
+        }
+        if (heroCardMini) {
+          heroCardMini.style.transform = `translateY(${progress * -200}px) translateX(0px)`;
+        }
+      }
+    };
+    document.addEventListener('scroll', onScroll, {passive:true});
+
+    function setupTilt(){
+      const els = document.querySelectorAll('.tilt');
+      const limit = 8;
+      els.forEach(el=>{
+        el.addEventListener('pointermove', (e)=>{
+          const r = el.getBoundingClientRect();
+          const x = e.clientX - r.left, y = e.clientY - r.top;
+          const rx = ((y / r.height) - 0.5) * -2 * limit;
+          const ry = ((x / r.width) - 0.5) * 2 * limit;
+          el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(0)`;
+        });
+        el.addEventListener('pointerleave', ()=>{
+          el.style.transform = 'rotateX(0) rotateY(0)';
+        });
+      });
+    }
+
+    /* ===== Modal / popup til Book Demo ===== */
+    function openDemoModal(e){
+      if (e) e.preventDefault();
+      const m = document.getElementById('demo-modal-backdrop');
+      if (!m) return;
+      m.classList.add('show');
+      m.setAttribute('aria-hidden','false');
+    }
+
+    function closeDemoModal(){
+      const m = document.getElementById('demo-modal-backdrop');
+      if (!m) return;
+      m.classList.remove('show');
+      m.setAttribute('aria-hidden','true');
+    }
+
+    function submitDemoForm(e){
+      e.preventDefault();
+      alert('Tak! Vi vender tilbage hurtigst muligt.');
+      closeDemoModal();
+    }
+
+    document.addEventListener('click', (e)=>{
+      const backdrop = document.getElementById('demo-modal-backdrop');
+      if (!backdrop || !backdrop.classList.contains('show')) return;
+      if (e.target === backdrop) closeDemoModal();
+    });
+
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape') closeDemoModal();
+    });
+
+    /* ===== Chat demo runner (scoped) ===== */
+/* ===== Chat demo runner (starts on scroll into view) ===== */
+(function(){
+  const msgsEl = document.getElementById("chatMsgs");
+  if (!msgsEl) return;
+
+  const script = [
+    { side: "in",  text: "Hi! I’m Rithink AI 👋 What can I help you with today?", delay: 700 },
+    { side: "out", text: "I want to see how you handle inbound leads.",          delay: 1100 },
+    { side: "in",  typing: true,                                                 delay: 700 },
+    { side: "in",  text: "Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay: 700 },
+    { side: "out", text: "Website form + email inbox.",                           delay: 1000 },
+    { side: "in",  typing: true,                                                  delay: 650 },
+    { side: "in",  text: "Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay: 800 },
+    { side: "out", text: "Yes — Thursday afternoon.",                             delay: 950 },
+    { side: "in",  typing: true,                                                  delay: 700 },
+    { side: "in",  text: "Done ✅ I can do 14:30 or 15:00. Which one works?",      delay: 700 },
+  ];
+
+  let started = false;
+
+  function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+  function addBubble(side, node){
+    const row = document.createElement("div");
+    row.className = `chat-row ${side}`;
+    row.appendChild(node);
+    msgsEl.appendChild(row);
+    scrollToBottom();
+    requestAnimationFrame(() => node.classList.add("show"));
+    return row;
   }
 
-  /* ===== Modal / popup til Book Demo ===== */
-  function openDemoModal(e){
-    if (e) e.preventDefault();
-    const m = document.getElementById('demo-modal-backdrop');
-    if (!m) return;
-    m.classList.add('show');
-    m.setAttribute('aria-hidden','false');
+  function makeTextBubble(text){
+    const b = document.createElement("div");
+    b.className = "chat-bubble";
+    b.textContent = text;
+    return b;
   }
 
-  function closeDemoModal(){
-    const m = document.getElementById('demo-modal-backdrop');
-    if (!m) return;
-    m.classList.remove('show');
-    m.setAttribute('aria-hidden','true');
+  function makeTypingBubble(){
+    const b = document.createElement("div");
+    b.className = "chat-bubble chat-typing";
+    b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
+    return b;
   }
 
-  function submitDemoForm(e){
-    e.preventDefault();
-    alert('Tak! Vi vender tilbage hurtigst muligt.');
-    closeDemoModal();
+  async function run(){
+    if (started) return;
+    started = true;
+
+    let typingRow = null;
+
+    for (const step of script){
+      await new Promise(r => setTimeout(r, step.delay));
+
+      if (typingRow){
+        typingRow.remove();
+        typingRow = null;
+      }
+
+      if (step.typing){
+        typingRow = addBubble(step.side, makeTypingBubble());
+        continue;
+      }
+
+      addBubble(step.side, makeTextBubble(step.text));
+    }
   }
 
-  // Luk ved klik udenfor boksen
-  document.addEventListener('click', (e)=>{
-    const backdrop = document.getElementById('demo-modal-backdrop');
-    if (!backdrop || !backdrop.classList.contains('show')) return;
-    if (e.target === backdrop) closeDemoModal();
-  });
+  // Start when visible
+  const target = document.getElementById("chat-demo") || msgsEl;
 
-  // Luk med ESC
-  document.addEventListener('keydown', (e)=>{
-    if (e.key === 'Escape') closeDemoModal();
-  });
+  if ("IntersectionObserver" in window){
+    const io = new IntersectionObserver((entries)=>{
+      if (entries.some(e => e.isIntersecting)){
+        io.disconnect();
+        run();
+      }
+    }, { threshold: 0.25 });
 
-  // On load
-  window.addEventListener('load', ()=>{
-    document.getElementById('yr').textContent = new Date().getFullYear();
-    setupTilt();
-    setupAgendaObserver();
+    io.observe(target);
+  } else {
+    // Fallback: start on first scroll that reaches it
+    const onScroll = () => {
+      const r = target.getBoundingClientRect();
+      if (r.top < window.innerHeight * 0.75){
+        window.removeEventListener("scroll", onScroll);
+        run();
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive:true });
     onScroll();
-  });
-</script>
-
-  
+  }
+})();
+    // On load
+    window.addEventListener('load', ()=>{
+      document.getElementById('yr').textContent = new Date().getFullYear();
+      setupTilt();
+      onScroll();
+    });
+  </script>
 </body>
 </html>
