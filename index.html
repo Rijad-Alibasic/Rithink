@@ -14,7 +14,6 @@
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    /* ===== Theme ===== */
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
       --bg-1:#070B1F;
@@ -57,46 +56,35 @@
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
     /* ===== Global video background ===== */
-    .site-bg{
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      overflow:hidden;
-    }
+    .site-bg{position:fixed;inset:0;z-index:-2;overflow:hidden}
     .site-bg video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+      width:100%;height:100%;object-fit:cover;
       transform:scale(1.08);
       filter:saturate(1.1) contrast(1.05) brightness(0.9);
       transition:transform .25s ease-out;
     }
     .site-bg-overlay{
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;
       background:
         radial-gradient(circle at 15% 15%, rgba(123,140,255,.55), transparent 60%),
         radial-gradient(circle at 85% 20%, rgba(0,224,255,.4), transparent 60%),
         radial-gradient(circle at 50% 90%, rgba(0,0,0,.9), rgba(0,0,0,1)),
         linear-gradient(160deg, rgba(7,11,31,.95), rgba(7,11,31,.95));
       opacity:.9;
-      mix-blend-mode:normal;
       transition:opacity .25s ease-out;
     }
 
     /* ===== Scroll progress bar ===== */
     #scroll-progress{
-      position:fixed;
-      top:0;left:0;
-      height:var(--progress-h);
-      width:0%;
+      position:fixed;top:0;left:0;
+      height:var(--progress-h);width:0%;
       background:linear-gradient(90deg,var(--accent-2),var(--accent),var(--accent-3));
       z-index:1500;
       box-shadow:0 0 20px rgba(0,224,255,.45);
       transition:width .1s linear;
     }
 
-    /* ===== Header / Logo ===== */
+    /* ===== Header ===== */
     header{
       position:fixed;inset:0 0 auto 0;
       background:linear-gradient(180deg, rgba(14,20,54,.75), rgba(14,20,54,.38));
@@ -124,7 +112,7 @@
       mix-blend-mode:screen;filter:blur(.3px);
     }
     .wordmark{
-      font-size:26px;font-weight:900;letter-spacing:-.6px;position:relative;
+      font-size:26px;font-weight:900;letter-spacing:-.6px;
       background:linear-gradient(90deg,#fff 0%, var(--accent-2) 35%, var(--accent) 65%, #fff 100%);
       background-size:200% auto;
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
@@ -168,16 +156,9 @@
     .menu-toggle span{width:26px;height:2px;background:var(--text);transition:.25s}
 
     /* ===== HERO ===== */
-    .hero{
-      margin-top:80px;
-      height:170vh;
-      position:relative;
-      overflow:visible;
-    }
-
+    .hero{margin-top:80px;height:170vh;position:relative;overflow:visible}
     .hero-inner{
-      position:sticky;
-      top:88px;
+      position:sticky;top:88px;
       min-height:calc(100vh - 110px);
       display:grid;
       grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
@@ -203,7 +184,9 @@
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
     .hero p{font-size:20px;color:var(--muted);max-width:780px;margin-bottom:28px}
-    .cta{display:flex;gap:14px;flex-wrap:wrap}
+
+    /* FIX: hero cta har eget navn */
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
     .btn{
       padding:14px 28px;border-radius:28px;
       text-decoration:none;font-weight:800;font-size:15px;
@@ -228,9 +211,7 @@
       transform-style:preserve-3d;
     }
     .hero-card{
-      position:relative;
-      border-radius:18px;
-      overflow:hidden;
+      border-radius:18px;overflow:hidden;
       background:var(--surface-2);
       border:1px solid var(--border);
       box-shadow:0 18px 40px rgba(0,0,0,.6);
@@ -239,9 +220,9 @@
       min-height:110px;
       transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease, background .35s ease;
     }
-    .hero-card-primary{min-height:180px;}
-    .hero-card h3{font-size:16px;margin-bottom:6px;}
-    .hero-card p{font-size:13px;color:var(--muted);}
+    .hero-card-primary{min-height:180px}
+    .hero-card h3{font-size:16px;margin-bottom:6px}
+    .hero-card p{font-size:13px;color:var(--muted)}
     .hero-card-pill{
       font-size:11px;text-transform:uppercase;letter-spacing:.08em;
       padding:4px 9px;border-radius:999px;background:rgba(0,0,0,.5);
@@ -252,18 +233,12 @@
       background:radial-gradient(circle at 30% 30%, #fff, var(--accent-2));
       box-shadow:0 0 8px rgba(0,224,255,.8);
     }
-    .hero-card-metric{
-      display:flex;justify-content:space-between;align-items:baseline;
-      margin-top:10px;font-size:12px;
-    }
+    .hero-card-metric{display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;font-size:12px}
     .hero-card-metric strong{
       font-size:20px;
       background:linear-gradient(90deg,var(--accent-2),var(--accent));
       -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .hero-card-secondary{transform-origin:top right;}
-    .hero-card-mini{transform-origin:top left;}
-
     .hero-card:hover{
       box-shadow:0 26px 56px rgba(0,0,0,.75);
       border-color:rgba(0,224,255,.5);
@@ -271,33 +246,19 @@
     }
 
     .scroll-hint{
-      position:absolute;
-      left:50%;
-      bottom:28px;
-      transform:translateX(-50%);
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px;
-      font-size:12px;
-      color:var(--muted);
-      opacity:.85;
-      pointer-events:none;
+      position:absolute;left:50%;bottom:28px;transform:translateX(-50%);
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      font-size:12px;color:var(--muted);opacity:.85;pointer-events:none;
     }
     .scroll-hint span{
       width:22px;height:38px;border-radius:999px;
       border:1px solid rgba(255,255,255,.45);
-      position:relative;
-      overflow:hidden;
+      position:relative;overflow:hidden;
     }
     .scroll-hint span::after{
-      content:"";
-      position:absolute;
-      top:6px;left:50%;
-      width:4px;height:8px;
-      border-radius:999px;
-      background:var(--accent-2);
-      transform:translateX(-50%);
+      content:"";position:absolute;top:6px;left:50%;
+      width:4px;height:8px;border-radius:999px;
+      background:var(--accent-2);transform:translateX(-50%);
       animation:scrollDot 1.6s ease-in-out infinite;
     }
     @keyframes scrollDot{
@@ -332,11 +293,7 @@
     .metric .label{font-size:15px;color:var(--muted);font-weight:700}
 
     /* ===== Videos ===== */
-    .videos .video-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-      gap:24px;
-    }
+    .videos .video-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px}
     .video-card{
       height:280px;border-radius:18px;overflow:hidden;
       position:relative;cursor:pointer;
@@ -347,11 +304,7 @@
       text-decoration:none;
     }
     .video-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 22px 52px rgba(74,105,255,.32)}
-    .video-card video{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:cover;opacity:.92;
-      filter:saturate(1.1) contrast(1.03);
-    }
+    .video-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92}
     .video-info{
       position:absolute;left:0;right:0;bottom:0;
       padding:20px 22px;color:#fff;
@@ -362,23 +315,17 @@
     .badge{
       display:inline-block;padding:6px 10px;border-radius:999px;
       background:rgba(0,0,0,.35);font-size:11px;
-      text-transform:uppercase;letter-spacing:.7px;
-      margin-left:8px;
+      text-transform:uppercase;letter-spacing:.7px;margin-left:8px;
     }
 
-    /* ==== Scroll-in animation ==== */
-    .video-card.fade{
-      opacity:0;
-      transform:translateY(40px);
-      transition:transform .6s ease, opacity .6s ease;
-    }
-    .video-card.fade.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-    .videos .video-grid .video-card.fade:nth-child(1).show{transition-delay:0s;}
-    .videos .video-grid .video-card.fade:nth-child(2).show{transition-delay:0.12s;}
-    .videos .video-grid .video-card.fade:nth-child(3).show{transition-delay:0.24s;}
+    /* ===== Motion ===== */
+    .tilt{transform-style:preserve-3d;will-change:transform}
+    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
+    .fade.show{opacity:1;transform:translateY(0)}
+    .video-card.fade{opacity:0;transform:translateY(40px);transition:transform .6s ease, opacity .6s ease}
+    .video-card.fade.show{opacity:1;transform:translateY(0)}
+    .videos .video-grid .video-card.fade:nth-child(2).show{transition-delay:.12s}
+    .videos .video-grid .video-card.fade:nth-child(3).show{transition-delay:.24s}
 
     /* ===== Cards / Cases ===== */
     .card{
@@ -394,17 +341,6 @@
     }
     .card:hover{transform:translateY(-6px);box-shadow:0 22px 52px rgba(0,0,0,.5)}
     .card:hover::before{transform:scaleX(1)}
-
-    .icon{
-      width:64px;height:64px;border-radius:16px;
-      display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(135deg,var(--accent-2),var(--accent));
-      color:#0A0E27;font-size:28px;margin-bottom:16px;
-      border:1px solid rgba(255,255,255,.35);
-    }
-    .card h3{font-size:22px;margin-bottom:8px}
-    .card p{color:var(--muted)}
-
     .cases .case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
     .case .tag{
       font-size:12px;background:var(--surface-2);color:var(--text);
@@ -446,53 +382,34 @@
 
     /* ===== Modal ===== */
     .modal-backdrop{
-      position:fixed;
-      inset:0;
+      position:fixed;inset:0;
       background:rgba(0,0,0,.7);
-      display:none;
-      align-items:center;
-      justify-content:center;
+      display:none;align-items:center;justify-content:center;
       z-index:2000;
     }
-    .modal-backdrop.show{display:flex;}
+    .modal-backdrop.show{display:flex}
     .modal{
-      width:100%;
-      max-width:420px;
+      width:100%;max-width:420px;
       background:var(--surface);
-      border-radius:18px;
-      border:1px solid var(--border);
+      border-radius:18px;border:1px solid var(--border);
       box-shadow:var(--shadow);
       padding:22px 22px 24px;
       backdrop-filter:blur(14px);
       position:relative;
     }
-    .modal h2{margin-bottom:8px;}
-    .modal-close{
-      position:absolute;top:10px;right:12px;
-      border:0;background:transparent;color:var(--text);
-      font-size:20px;cursor:pointer;
-    }
-    .modal .field{margin-bottom:10px;}
-    .modal label{
-      display:block;font-size:13px;margin-bottom:4px;color:var(--muted);
-    }
+    .modal-close{position:absolute;top:10px;right:12px;border:0;background:transparent;color:var(--text);font-size:20px;cursor:pointer}
+    .modal .field{margin-bottom:10px}
+    .modal label{display:block;font-size:13px;margin-bottom:4px;color:var(--muted)}
     .modal input,.modal textarea{
-      width:100%;
-      padding:8px 10px;
-      border-radius:10px;
+      width:100%;padding:8px 10px;border-radius:10px;
       border:1px solid var(--border);
       background:rgba(5,8,30,.9);
-      color:var(--text);
-      font-size:14px;
+      color:var(--text);font-size:14px;
     }
 
     /* ===== CTA & Footer ===== */
-    .cta{text-align:center}
-    .benefits{
-      display:flex;gap:22px;
-      flex-wrap:wrap;justify-content:center;
-      margin:18px 0 28px;
-    }
+    .cta-section{text-align:center}
+    .benefits{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin:18px 0 28px}
     .benefit{display:flex;align-items:center;gap:8px}
     .check{
       width:22px;height:22px;border-radius:50%;
@@ -507,10 +424,7 @@
       padding:56px 0 28px;
       border-top:1px solid var(--border);
     }
-    .foot{
-      display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
-      gap:28px;margin-bottom:32px;
-    }
+    .foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px;margin-bottom:32px}
     .foot h3{
       font-size:26px;
       background:linear-gradient(135deg,#fff 0%,var(--accent-2) 50%,var(--accent) 100%);
@@ -522,342 +436,154 @@
     .fcol li{margin:8px 0}
     .fcol a{color:var(--text);text-decoration:none;opacity:.85}
     .fcol a:hover{opacity:1}
-    .foot-bottom{
-      opacity:.6;border-top:1px solid var(--border);
-      padding-top:18px;text-align:center;
+    .foot-bottom{opacity:.6;border-top:1px solid var(--border);padding-top:18px;text-align:center}
+
+    /* ===== Phones scroll section ===== */
+    .phones-scroll{position:relative;height:220vh;padding:40px 0}
+    .phones-sticky{position:sticky;top:88px;height:calc(100vh - 110px);display:flex;align-items:center}
+    .phones-stage{width:100%;max-width:1200px;margin:0 auto;padding:0 20px;position:relative}
+
+    .phones-scroll .phone{width:360px;height:720px;border-radius:44px;background:linear-gradient(180deg,#0b1220,#111827);padding:14px;box-shadow:0 30px 90px rgba(0,0,0,.55)}
+    .phones-scroll .screen{height:100%;border-radius:34px;background:linear-gradient(180deg,#0b1220,#0f172a);overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.08)}
+    .phones-scroll .topbar{height:64px;display:flex;align-items:flex-end;justify-content:center;padding:10px 14px 12px;color:rgba(255,255,255,.9);position:relative;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);backdrop-filter:blur(8px)}
+    .phones-scroll .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:160px;height:26px;border-radius:0 0 18px 18px;background:rgba(0,0,0,.55)}
+    .phones-scroll .name{font-weight:600;font-size:14px;padding-top:6px}
+    .phones-scroll .msgs{flex:1;padding:14px 12px;overflow:auto;scroll-behavior:smooth}
+    .phones-scroll .composer{height:66px;padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.02)}
+    .phones-scroll .fakeInput{flex:1;height:40px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .phones-scroll .sendBtn{width:40px;height:40px;border-radius:999px;display:grid;place-items:center;background:rgba(59,130,246,.9);color:#fff;font-weight:700;user-select:none}
+
+    .phones-scroll .row{display:flex;margin:8px 0}
+    .phones-scroll .row.in{justify-content:flex-start}
+    .phones-scroll .row.out{justify-content:flex-end}
+    .phones-scroll .bubble{
+      max-width:78%;padding:10px 12px;border-radius:18px;line-height:1.25;font-size:14px;
+      opacity:0;transform:translateY(10px) scale(.98);
+      transition:opacity .35s ease, transform .35s ease;
+      box-shadow:0 10px 20px rgba(0,0,0,.22);
+      white-space:pre-wrap;
     }
+    .phones-scroll .in .bubble{background:#e5e7eb;color:#0b0f16;border-bottom-left-radius:6px}
+    .phones-scroll .out .bubble{background:#3b82f6;color:#fff;border-bottom-right-radius:6px}
+    .phones-scroll .bubble.show{opacity:1;transform:translateY(0) scale(1)}
+    .phones-scroll .typing{display:inline-flex;gap:6px;padding:10px 12px;background:rgba(229,231,235,.92);border-radius:18px;border-bottom-left-radius:6px}
+    .phones-scroll .dot{width:6px;height:6px;border-radius:999px;background:rgba(17,24,39,.65);animation:bounce 1s infinite}
+    .phones-scroll .dot:nth-child(2){animation-delay:.15s}
+    .phones-scroll .dot:nth-child(3){animation-delay:.3s}
+    @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.6}40%{transform:translateY(-5px);opacity:1}}
 
-    /* ===== Utilities / Motion ===== */
-    .tilt{transform-style:preserve-3d;will-change:transform}
-    .fade{opacity:0;transform:translateY(26px);transition:all .7s ease}
-    .fade.show{opacity:1;transform:translateY(0)}
+    .phone-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .phone-label{font-size:12px;color:rgba(255,255,255,.75)}
+    .phone-main{position:relative;display:flex;justify-content:center;will-change:transform,opacity}
 
-    /* ===== Scroll phones section ===== */
-.phones-scroll{
-  position:relative;
-  height:220vh;              /* giver “scroll-plads” til effekten */
-  padding:40px 0;
-}
-.phones-sticky{
-  position:sticky;
-  top:88px;                  /* samme “header offset” som din hero */
-  height:calc(100vh - 110px);
-  display:flex;
-  align-items:center;
-}
-.phones-stage{
-  width:100%;
-  max-width:1200px;
-  margin:0 auto;
-  padding:0 20px;
-  position:relative;
-}
+    .phones-grid{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:14px;
+      opacity:0;transform:translateY(18px);
+      pointer-events:none;
+      will-change:transform,opacity;
+    }
+    .phone-mini .phone{width:220px;height:440px;border-radius:34px;padding:12px}
+    .phone-mini .screen{border-radius:26px}
+    .phone-mini .topbar{height:56px}
+    .phone-mini .msgs{padding:12px 10px}
+    .phone-mini .bubble{font-size:12px}
 
-/* base phone styling (genbrug din chat-look) */
-.phones-scroll .phone{
-  width:360px; height:720px;
-  border-radius:44px;
-  background:linear-gradient(180deg,#0b1220,#111827);
-  padding:14px;
-  box-shadow:0 30px 90px rgba(0,0,0,.55);
-  position:relative;
-}
-.phones-scroll .screen{
-  height:100%;
-  border-radius:34px;
-  background:linear-gradient(180deg,#0b1220,#0f172a);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  border:1px solid rgba(255,255,255,.08);
-}
-.phones-scroll .topbar{
-  height:64px;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  padding:10px 14px 12px;
-  color:rgba(255,255,255,.9);
-  position:relative;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  background:rgba(255,255,255,.02);
-  backdrop-filter:blur(8px);
-}
-.phones-scroll .notch{
-  position:absolute; top:10px; left:50%; transform:translateX(-50%);
-  width:160px; height:26px; border-radius:0 0 18px 18px;
-  background:rgba(0,0,0,.55);
-}
-.phones-scroll .name{font-weight:600;font-size:14px;padding-top:6px}
-.phones-scroll .msgs{
-  flex:1;
-  padding:14px 12px;
-  overflow:auto;
-  scroll-behavior:smooth;
-}
-.phones-scroll .composer{
-  height:66px;
-  padding:10px 12px 12px;
-  border-top:1px solid rgba(255,255,255,.08);
-  display:flex; gap:10px; align-items:center;
-  background:rgba(255,255,255,.02);
-}
-.phones-scroll .fakeInput{
-  flex:1;height:40px;border-radius:999px;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-}
-.phones-scroll .sendBtn{
-  width:40px;height:40px;border-radius:999px;
-  display:grid;place-items:center;
-  background:rgba(59,130,246,.9);
-  color:#fff;font-weight:700;
-  user-select:none;
-}
-
-/* bubbles */
-.phones-scroll .row{display:flex;margin:8px 0}
-.phones-scroll .row.in{justify-content:flex-start}
-.phones-scroll .row.out{justify-content:flex-end}
-.phones-scroll .bubble{
-  max-width:78%;
-  padding:10px 12px;
-  border-radius:18px;
-  line-height:1.25;
-  font-size:14px;
-  opacity:0;
-  transform:translateY(10px) scale(.98);
-  transition:opacity .35s ease, transform .35s ease;
-  box-shadow:0 10px 20px rgba(0,0,0,.22);
-  white-space:pre-wrap;
-}
-.phones-scroll .in .bubble{background:#e5e7eb;color:#0b0f16;border-bottom-left-radius:6px}
-.phones-scroll .out .bubble{background:#3b82f6;color:#fff;border-bottom-right-radius:6px}
-.phones-scroll .bubble.show{opacity:1;transform:translateY(0) scale(1)}
-.phones-scroll .typing{
-  display:inline-flex;gap:6px;padding:10px 12px;
-  background:rgba(229,231,235,.92);
-  border-radius:18px;border-bottom-left-radius:6px;
-}
-.phones-scroll .dot{
-  width:6px;height:6px;border-radius:999px;
-  background:rgba(17,24,39,.65);
-  animation:bounce 1s infinite;
-}
-.phones-scroll .dot:nth-child(2){animation-delay:.15s}
-.phones-scroll .dot:nth-child(3){animation-delay:.3s}
-@keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.6}40%{transform:translateY(-5px);opacity:1}}
-
-/* layout */
-.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-.phone-label{font-size:12px;color:rgba(255,255,255,.75)}
-
-/* main phone center */
-.phone-main{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  will-change:transform,opacity;
-}
-
-/* grid phones hidden initially */
-.phones-grid{
-  margin-top:22px;
-  display:grid;
-  grid-template-columns:repeat(5, minmax(0,1fr));
-  gap:14px;
-  opacity:0;
-  transform:translateY(18px);
-  pointer-events:none;
-  will-change:transform,opacity;
-}
-.phone-mini .phone{width:220px;height:440px;border-radius:34px;padding:12px}
-.phone-mini .screen{border-radius:26px}
-.phone-mini .topbar{height:56px}
-.phone-mini .msgs{padding:12px 10px}
-.phone-mini .bubble{font-size:12px}
-
-/* mobile */
-@media(max-width:900px){
-  .phones-scroll{height:260vh}
-  .phones-grid{
-    grid-template-columns:1fr;
-    gap:16px;
-  }
-  .phones-scroll .phone{width:min(360px, 92vw); height:680px}
-  .phone-mini .phone{width:min(360px, 92vw); height:620px}
-}
-
-    /* ===== Chat demo (scoped) ===== */
-    #chat-demo{ padding: 96px 0; }
+    /* ===== Chat demo ===== */
+    #chat-demo{padding:96px 0}
     .chat-phone{
-      width: 360px; height: 720px;
-      border-radius: 44px;
-      background: linear-gradient(180deg, #0b1220, #111827);
-      padding: 14px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.55);
-      position: relative;
+      width:min(360px, 92vw);
+      height:min(720px, 78vh);
+      border-radius:44px;
+      background:linear-gradient(180deg,#0b1220,#111827);
+      padding:14px;
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
     }
     .chat-screen{
       height:100%;
-      border-radius: 34px;
-      background: linear-gradient(180deg, #0b1220, #0f172a);
+      border-radius:34px;
+      background:linear-gradient(180deg,#0b1220,#0f172a);
       overflow:hidden;
       display:flex;
       flex-direction:column;
-      border: 1px solid rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
     }
     .chat-topbar{
-      height: 64px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      padding: 10px 14px 12px;
-      color: rgba(255,255,255,.9);
-      position: relative;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      backdrop-filter: blur(8px);
+      height:64px;display:flex;align-items:flex-end;justify-content:center;
+      padding:10px 14px 12px;color:rgba(255,255,255,.9);
+      position:relative;border-bottom:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+      backdrop-filter:blur(8px);
     }
-    .chat-notch{
-      position:absolute; top:10px; left:50%; transform:translateX(-50%);
-      width: 160px; height: 26px; border-radius: 0 0 18px 18px;
-      background: rgba(0,0,0,.55);
-    }
-    .chat-name{ font-weight:600; font-size:14px; padding-top: 6px; }
-
-    .chat-msgs{
-      flex:1;
-      padding: 14px 12px;
-      overflow:auto;
-      scroll-behavior:smooth;
-    }
-    .chat-row{ display:flex; margin: 8px 0; }
-    .chat-row.in{ justify-content:flex-start; }
-    .chat-row.out{ justify-content:flex-end; }
-
+    .chat-notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:160px;height:26px;border-radius:0 0 18px 18px;background:rgba(0,0,0,.55)}
+    .chat-name{font-weight:600;font-size:14px;padding-top:6px}
+    .chat-msgs{flex:1;padding:14px 12px;overflow:auto;scroll-behavior:smooth}
+    .chat-row{display:flex;margin:8px 0}
+    .chat-row.in{justify-content:flex-start}
+    .chat-row.out{justify-content:flex-end}
     .chat-bubble{
-      max-width: 78%;
-      padding: 10px 12px;
-      border-radius: 18px;
-      line-height: 1.25;
-      font-size: 14px;
-      opacity: 0;
-      transform: translateY(10px) scale(.98);
-      transition: opacity .35s ease, transform .35s ease;
-      box-shadow: 0 10px 20px rgba(0,0,0,.22);
-      white-space: pre-wrap;
+      max-width:78%;
+      padding:10px 12px;border-radius:18px;line-height:1.25;font-size:14px;
+      opacity:0;transform:translateY(10px) scale(.98);
+      transition:opacity .35s ease, transform .35s ease;
+      box-shadow:0 10px 20px rgba(0,0,0,.22);
+      white-space:pre-wrap;
     }
-    .chat-row.in .chat-bubble{
-      background: #e5e7eb;
-      color: #0b0f16;
-      border-bottom-left-radius: 6px;
-    }
-    .chat-row.out .chat-bubble{
-      background: #3b82f6;
-      color: #ffffff;
-      border-bottom-right-radius: 6px;
-    }
-    .chat-bubble.show{
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    .chat-row.in .chat-bubble{background:#e5e7eb;color:#0b0f16;border-bottom-left-radius:6px}
+    .chat-row.out .chat-bubble{background:#3b82f6;color:#fff;border-bottom-right-radius:6px}
+    .chat-bubble.show{opacity:1;transform:translateY(0) scale(1)}
 
-    .chat-typing{
-      display:inline-flex;
-      gap:6px;
-      padding: 10px 12px;
-      background: rgba(229,231,235,.92);
-      border-radius: 18px;
-      border-bottom-left-radius: 6px;
-      box-shadow: 0 10px 20px rgba(0,0,0,.18);
-    }
-    .chat-dot{
-      width:6px; height:6px; border-radius:999px;
-      background: rgba(17,24,39,.65);
-      animation: chatBounce 1s infinite;
-    }
-    .chat-dot:nth-child(2){ animation-delay:.15s; }
-    .chat-dot:nth-child(3){ animation-delay:.3s; }
-    @keyframes chatBounce{
-      0%, 80%, 100%{ transform: translateY(0); opacity:.6; }
-      40%{ transform: translateY(-5px); opacity:1; }
-    }
+    .chat-typing{display:inline-flex;gap:6px;padding:10px 12px;background:rgba(229,231,235,.92);border-radius:18px;border-bottom-left-radius:6px;box-shadow:0 10px 20px rgba(0,0,0,.18)}
+    .chat-dot{width:6px;height:6px;border-radius:999px;background:rgba(17,24,39,.65);animation:chatBounce 1s infinite}
+    .chat-dot:nth-child(2){animation-delay:.15s}
+    .chat-dot:nth-child(3){animation-delay:.3s}
+    @keyframes chatBounce{0%,80%,100%{transform:translateY(0);opacity:.6}40%{transform:translateY(-5px);opacity:1}}
 
     .chat-composer{
-      height: 66px;
-      padding: 10px 12px 12px;
-      border-top: 1px solid rgba(255,255,255,.08);
-      display:flex; gap:10px; align-items:center;
-      background: rgba(255,255,255,.02);
+      height:66px;padding:10px 12px 12px;border-top:1px solid rgba(255,255,255,.08);
+      display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.02)
     }
-    .chat-fakeInput{
-      flex:1;
-      height: 40px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.08);
-    }
-    .chat-sendBtn{
-      width:40px; height:40px; border-radius:999px;
-      display:grid; place-items:center;
-      background: rgba(59,130,246,.9);
-      color:white; font-weight:700;
-      user-select:none;
-    }
-/* ... all your current CSS ... */
+    .chat-fakeInput{flex:1;height:40px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+    .chat-sendBtn{width:40px;height:40px;border-radius:999px;display:grid;place-items:center;background:rgba(59,130,246,.9);color:#fff;font-weight:700;user-select:none}
 
-  /* Chat demo: responsive */
-  .chat-phone{
-    width: min(360px, 92vw);
-    height: min(720px, 78vh);
-  }
-
-  @media (max-width: 480px){
-    .chat-phone{
-      width: 92vw;
-      height: 70vh;
-      border-radius: 34px;
+    /* ===== Responsive ===== */
+    @media (max-width: 480px){
+      .chat-phone{height:70vh;border-radius:34px}
+      .chat-screen{border-radius:26px}
+      .chat-msgs{padding:12px 10px}
+      .chat-bubble{max-width:86%;font-size:13px}
+      .chat-topbar{height:56px}
     }
-    .chat-screen{ border-radius: 26px; }
-    .chat-msgs{ padding: 12px 10px; }
-    .chat-bubble{ max-width: 86%; font-size: 13px; }
-    .chat-topbar{ height: 56px; }
-  }
 
     @media(max-width:900px){
       .nav-links{display:none}
       .menu-toggle{display:flex}
 
-      .hero-left h1{font-size:30px;line-height:1.15;}
-      .hero p{font-size:15px;}
-      .cta{flex-direction:column;align-items:stretch;}
-      .btn{width:100%;text-align:center;}
+      .hero p{font-size:15px}
+      .hero{height:auto}
+      .hero-inner{
+        position:relative;top:0;min-height:auto;
+        padding:96px 0 54px;grid-template-columns:1fr;gap:26px;
+      }
+      .hero-right{display:none}
+      .scroll-hint{display:none}
+
+      .hero-cta{flex-direction:column;align-items:stretch}
+      .btn{width:100%;text-align:center}
 
       .about-grid{grid-template-columns:1fr;gap:36px}
-      .videos .video-grid{grid-template-columns:1fr;gap:18px;}
-      .video-card{height:210px;}
-      .video-info h3{font-size:16px;}
-      .video-info p{font-size:13px;}
-      .case-grid{grid-template-columns:1fr;gap:20px;}
-      .card{padding:20px;}
-      .card h3{font-size:18px;}
-      .card p{font-size:14px;}
+      .videos .video-grid{grid-template-columns:1fr;gap:18px}
+      .video-card{height:210px}
+      .case-grid{grid-template-columns:1fr;gap:20px}
+      .card{padding:20px}
       .foot{grid-template-columns:1fr;text-align:center}
 
-      .hero{height:auto;}
-      .hero-inner{
-        position:relative;
-        top:0;
-        min-height:auto;
-        padding:96px 0 54px;
-        grid-template-columns:1fr;
-        gap:26px;
-      }
-      .hero-right{display:none;}
-      .scroll-hint{display:none;}
-
-      .chat-phone{ width: 320px; height: 640px; }
+      .phones-scroll{height:260vh}
+      .phones-grid{grid-template-columns:1fr;gap:16px}
+      .phones-scroll .phone{width:min(360px, 92vw);height:680px}
+      .phone-mini .phone{width:min(360px, 92vw);height:620px}
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -918,13 +644,12 @@
           An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
           calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
         </p>
-        <div class="cta">
+        <div class="hero-cta">
           <a class="btn btn-primary" href="#contact">Start free trial (beta)</a>
           <a class="btn btn-outline" href="#videos">See Videos</a>
         </div>
       </div>
 
-      <!-- Right side cards (hidden on mobile via CSS) -->
       <div class="hero-right">
         <div class="hero-card hero-card-primary">
           <div class="hero-card-pill">
@@ -934,14 +659,8 @@
           <h3>Never miss a lead</h3>
           <p>Forms, chat, email and social all land in one inbox, with instant AI replies and suggested next steps.</p>
           <div class="hero-card-metric">
-            <div>
-              <strong>100%</strong><br />
-              coverage
-            </div>
-            <div>
-              <span>2 min</span><br />
-              median response
-            </div>
+            <div><strong>100%</strong><br/>coverage</div>
+            <div><span>2 min</span><br/>median response</div>
           </div>
         </div>
 
@@ -1025,7 +744,7 @@
     </div>
   </section>
 
-  <!-- Chat demo (new) -->
+  <!-- Chat demo -->
   <section class="section" id="chat-demo">
     <div class="container">
       <div class="section-header">
@@ -1053,121 +772,90 @@
     </div>
   </section>
 
-  <!-- Case Studies -->
+  <!-- Phones scroll -->
   <section class="phones-scroll" id="industry-demos">
-  <div class="phones-sticky">
-    <div class="phones-stage">
+    <div class="phones-sticky">
+      <div class="phones-stage">
 
-      <!-- Main phone (starter stor) -->
-      <div class="phone-wrap phone-main">
-        <div class="phone">
-          <div class="screen">
-            <div class="topbar">
-              <div class="notch"></div>
-              <div class="name">Rithink AI</div>
-            </div>
-            <div class="msgs" id="msgs-main"></div>
-            <div class="composer">
-              <div class="fakeInput"></div>
-              <div class="sendBtn">↑</div>
+        <div class="phone-wrap phone-main">
+          <div class="phone">
+            <div class="screen">
+              <div class="topbar">
+                <div class="notch"></div>
+                <div class="name">Rithink AI</div>
+              </div>
+              <div class="msgs" id="msgs-main"></div>
+              <div class="composer">
+                <div class="fakeInput"></div>
+                <div class="sendBtn">↑</div>
+              </div>
             </div>
           </div>
+          <div class="phone-label">General demo</div>
         </div>
-        <div class="phone-label">General demo</div>
+
+        <div class="phones-grid">
+          <div class="phone-wrap phone-mini" data-script="realtor">
+            <div class="phone">
+              <div class="screen">
+                <div class="topbar"><div class="notch"></div><div class="name">Realtor</div></div>
+                <div class="msgs" data-msgs></div>
+                <div class="composer"><div class="fakeInput"></div><div class="sendBtn">↑</div></div>
+              </div>
+            </div>
+            <div class="phone-label">Real estate · Viewing booking</div>
+          </div>
+
+          <div class="phone-wrap phone-mini" data-script="hair">
+            <div class="phone">
+              <div class="screen">
+                <div class="topbar"><div class="notch"></div><div class="name">Salon</div></div>
+                <div class="msgs" data-msgs></div>
+                <div class="composer"><div class="fakeInput"></div><div class="sendBtn">↑</div></div>
+              </div>
+            </div>
+            <div class="phone-label">Hair salon · Appointment</div>
+          </div>
+
+          <div class="phone-wrap phone-mini" data-script="cars">
+            <div class="phone">
+              <div class="screen">
+                <div class="topbar"><div class="notch"></div><div class="name">Dealer</div></div>
+                <div class="msgs" data-msgs></div>
+                <div class="composer"><div class="fakeInput"></div><div class="sendBtn">↑</div></div>
+              </div>
+            </div>
+            <div class="phone-label">Car dealer · Test drive</div>
+          </div>
+
+          <div class="phone-wrap phone-mini" data-script="coach">
+            <div class="phone">
+              <div class="screen">
+                <div class="topbar"><div class="notch"></div><div class="name">Coach</div></div>
+                <div class="msgs" data-msgs></div>
+                <div class="composer"><div class="fakeInput"></div><div class="sendBtn">↑</div></div>
+              </div>
+            </div>
+            <div class="phone-label">Private coach · Discovery call</div>
+          </div>
+
+          <div class="phone-wrap phone-mini" data-script="clinic">
+            <div class="phone">
+              <div class="screen">
+                <div class="topbar"><div class="notch"></div><div class="name">Clinic</div></div>
+                <div class="msgs" data-msgs></div>
+                <div class="composer"><div class="fakeInput"></div><div class="sendBtn">↑</div></div>
+              </div>
+            </div>
+            <div class="phone-label">Clinic · Booking</div>
+          </div>
+        </div>
+
       </div>
-
-      <!-- Grid phones (dukker op når man scroller videre) -->
-      <div class="phones-grid">
-        <div class="phone-wrap phone-mini" data-script="realtor">
-          <div class="phone">
-            <div class="screen">
-              <div class="topbar">
-                <div class="notch"></div>
-                <div class="name">Realtor</div>
-              </div>
-              <div class="msgs" data-msgs></div>
-              <div class="composer">
-                <div class="fakeInput"></div>
-                <div class="sendBtn">↑</div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-label">Real estate · Viewing booking</div>
-        </div>
-
-        <div class="phone-wrap phone-mini" data-script="hair">
-          <div class="phone">
-            <div class="screen">
-              <div class="topbar">
-                <div class="notch"></div>
-                <div class="name">Salon</div>
-              </div>
-              <div class="msgs" data-msgs></div>
-              <div class="composer">
-                <div class="fakeInput"></div>
-                <div class="sendBtn">↑</div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-label">Hair salon · Appointment</div>
-        </div>
-
-        <div class="phone-wrap phone-mini" data-script="cars">
-          <div class="phone">
-            <div class="screen">
-              <div class="topbar">
-                <div class="notch"></div>
-                <div class="name">Dealer</div>
-              </div>
-              <div class="msgs" data-msgs></div>
-              <div class="composer">
-                <div class="fakeInput"></div>
-                <div class="sendBtn">↑</div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-label">Car dealer · Test drive</div>
-        </div>
-
-        <div class="phone-wrap phone-mini" data-script="coach">
-          <div class="phone">
-            <div class="screen">
-              <div class="topbar">
-                <div class="notch"></div>
-                <div class="name">Coach</div>
-              </div>
-              <div class="msgs" data-msgs></div>
-              <div class="composer">
-                <div class="fakeInput"></div>
-                <div class="sendBtn">↑</div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-label">Private coach · Discovery call</div>
-        </div>
-
-        <div class="phone-wrap phone-mini" data-script="clinic">
-          <div class="phone">
-            <div class="screen">
-              <div class="topbar">
-                <div class="notch"></div>
-                <div class="name">Clinic</div>
-              </div>
-              <div class="msgs" data-msgs></div>
-              <div class="composer">
-                <div class="fakeInput"></div>
-                <div class="sendBtn">↑</div>
-              </div>
-            </div>
-          </div>
-          <div class="phone-label">Clinic · Booking</div>
-        </div>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
+  <!-- Cases -->
   <section class="section cases" id="cases">
     <div class="container">
       <div class="section-header">
@@ -1371,7 +1059,7 @@
   </section>
 
   <!-- CTA -->
-  <section class="section cta" id="contact">
+  <section class="section cta-section" id="contact">
     <div class="container">
       <h2>Ready to try an AI-first CRM?</h2>
       <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
@@ -1420,14 +1108,12 @@
     </div>
   </footer>
 
-  <!-- Demo / trial popup -->
+  <!-- Demo modal -->
   <div id="demo-modal-backdrop" class="modal-backdrop" aria-hidden="true">
     <div class="modal">
       <button class="modal-close" aria-label="Close" onclick="closeDemoModal()">×</button>
       <h2>Book a demo</h2>
-      <p style="margin-bottom:16px;color:var(--muted);font-size:14px">
-        Skriv dine oplysninger, så vender vi tilbage med en tid.
-      </p>
+      <p style="margin-bottom:16px;color:var(--muted);font-size:14px">Skriv dine oplysninger, så vender vi tilbage med en tid.</p>
       <form onsubmit="submitDemoForm(event)">
         <div class="field">
           <label>Navn</label>
@@ -1445,56 +1131,55 @@
           <label>Besked</label>
           <textarea name="message" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">
-          Send
-        </button>
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">Send</button>
       </form>
     </div>
   </div>
 
   <script>
-    // Mobile menu
-    const toggleMenu = () => {
+    /* ===== Mobile menu (funktion, så onclick virker) ===== */
+    function toggleMenu(){
       const btn = document.querySelector('.menu-toggle');
       const existing = document.getElementById('mobile-nav');
       const open = !existing;
       btn.setAttribute('aria-expanded', String(open));
       if (existing){ existing.remove(); return; }
+
       const ul = document.querySelector('.nav-links').cloneNode(true);
       ul.id = 'mobile-nav';
       ul.className = 'mobile-nav';
       ul.setAttribute('role','menu');
+
       Object.assign(ul.style,{
         position:'fixed',top:'64px',left:'0',right:'0',
         background:'linear-gradient(180deg, rgba(14,20,54,.95), rgba(14,20,54,.85))',
         padding:'16px 20px 24px',display:'grid',gap:'14px',
-        borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.5)',
+        borderBottom:'1px solid rgba(255,255,255,.18)',
+        boxShadow:'0 14px 32px rgba(0,0,0,.5)',
         zIndex:'999',backdropFilter:'blur(10px)'
       });
+
       document.body.appendChild(ul);
-    };
+    }
 
     const hdr = document.getElementById('header');
     const progressBar = document.getElementById('scroll-progress');
 
-    const onScroll = () => {
+    function onScroll(){
       const scrollY = window.scrollY || window.pageYOffset;
 
-      // Header shadow
-      if (scrollY > 10) hdr.classList.add('scrolled'); else hdr.classList.remove('scrolled');
+      if (scrollY > 10) hdr.classList.add('scrolled');
+      else hdr.classList.remove('scrolled');
 
-      // Reveal
       document.querySelectorAll('.fade').forEach(el=>{
         const r = el.getBoundingClientRect();
         if (r.top < window.innerHeight - 80) el.classList.add('show');
       });
 
-      // Progress bar
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
 
-      // Advanced hero scroll
       const hero = document.querySelector('.hero');
       const bgVideo = document.querySelector('.site-bg video');
       const bgOverlay = document.querySelector('.site-bg-overlay');
@@ -1502,10 +1187,9 @@
       const heroLeft = document.querySelector('.hero-left');
       const heroRight = document.querySelector('.hero-right');
       const heroCardPrimary = document.querySelector('.hero-card-primary');
-      const heroCardSecondary = document.querySelector('.hero-card-secondary');
       const heroCardMini = document.querySelector('.hero-card-mini');
 
-      if (hero && heroInner) {
+      if (hero && heroInner){
         const heroTop = hero.offsetTop;
         const heroHeight = hero.offsetHeight;
         const vh = window.innerHeight;
@@ -1516,14 +1200,15 @@
         if (scrollY <= start) progress = 0;
         else if (scrollY >= end) progress = 1;
         else progress = (scrollY - start) / (end - start);
+
         progress = Math.min(1, Math.max(0, progress));
 
-        if (bgVideo) {
+        if (bgVideo){
           const scale = 1.08 + progress * 0.25;
           const translateY = progress * 60;
           bgVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
         }
-        if (bgOverlay) {
+        if (bgOverlay){
           const o = 0.9 - progress * 0.3;
           bgOverlay.style.opacity = Math.max(0.5, o);
         }
@@ -1533,27 +1218,19 @@
         const sideOffset = progress * 120;
         const sideOpacity = Math.max(0, 1 - progress * 1.4);
 
-        if (heroLeft) {
+        if (heroLeft){
           heroLeft.style.transform = `translateX(${-sideOffset}px)`;
           heroLeft.style.opacity = sideOpacity;
         }
-        if (heroRight) {
+        if (heroRight){
           heroRight.style.transform = `translateX(${sideOffset}px)`;
           heroRight.style.opacity = sideOpacity;
         }
 
-        if (heroCardPrimary) {
-          heroCardPrimary.style.transform = `translateY(${progress * 200}px)`;
-        }
-        if (heroCardSecondary) {
-          heroCardSecondary.style.transform = `translateY(0px) translateX(0px)`;
-        }
-        if (heroCardMini) {
-          heroCardMini.style.transform = `translateY(${progress * -200}px) translateX(0px)`;
-        }
+        if (heroCardPrimary) heroCardPrimary.style.transform = `translateY(${progress * 200}px)`;
+        if (heroCardMini) heroCardMini.style.transform = `translateY(${progress * -200}px)`;
       }
-    };
-    document.addEventListener('scroll', onScroll, {passive:true});
+    }
 
     function setupTilt(){
       const els = document.querySelectorAll('.tilt');
@@ -1566,13 +1243,11 @@
           const ry = ((x / r.width) - 0.5) * 2 * limit;
           el.style.transform = `rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(0)`;
         });
-        el.addEventListener('pointerleave', ()=>{
-          el.style.transform = 'rotateX(0) rotateY(0)';
-        });
+        el.addEventListener('pointerleave', ()=>{ el.style.transform = 'rotateX(0) rotateY(0)'; });
       });
     }
 
-    /* ===== Modal / popup til Book Demo ===== */
+    /* ===== Modal ===== */
     function openDemoModal(e){
       if (e) e.preventDefault();
       const m = document.getElementById('demo-modal-backdrop');
@@ -1580,264 +1255,258 @@
       m.classList.add('show');
       m.setAttribute('aria-hidden','false');
     }
-
     function closeDemoModal(){
       const m = document.getElementById('demo-modal-backdrop');
       if (!m) return;
       m.classList.remove('show');
       m.setAttribute('aria-hidden','true');
     }
-
     function submitDemoForm(e){
       e.preventDefault();
       alert('Tak! Vi vender tilbage hurtigst muligt.');
       closeDemoModal();
     }
-
     document.addEventListener('click', (e)=>{
       const backdrop = document.getElementById('demo-modal-backdrop');
-      if (!backdrop || !backdrop.classList.contains('show')) return;
-      if (e.target === backdrop) closeDemoModal();
+      if (backdrop && backdrop.classList.contains('show') && e.target === backdrop) closeDemoModal();
     });
+    document.addEventListener('keydown', (e)=>{ if (e.key === 'Escape') closeDemoModal(); });
 
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape') closeDemoModal();
-    });
+    /* ===== Chat demo runner ===== */
+    (function(){
+      const msgsEl = document.getElementById("chatMsgs");
+      if (!msgsEl) return;
 
-    /* ===== Chat demo runner (scoped) ===== */
-/* ===== Chat demo runner (starts on scroll into view) ===== */
-(function(){
-  const msgsEl = document.getElementById("chatMsgs");
-  if (!msgsEl) return;
+      const script = [
+        { side:"in",  text:"Hi! I’m Rithink AI 👋 What can I help you with today?", delay:700 },
+        { side:"out", text:"I want to see how you handle inbound leads.", delay:1100 },
+        { side:"in",  typing:true, delay:700 },
+        { side:"in",  text:"Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay:700 },
+        { side:"out", text:"Website form + email inbox.", delay:1000 },
+        { side:"in",  typing:true, delay:650 },
+        { side:"in",  text:"Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay:800 },
+        { side:"out", text:"Yes — Thursday afternoon.", delay:950 },
+        { side:"in",  typing:true, delay:700 },
+        { side:"in",  text:"Done ✅ I can do 14:30 or 15:00. Which one works?", delay:700 },
+      ];
 
-  const script = [
-    { side: "in",  text: "Hi! I’m Rithink AI 👋 What can I help you with today?", delay: 700 },
-    { side: "out", text: "I want to see how you handle inbound leads.",          delay: 1100 },
-    { side: "in",  typing: true,                                                 delay: 700 },
-    { side: "in",  text: "Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay: 700 },
-    { side: "out", text: "Website form + email inbox.",                           delay: 1000 },
-    { side: "in",  typing: true,                                                  delay: 650 },
-    { side: "in",  text: "Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay: 800 },
-    { side: "out", text: "Yes — Thursday afternoon.",                             delay: 950 },
-    { side: "in",  typing: true,                                                  delay: 700 },
-    { side: "in",  text: "Done ✅ I can do 14:30 or 15:00. Which one works?",      delay: 700 },
-  ];
+      let started = false;
+      function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
 
-  let started = false;
-
-  function scrollToBottom(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
-
-  function addBubble(side, node){
-    const row = document.createElement("div");
-    row.className = `chat-row ${side}`;
-    row.appendChild(node);
-    msgsEl.appendChild(row);
-    scrollToBottom();
-    requestAnimationFrame(() => node.classList.add("show"));
-    return row;
-  }
-
-  function makeTextBubble(text){
-    const b = document.createElement("div");
-    b.className = "chat-bubble";
-    b.textContent = text;
-    return b;
-  }
-
-  function makeTypingBubble(){
-    const b = document.createElement("div");
-    b.className = "chat-bubble chat-typing";
-    b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
-    return b;
-  }
-
-  async function run(){
-    if (started) return;
-    started = true;
-
-    let typingRow = null;
-
-    for (const step of script){
-      await new Promise(r => setTimeout(r, step.delay));
-
-      if (typingRow){
-        typingRow.remove();
-        typingRow = null;
+      function addBubble(side, node){
+        const row = document.createElement("div");
+        row.className = `chat-row ${side}`;
+        row.appendChild(node);
+        msgsEl.appendChild(row);
+        scrollToBottom();
+        requestAnimationFrame(()=>node.classList.add("show"));
+        return row;
       }
 
-      if (step.typing){
-        typingRow = addBubble(step.side, makeTypingBubble());
-        continue;
+      function makeTextBubble(text){
+        const b = document.createElement("div");
+        b.className = "chat-bubble";
+        b.textContent = text;
+        return b;
       }
 
-      addBubble(step.side, makeTextBubble(step.text));
-    }
-  }
-
-  // Start when visible
-  const target = document.getElementById("chat-demo") || msgsEl;
-
-  if ("IntersectionObserver" in window){
-    const io = new IntersectionObserver((entries)=>{
-      if (entries.some(e => e.isIntersecting)){
-        io.disconnect();
-        run();
+      function makeTypingBubble(){
+        const b = document.createElement("div");
+        b.className = "chat-bubble chat-typing";
+        b.innerHTML = `<span class="chat-dot"></span><span class="chat-dot"></span><span class="chat-dot"></span>`;
+        return b;
       }
-    }, { threshold: 0.25 });
 
-    io.observe(target);
-  } else {
-    // Fallback: start on first scroll that reaches it
-    const onScroll = () => {
-      const r = target.getBoundingClientRect();
-      if (r.top < window.innerHeight * 0.75){
-        window.removeEventListener("scroll", onScroll);
-        run();
+      async function run(){
+        if (started) return;
+        started = true;
+
+        let typingRow = null;
+        for (const step of script){
+          await new Promise(r=>setTimeout(r, step.delay));
+          if (typingRow){ typingRow.remove(); typingRow = null; }
+
+          if (step.typing){
+            typingRow = addBubble(step.side, makeTypingBubble());
+            continue;
+          }
+          addBubble(step.side, makeTextBubble(step.text));
+        }
       }
-    };
-    window.addEventListener("scroll", onScroll, { passive:true });
-    onScroll();
-  }
-})();
-    // On load
+
+      const target = document.getElementById("chat-demo") || msgsEl;
+
+      if ("IntersectionObserver" in window){
+        const io = new IntersectionObserver((entries)=>{
+          if (entries.some(e=>e.isIntersecting)){
+            io.disconnect();
+            run();
+          }
+        }, { threshold: 0.25 });
+        io.observe(target);
+      } else {
+        const onScrollFallback = () => {
+          const r = target.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.75){
+            window.removeEventListener("scroll", onScrollFallback);
+            run();
+          }
+        };
+        window.addEventListener("scroll", onScrollFallback, { passive:true });
+        onScrollFallback();
+      }
+    })();
+
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
       setupTilt();
       onScroll();
     });
+
+    window.addEventListener('scroll', onScroll, { passive:true });
   </script>
+
   <script>
-  // ===== Phone scroll effect + chat start when visible =====
-  const phoneSection = document.querySelector('.phones-scroll');
-  const mainWrap = document.querySelector('.phone-main');
-  const grid = document.querySelector('.phones-grid');
+    /* ===== Phones scroll + chats ===== */
+    const phoneSection = document.querySelector('.phones-scroll');
+    const mainWrap = document.querySelector('.phone-main');
+    const grid = document.querySelector('.phones-grid');
 
-  const scripts = {
-    main: [
-      { side:"in",  text:"Hi — can you help me book a demo?", delay:650 },
-      { side:"out", text:"Absolutely. What industry are you in, and what’s a good time this week?", delay:950 },
-      { side:"in",  typing:true, delay:700 },
-      { side:"in",  text:"B2B SaaS. Thursday afternoon works.", delay:550 },
-      { side:"out", text:"Great — I can do Thu 15:00 or 16:30. Want it on Google Meet?", delay:950 },
-    ],
-    realtor: [
-      { side:"in",  text:"Hi! Can I book a viewing for the apartment on Strandvej?", delay:650 },
-      { side:"out", text:"Yes — what day suits you? I have Wed 17:30 or Sat 11:00.", delay:900 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Saturday 11:00 please. Two people.", delay:550 },
-      { side:"out", text:"Booked ✅ What’s your email for confirmation?", delay:850 },
-    ],
-    hair: [
-      { side:"in",  text:"Do you have time for a haircut this week?", delay:650 },
-      { side:"out", text:"Yes — would you prefer Tue 14:00 or Fri 10:30?", delay:900 },
-      { side:"in",  text:"Friday 10:30!", delay:600 },
-      { side:"out", text:"Perfect. Any notes? (short/medium/long + beard?)", delay:900 },
-    ],
-    cars: [
-      { side:"in",  text:"Can I book a test drive for the ID.4?", delay:650 },
-      { side:"out", text:"Sure. Automatic or manual, and which city?", delay:850 },
-      { side:"in",  text:"Automatic. Copenhagen.", delay:550 },
-      { side:"out", text:"Great — I can offer Thu 12:00 or Sat 13:30. Which one?", delay:950 },
-    ],
-    coach: [
-      { side:"in",  text:"I’m looking for a coach. How does it work?", delay:650 },
-      { side:"out", text:"We start with a 20-min discovery call. What’s your main goal right now?", delay:950 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Better routines + focus.", delay:550 },
-      { side:"out", text:"Got it. Want to book Tue 09:00 or Wed 18:00?", delay:950 },
-    ],
-    clinic: [
-      { side:"in",  text:"Can I book an appointment for a consultation?", delay:650 },
-      { side:"out", text:"Yes. Is this urgent, and do you prefer morning or afternoon?", delay:900 },
-      { side:"in",  text:"Not urgent. Afternoon.", delay:550 },
-      { side:"out", text:"Okay — I can do Thu 14:20 or Fri 15:10. Which fits?", delay:950 },
-    ],
-  };
+    const scripts = {
+      main: [
+        { side:"in",  text:"Hi — can you help me book a demo?", delay:650 },
+        { side:"out", text:"Absolutely. What industry are you in, and what’s a good time this week?", delay:950 },
+        { side:"in",  typing:true, delay:700 },
+        { side:"in",  text:"B2B SaaS. Thursday afternoon works.", delay:550 },
+        { side:"out", text:"Great — I can do Thu 15:00 or 16:30. Want it on Google Meet?", delay:950 },
+      ],
+      realtor: [
+        { side:"in",  text:"Hi! Can I book a viewing for the apartment on Strandvej?", delay:650 },
+        { side:"out", text:"Yes — what day suits you? I have Wed 17:30 or Sat 11:00.", delay:900 },
+        { side:"in",  typing:true, delay:650 },
+        { side:"in",  text:"Saturday 11:00 please. Two people.", delay:550 },
+        { side:"out", text:"Booked ✅ What’s your email for confirmation?", delay:850 },
+      ],
+      hair: [
+        { side:"in",  text:"Do you have time for a haircut this week?", delay:650 },
+        { side:"out", text:"Yes — would you prefer Tue 14:00 or Fri 10:30?", delay:900 },
+        { side:"in",  text:"Friday 10:30!", delay:600 },
+        { side:"out", text:"Perfect. Any notes? (short/medium/long + beard?)", delay:900 },
+      ],
+      cars: [
+        { side:"in",  text:"Can I book a test drive for the ID.4?", delay:650 },
+        { side:"out", text:"Sure. Automatic or manual, and which city?", delay:850 },
+        { side:"in",  text:"Automatic. Copenhagen.", delay:550 },
+        { side:"out", text:"Great — I can offer Thu 12:00 or Sat 13:30. Which one?", delay:950 },
+      ],
+      coach: [
+        { side:"in",  text:"I’m looking for a coach. How does it work?", delay:650 },
+        { side:"out", text:"We start with a 20-min discovery call. What’s your main goal right now?", delay:950 },
+        { side:"in",  typing:true, delay:650 },
+        { side:"in",  text:"Better routines + focus.", delay:550 },
+        { side:"out", text:"Got it. Want to book Tue 09:00 or Wed 18:00?", delay:950 },
+      ],
+      clinic: [
+        { side:"in",  text:"Can I book an appointment for a consultation?", delay:650 },
+        { side:"out", text:"Yes. Is this urgent, and do you prefer morning or afternoon?", delay:900 },
+        { side:"in",  text:"Not urgent. Afternoon.", delay:550 },
+        { side:"out", text:"Okay — I can do Thu 14:20 or Fri 15:10. Which fits?", delay:950 },
+      ],
+    };
 
-  function addBubble(msgsEl, side, node){
-    const row = document.createElement('div');
-    row.className = `row ${side}`;
-    row.appendChild(node);
-    msgsEl.appendChild(row);
-    msgsEl.scrollTop = msgsEl.scrollHeight;
-    requestAnimationFrame(()=>node.classList.add('show'));
-  }
-  function makeTextBubble(text){
-    const b = document.createElement('div');
-    b.className = 'bubble';
-    b.textContent = text;
-    return b;
-  }
-  function makeTypingBubble(){
-    const b = document.createElement('div');
-    b.className = 'typing bubble';
-    b.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
-    return b;
-  }
-
-  async function runChat(msgsEl, steps){
-    let typingRow = null;
-    for (const step of steps){
-      await new Promise(r=>setTimeout(r, step.delay));
-      if (typingRow){ typingRow.remove(); typingRow=null; }
-      if (step.typing){
-        const t = makeTypingBubble();
-        addBubble(msgsEl, step.side, t);
-        typingRow = t.closest('.row');
-        continue;
-      }
-      addBubble(msgsEl, step.side, makeTextBubble(step.text));
+    function addBubble(msgsEl, side, node){
+      const row = document.createElement('div');
+      row.className = `row ${side}`;
+      row.appendChild(node);
+      msgsEl.appendChild(row);
+      msgsEl.scrollTop = msgsEl.scrollHeight;
+      requestAnimationFrame(()=>node.classList.add('show'));
     }
-  }
+    function makeTextBubble(text){
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      b.textContent = text;
+      return b;
+    }
+    function makeTypingBubble(){
+      const b = document.createElement('div');
+      b.className = 'typing bubble';
+      b.innerHTML = `<span class="dot"></span><span class="dot"></span><span class="dot"></span>`;
+      return b;
+    }
 
-  // Start chats once (when section becomes visible)
-  let started = false;
-  const io = new IntersectionObserver((entries)=>{
-    if (started) return;
-    if (entries.some(e=>e.isIntersecting)){
+    async function runChat(msgsEl, steps){
+      if (!msgsEl) return;
+      let typingRow = null;
+
+      for (const step of steps){
+        await new Promise(r=>setTimeout(r, step.delay));
+
+        if (typingRow){ typingRow.remove(); typingRow=null; }
+
+        if (step.typing){
+          const t = makeTypingBubble();
+          addBubble(msgsEl, step.side, t);
+          typingRow = t.closest('.row');
+          continue;
+        }
+
+        addBubble(msgsEl, step.side, makeTextBubble(step.text));
+      }
+    }
+
+    let started = false;
+    function startPhonesChatsOnce(){
+      if (started) return;
       started = true;
 
-      // main
       runChat(document.getElementById('msgs-main'), scripts.main);
 
-      // minis
       document.querySelectorAll('.phone-mini').forEach(card=>{
         const key = card.getAttribute('data-script');
         const msgsEl = card.querySelector('[data-msgs]');
         if (scripts[key] && msgsEl) runChat(msgsEl, scripts[key]);
       });
     }
-  }, { threshold: 0.35 });
-  if (phoneSection) io.observe(phoneSection);
 
-  // Scroll transform: main scales down, grid fades in
-  function clamp01(x){ return Math.max(0, Math.min(1, x)); }
+    if ("IntersectionObserver" in window){
+      const io = new IntersectionObserver((entries)=>{
+        if (entries.some(e=>e.isIntersecting)){
+          io.disconnect();
+          startPhonesChatsOnce();
+        }
+      }, { threshold: 0.35 });
 
-  function onPhoneScroll(){
-    if (!phoneSection || !mainWrap || !grid) return;
+      if (phoneSection) io.observe(phoneSection);
+    } else {
+      // fallback
+      startPhonesChatsOnce();
+    }
 
-    const r = phoneSection.getBoundingClientRect();
-    const vh = window.innerHeight;
+    function clamp01(x){ return Math.max(0, Math.min(1, x)); }
 
-    // progress: 0 når sektion top rammer midten-ish, 1 når vi nærmer os bunden
-    const start = vh * 0.15;
-    const end   = -vh * 0.85;
-    const p = clamp01((start - r.top) / (start - end));
+    function onPhoneScroll(){
+      if (!phoneSection || !mainWrap || !grid) return;
 
-    // main shrink
-    const scale = 1 - p * 0.45;           // 1 -> 0.55
-    const lift  = p * -22;
-    mainWrap.style.transform = `translateY(${lift}px) scale(${scale})`;
+      const r = phoneSection.getBoundingClientRect();
+      const vh = window.innerHeight;
 
-    // grid reveal
-    const gp = clamp01((p - 0.25) / 0.55); // starter lidt senere
-    grid.style.opacity = gp;
-    grid.style.transform = `translateY(${(1-gp)*18}px)`;
-    grid.style.pointerEvents = gp > 0.85 ? 'auto' : 'none';
-  }
+      const start = vh * 0.15;
+      const end   = -vh * 0.85;
+      const p = clamp01((start - r.top) / (start - end));
 
-  window.addEventListener('scroll', onPhoneScroll, { passive:true });
-  window.addEventListener('load', onPhoneScroll);
-</script>
+      const scale = 1 - p * 0.45;
+      const lift  = p * -22;
+      mainWrap.style.transform = `translateY(${lift}px) scale(${scale})`;
+
+      const gp = clamp01((p - 0.25) / 0.55);
+      grid.style.opacity = gp;
+      grid.style.transform = `translateY(${(1-gp)*18}px)`;
+      grid.style.pointerEvents = gp > 0.85 ? 'auto' : 'none';
+    }
+
+    window.addEventListener('scroll', onPhoneScroll, { passive:true });
+    window.addEventListener('load', onPhoneScroll);
+  </script>
 </body>
 </html>
