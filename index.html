@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
   <meta name="description" content="Rithink — AI-first CRM. Capture every lead 24/7, reply instantly, book meetings, and keep deals moving — all in one CRM with built-in AI." />
   <title>Rithink — AI-first CRM</title>
 
@@ -726,6 +727,44 @@
       .story-copy{opacity:1 !important;transform:none !important}
       .story-scroll .bubble{opacity:1 !important;transform:none !important}
     }
+    /* ===== Mobile polish ===== */
+@media (max-width: 520px){
+  .container{ padding: 0 16px; }
+  .section{ padding: 72px 0; }
+
+  .hero p{ font-size: 16px; }
+  .btn{ padding: 14px 22px; }
+
+  .video-card{ height: 200px; }
+
+  /* Phone demo: bedre størrelse på små skærme */
+  .story-scroll .phone{
+    width: 94vw;
+    height: min(720px, 78vh);
+  }
+
+  /* Fix: navn rammer notch (skub tekst ned) */
+  .story-scroll .topbar{
+    padding: 10px 14px 4px;
+  }
+
+  /* Smooth scroll inde i “telefonen” */
+  .story-scroll .msgs{
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Mindre jank på touch: slå hover/tilt-effekter fra */
+@media (pointer: coarse){
+  .tilt{ transform: none !important; }
+  .hero-card:hover,
+  .metric:hover,
+  .video-card:hover,
+  .card:hover{
+    transform: none !important;
+  }
+}
+
   </style>
 
   <!-- JSON-LD -->
@@ -741,10 +780,12 @@
   <div id="scroll-progress"></div>
 
   <!-- GLOBAL VIDEO BACKGROUND -->
-  <div class="site-bg">
-    <video muted autoplay playsinline loop>
-      <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
-    </video>
+<div class="site-bg">
+  <video id="bgVideo" muted autoplay playsinline loop preload="auto"
+    poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
+    <source src="BG_MOBILE_720P.mp4" type="video/mp4" media="(max-width: 700px)">
+    <source src="BG_DESKTOP_1080P.mp4" type="video/mp4">
+  </video>
     <div class="site-bg-overlay"></div>
   </div>
 
@@ -854,7 +895,8 @@
 
       <div class="video-grid">
         <a class="video-card fade" href="#contact" aria-label="Never miss a lead">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
+          <video muted playsinline autoplay loop preload= "auto" 
+            poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -864,7 +906,8 @@
         </a>
 
         <a class="video-card fade" href="#industry-demos" aria-label="Demos">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
+          <video muted playsinline autoplay loop preload= "auto" 
+            poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -874,7 +917,8 @@
         </a>
 
         <a class="video-card fade" href="#contact" aria-label="Follow-up on autopilot">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
+          <video muted playsinline autoplay loop preload= "auto"  
+            poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -1274,6 +1318,7 @@
     document.addEventListener('scroll', onScroll, {passive:true});
 
     function setupTilt(){
+      if (window.matchMedia('(pointer: coarse)').matches) return; 
       const els = document.querySelectorAll('.tilt');
       const limit = 8;
       els.forEach(el=>{
@@ -1595,5 +1640,46 @@ async function renderStep(i){
       renderStep(0);
     })();
   </script>
+  <script>
+(function(){
+  const ensurePlay = (v) => {
+    try{
+      v.muted = true;
+      v.playsInline = true;
+      v.setAttribute('playsinline','');
+      v.setAttribute('webkit-playsinline','');
+      const p = v.play();
+      if (p && p.catch) p.catch(()=>{});
+    }catch(e){}
+  };
+
+  const kickstart = () => document.querySelectorAll('video').forEach(ensurePlay);
+
+  window.addEventListener('load', kickstart);
+
+  // iOS: autoplay “låser op” efter første gesture
+  ['touchstart','pointerdown','click','scroll'].forEach(evt=>{
+    window.addEventListener(evt, kickstart, { once:true, passive:true });
+  });
+
+  // Når man kommer tilbage til fanen
+  document.addEventListener('visibilitychange', ()=>{
+    if (!document.hidden) kickstart();
+  });
+
+  // Sørg for at video-kort spiller når de er synlige (stabilt på iPhone)
+  const vids = document.querySelectorAll('.video-card video');
+  if ('IntersectionObserver' in window && vids.length){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        const v = e.target;
+        if (e.isIntersecting) ensurePlay(v);
+        else v.pause(); // offscreen pause = mindre chance for at iOS pauser “den forkerte”
+      });
+    }, { threshold: 0.35 });
+    vids.forEach(v=>io.observe(v));
+  }
+})();
+</script>
 </body>
 </html>
