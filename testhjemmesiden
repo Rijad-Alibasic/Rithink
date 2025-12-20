@@ -427,7 +427,7 @@
       display:flex;
       align-items:flex-end;
       justify-content:center;
-      padding:10px 14px 12px;
+      padding:10px 14px 2px;
       color:rgba(255,255,255,.9);
       position:relative;
       border-bottom:1px solid rgba(255,255,255,.08);
@@ -1348,93 +1348,143 @@
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const steps = [
-        {
-          name: "Rithink AI",
-          label: "General demo",
-          kicker: "DEMO",
-          title: `Turn every interaction into <span class="gradient-text">qualified pipeline</span>`,
-          lead: "A short example of qualifying an inbound lead and booking a time — automatically.",
-          script: [
-            { side:"in",  text:"Hi! I’m Rithink AI 👋 What can I help you with today?", delay:700 },
-            { side:"out", text:"I want to see how you handle inbound leads.",          delay:1100 },
-            { side:"in",  typing:true,                                               delay:700 },
-            { side:"in",  text:"Sure. I can capture leads 24/7, qualify them, and book meetings.\nWhat channel are your leads coming from?", delay:700 },
-            { side:"out", text:"Website form + email inbox.",                         delay:1000 },
-            { side:"in",  typing:true,                                               delay:650 },
-            { side:"in",  text:"Great — I’ll route both into one inbox, reply instantly, and create a deal with notes + next steps.\nWant a 10-min demo slot this week?", delay:800 },
-            { side:"out", text:"Yes — Thursday afternoon.",                           delay:950 },
-            { side:"in",  typing:true,                                               delay:700 },
-            { side:"in",  text:"Done ✅ I can do 14:30 or 15:00. Which one works?",    delay:700 },
-          ]
-        },
-        {
-          name: "Realtor",
-          label: "Real estate · Viewing booking",
-          kicker: "REAL ESTATE",
-          title: `Turn inquiries into <span class="gradient-text">booked viewings</span>`,
-          lead: "Answer instantly and propose time slots — no back-and-forth.",
-          script: [
-            { side:"in",  text:"Hi! Can I book a viewing for the apartment on Strandvej?", delay:650 },
-            { side:"out", text:"Yes — what day suits you? I have Wed 17:30 or Sat 11:00.", delay:900 },
-            { side:"in",  typing:true, delay:650 },
-            { side:"in",  text:"Saturday 11:00 please. Two people.", delay:550 },
-            { side:"out", text:"Booked ✅ What’s your email for confirmation?", delay:850 },
-          ]
-        },
-        {
-          name: "Salon",
-          label: "Hair salon · Appointment",
-          kicker: "SALON",
-          title: `Fill the calendar with <span class="gradient-text">smart scheduling</span>`,
-          lead: "The assistant offers times, captures preferences, and confirms.",
-          script: [
-            { side:"in",  text:"Do you have time for a haircut this week?", delay:650 },
-            { side:"out", text:"Yes — would you prefer Tue 14:00 or Fri 10:30?", delay:900 },
-            { side:"in",  text:"Friday 10:30!", delay:600 },
-            { side:"out", text:"Perfect. Any notes? (short/medium/long + beard?)", delay:900 },
-          ]
-        },
-        {
-          name: "Dealer",
-          label: "Car dealer · Test drive",
-          kicker: "AUTOMOTIVE",
-          title: `Qualify and book <span class="gradient-text">test drives</span>`,
-          lead: "Ask the right questions first — then book the slot.",
-          script: [
-            { side:"in",  text:"Can I book a test drive for the ID.4?", delay:650 },
-            { side:"out", text:"Sure. Automatic or manual, and which city?", delay:850 },
-            { side:"in",  text:"Automatic. Copenhagen.", delay:550 },
-            { side:"out", text:"Great — I can offer Thu 12:00 or Sat 13:30. Which one?", delay:950 },
-          ]
-        },
-        {
-          name: "Coach",
-          label: "Private coach · Discovery call",
-          kicker: "COACHING",
-          title: `Turn questions into <span class="gradient-text">booked calls</span>`,
-          lead: "Move from “how does it work?” to a concrete next step.",
-          script: [
-            { side:"in",  text:"I’m looking for a coach. How does it work?", delay:650 },
-            { side:"out", text:"We start with a 20-min discovery call. What’s your main goal right now?", delay:950 },
-            { side:"in",  typing:true, delay:650 },
-            { side:"in",  text:"Better routines + focus.", delay:550 },
-            { side:"out", text:"Got it. Want to book Tue 09:00 or Wed 18:00?", delay:950 },
-          ]
-        },
-        {
-          name: "Clinic",
-          label: "Clinic · Booking",
-          kicker: "HEALTH",
-          title: `Handle bookings with <span class="gradient-text">care</span>`,
-          lead: "Ask urgency + preference, then confirm the appointment.",
-          script: [
-            { side:"in",  text:"Can I book an appointment for a consultation?", delay:650 },
-            { side:"out", text:"Yes. Is this urgent, and do you prefer morning or afternoon?", delay:900 },
-            { side:"in",  text:"Not urgent. Afternoon.", delay:550 },
-            { side:"out", text:"Okay — I can do Thu 14:20 or Fri 15:10. Which fits?", delay:950 },
-          ]
-        },
-      ];
+  {
+    name: "Nordic Realty",
+    label: "Buyer lead · Viewing booking",
+    kicker: "VIEWING",
+    title: `Reply instantly. Book <span class="gradient-text">viewings</span>`,
+    lead: "24/7 SMS assistant qualifies lightly and locks a time — no back-and-forth.",
+    script: [
+      { side:"out", text:"Hi — is the apartment on Strandvej 12 still available?", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Yes 😊 Want to book a viewing?\nQuick questions so we get the right slot:\n• How many people?\n• Preferred day/time?", delay:650 },
+      { side:"out", text:"2 people. This week after 17:00 if possible.", delay:900 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Perfect. I can offer:\n1) Thu 17:30\n2) Sat 11:00\nWhich works?", delay:650 },
+      { side:"out", text:"Sat 11:00.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Booked ✅ What’s your full name + email for confirmation?\n(Reply STOP to opt out.)", delay:650 },
+      { side:"out", text:"Sara Jensen, sara@email.com", delay:900 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Thanks! Confirmation sent. If you have questions before the viewing, just text me here.", delay:650 },
+    ]
+  },
+
+  {
+    name: "Nordic Realty",
+    label: "Buyer lead · Qualification → flow",
+    kicker: "QUALIFY",
+    title: `Qualify buyers into <span class="gradient-text">ready-to-view</span> leads`,
+    lead: "Budget, timeline, and must-haves — then the lead is routed + enrolled in follow-up.",
+    script: [
+      { side:"out", text:"Do you have a 3-bedroom in Østerbro under 6.0M?", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Yes — I can help. Quick questions so I only send relevant homes:\n• Move timeline?\n• Must-haves (balcony/elevator/parking)?", delay:650 },
+      { side:"out", text:"Within 3 months. Balcony + elevator.", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Got it. Are you already mortgage pre-approved?\n(Yes / No / Not yet)", delay:650 },
+      { side:"out", text:"Not yet.", delay:750 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"No worries. Want me to:\n1) Send 3 best matches today, and\n2) Follow up weekly until you book a viewing?", delay:650 },
+      { side:"out", text:"Yes please.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Perfect. What’s your email for brochure links?", delay:650 },
+      { side:"out", text:"sara@email.com", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Done ✅ You’ll get a shortlist today. Reply PAUSE anytime.\n(Reply STOP to opt out.)", delay:650 },
+    ]
+  },
+
+  {
+    name: "Nordic Realty",
+    label: "Seller lead · Property intake",
+    kicker: "SELLER INTAKE",
+    title: `Qualify seller inquiries before <span class="gradient-text">hand-off</span>`,
+    lead: "Collect address, size, upgrades, and timeline — then book a valuation visit.",
+    script: [
+      { side:"out", text:"Hi — we’re considering selling our house. Can you help?", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Absolutely. I’ll collect the basics and book a free valuation visit.\nWhat’s the address?", delay:650 },
+      { side:"out", text:"Skovvej 8, 2820 Gentofte", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Thanks. Property type (villa/townhouse/apartment) + approx. m²?", delay:650 },
+      { side:"out", text:"Villa, ~165 m².", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Any major upgrades recently?\n(kitchen / bath / roof / windows)", delay:650 },
+      { side:"out", text:"New kitchen 2022, roof 2018.", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"When would you ideally list?\n(ASAP / 1–3 months / 3+ months)", delay:650 },
+      { side:"out", text:"1–3 months.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Great. I can book a 20‑min valuation visit:\n• Tue 16:30\n• Thu 18:00\nWhich suits?", delay:650 },
+      { side:"out", text:"Thu 18:00.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Booked ✅ What’s your name + email for confirmation?", delay:650 },
+      { side:"out", text:"Mikkel, mikkel@email.com", delay:900 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Thanks! If you have photos or a floorplan, you can text them here — it helps the agent prepare.", delay:650 },
+    ]
+  },
+
+  {
+    name: "Nordic Realty",
+    label: "Nurture · Long-term follow-up",
+    kicker: "FOLLOW UP",
+    title: `Long-term follow-up on <span class="gradient-text">autopilot</span>`,
+    lead: "Polite check-ins until they reply, book, pause, or opt out.",
+    script: [
+      { side:"in",  text:"Hi Sara — quick check-in 👋 Still looking for a 3-bed in Østerbro?", delay:650 },
+      { side:"out", text:"Not actively right now.", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"No problem. When should I follow up again?\n1) 2 weeks\n2) 1 month\n3) 3 months\n(Reply STOP to opt out.)", delay:650 },
+      { side:"out", text:"2", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Got it ✅ I’ll check back in 2 weeks.\nIf you want to restart sooner, reply START.", delay:650 },
+    ]
+  },
+
+  {
+    name: "Nordic Realty",
+    label: "After viewing · Next step",
+    kicker: "POST VIEWING",
+    title: `Post-viewing follow-up that <span class="gradient-text">moves deals</span>`,
+    lead: "Capture interest + objections, then book the next action automatically.",
+    script: [
+      { side:"in",  text:"Thanks for coming to the viewing at Strandvej 12 today 😊", delay:650 },
+      { side:"out", text:"We liked it.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Great to hear. Quick questions so your agent can move fast:\n• Interested in a second viewing? (Yes/No)\n• Any deal-breakers?", delay:650 },
+      { side:"out", text:"Yes. No deal-breakers.", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Perfect. I can offer:\n• Mon 17:00\n• Wed 18:30\nWhich works?", delay:650 },
+      { side:"out", text:"Wed 18:30.", delay:800 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Booked ✅ Want us to prepare offer documents after the second viewing? (Yes/No)", delay:650 },
+      { side:"out", text:"Yes.", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Done. Your agent will have everything ready.", delay:650 },
+    ]
+  },
+
+  {
+    name: "Nordic Realty",
+    label: "Handoff · Negotiation / legal",
+    kicker: "HANDOFF",
+    title: `Safe replies + instant <span class="gradient-text">agent handoff</span>`,
+    lead: "When it becomes negotiation or legal topics, the assistant routes to a human — with context.",
+    script: [
+      { side:"out", text:"Could we offer 4.1M instead of 4.295M? And is there anything legal I should know?", delay:650 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"I can capture your offer details, but negotiation and legal questions need a licensed agent.\nShare:\n• Offer amount\n• Conditions (financing/inspection)\n• Preferred takeover date\n…and I’ll send it to your agent right away.", delay:650 },
+      { side:"out", text:"Offer 4.1M, subject to financing. Takeover June 1.", delay:950 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Got it. Best time for your agent to contact you today?\n(Or we can continue by SMS)", delay:650 },
+      { side:"out", text:"After 16:00. SMS is fine too.", delay:850 },
+      { side:"in",  typing:true, delay:650 },
+      { side:"in",  text:"Perfect ✅ I’ve alerted your agent with the full context.", delay:650 },
+    ]
+  },
+];
 
       function addBubble(side, node){
         const row = document.createElement('div');
