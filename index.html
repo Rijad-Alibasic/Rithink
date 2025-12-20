@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="description" content="Rithink — AI-first CRM. Capture every lead 24/7, reply instantly, book meetings, and keep deals moving — all in one CRM with built-in AI." />
-  <title>Rithink — AI-first CRM</title>
+  <meta name="description" content="Rithink — AI-first CRM for real estate teams. Capture leads 24/7 via SMS, qualify buyers & sellers, book viewings and valuations, and automate follow-up — with everything logged automatically." />
+  <title>Rithink — AI-first CRM for Real Estate</title>
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Rithink — AI-first CRM">
-  <meta property="og:description" content="Never miss a lead. Only the calls that matter. Follow-up on autopilot. Keep deals moving.">
+  <meta property="og:title" content="Rithink — AI-first CRM for Real Estate">
+  <meta property="og:description" content="Never miss a lead. Reply instantly by SMS. Book viewings. Follow up on autopilot — everything logged to your CRM.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="data:image/png;base64,iVBORw0KGgo=">
   <meta name="twitter:card" content="summary_large_image">
@@ -62,6 +62,7 @@
       inset:0;
       z-index:-2;
       overflow:hidden;
+      background:linear-gradient(160deg,var(--bg-1),var(--bg-2));
     }
     .site-bg video{
       width:100%;
@@ -69,8 +70,10 @@
       object-fit:cover;
       transform:scale(1.08);
       filter:saturate(1.1) contrast(1.05) brightness(0.9);
-      transition:transform .25s ease-out;
+      transition:transform .25s ease-out, opacity .25s ease;
+      opacity:0; /* prevent poster/flash */
     }
+    .site-bg video.is-playing{opacity:1;}
     .site-bg-overlay{
       position:absolute;
       inset:0;
@@ -102,7 +105,7 @@
       background:linear-gradient(180deg, rgba(14,20,54,.75), rgba(14,20,54,.38));
       backdrop-filter:blur(12px);
       z-index:1000;
-      padding:14px 0;
+      padding:calc(14px + env(safe-area-inset-top)) 0 14px;
       border-bottom:1px solid var(--border);
       transition:all .3s ease;
     }
@@ -169,15 +172,14 @@
 
     /* ===== HERO ===== */
     .hero{
-      margin-top:80px;
+      margin-top:calc(80px + env(safe-area-inset-top));
       height:170vh;
       position:relative;
       overflow:visible;
     }
-
     .hero-inner{
       position:sticky;
-      top:88px;
+      top:calc(88px + env(safe-area-inset-top));
       min-height:calc(100vh - 110px);
       display:grid;
       grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
@@ -305,7 +307,7 @@
     }
 
     /* ===== Sections ===== */
-    section{scroll-margin-top:100px}
+    section{scroll-margin-top:calc(100px + env(safe-area-inset-top))}
     .section{padding:96px 0}
     .section-header{text-align:center;margin-bottom:56px}
     .section h2{font-size:clamp(34px,5vw,54px);font-weight:900;color:var(--text);margin-bottom:10px}
@@ -386,7 +388,7 @@
     }
     .story-sticky{
       position:sticky;
-      top:88px;
+      top:calc(88px + env(safe-area-inset-top));
       height:calc(100vh - 110px);
       display:flex;
       align-items:center;
@@ -423,7 +425,7 @@
       border:1px solid rgba(255,255,255,.08);
     }
 
-    /* FIX: give notch room so the name never overlaps */
+    /* FIX: notch + name overlap */
     .story-scroll .topbar{
       height:74px;
       display:flex;
@@ -544,7 +546,7 @@
     .story-steps{position:relative;}
     .story-step{height:100vh}
 
-    /* ===== Cards / Cases ===== */
+    /* ===== Cards / Use Cases ===== */
     .card{
       padding:34px;background:var(--surface);
       border-radius:18px;border:1px solid var(--border);
@@ -572,7 +574,6 @@
       font-weight:900;
     }
     .stat .k{font-size:12px;color:var(--muted)}
-    .placeholder-note{font-size:12px;color:var(--muted);margin-top:8px}
 
     /* ===== About ===== */
     .about{position:relative;overflow:hidden}
@@ -603,48 +604,6 @@
     .policy h3{margin:14px 0 8px 0}
     .policy p, .policy li{color:var(--text)}
     .small{font-size:12px;color:var(--muted)}
-
-    /* ===== Modal ===== */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.7);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:2000;
-    }
-    .modal-backdrop.show{display:flex;}
-    .modal{
-      width:100%;
-      max-width:420px;
-      background:var(--surface);
-      border-radius:18px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-      padding:22px 22px 24px;
-      backdrop-filter:blur(14px);
-      position:relative;
-    }
-    .modal h2{margin-bottom:8px;}
-    .modal-close{
-      position:absolute;top:10px;right:12px;
-      border:0;background:transparent;color:var(--text);
-      font-size:20px;cursor:pointer;
-    }
-    .modal .field{margin-bottom:10px;}
-    .modal label{
-      display:block;font-size:13px;margin-bottom:4px;color:var(--muted);
-    }
-    .modal input,.modal textarea{
-      width:100%;
-      padding:8px 10px;
-      border-radius:10px;
-      border:1px solid var(--border);
-      background:rgba(5,8,30,.9);
-      color:var(--text);
-      font-size:14px;
-    }
 
     /* ===== CTA & Footer ===== */
     .benefits{
@@ -759,10 +718,28 @@
 
   <!-- JSON-LD -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Organization","name":"Rithink","url":"https://www.example.com","description":"AI-first CRM that captures leads, replies, books and keeps deals moving.","address":{"@type":"PostalAddress","addressLocality":"Copenhagen","addressCountry":"DK"}}
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"Rithink",
+    "description":"AI-first CRM for real estate teams: SMS lead capture, qualification, booking and automated follow-up.",
+    "address":{
+      "@type":"PostalAddress",
+      "addressLocality":"Copenhagen",
+      "addressCountry":"DK"
+    }
+  }
   </script>
+
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Rithink CRM","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"AI-first CRM for lead capture, assistive replies, scheduling and deal acceleration.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR","description":"Beta pricing placeholder"}}
+  {
+    "@context":"https://schema.org",
+    "@type":"SoftwareApplication",
+    "name":"Rithink CRM",
+    "applicationCategory":"BusinessApplication",
+    "operatingSystem":"Web",
+    "description":"AI-first CRM for real estate teams: SMS lead capture, qualification, booking, and automated follow-up."
+  }
   </script>
 </head>
 
@@ -779,6 +756,7 @@
       webkit-playsinline
       loop
       preload="auto"
+      disablepictureinpicture
       data-mobile-src="https://res.cloudinary.com/dkmriwd2i/video/upload/f_mp4,vc_h264,q_auto,w_1280/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4"
       data-desktop-src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4"
     >
@@ -797,17 +775,19 @@
 
       <ul class="nav-links" role="menubar" aria-label="Primary navigation">
         <li role="none"><a role="menuitem" href="#videos">Videos</a></li>
-        <li role="none"><a role="menuitem" href="#industry-demos">Demos</a></li>
-        <li role="none"><a role="menuitem" href="#cases">Cases</a></li>
+        <li role="none"><a role="menuitem" href="#industry-demos">Workflows</a></li>
+        <li role="none"><a role="menuitem" href="#cases">Use cases</a></li>
         <li role="none"><a role="menuitem" href="#privacy">Privacy</a></li>
-        <li role="none"><a class="btn-pill" role="menuitem"
-             href="https://cal.com/rijad-alibasic-i99nd3/30min"
+
+        <li role="none">
+          <a class="btn-pill" role="menuitem"
+             href="https://cal.com/rijad-alibasic-i99nd3/30min?overlayCalendar=true&layout=month_view"
              data-cal-namespace="30min"
-              data-cal-link="rijad-alibasic-i99nd3/30min"
+             data-cal-link="rijad-alibasic-i99nd3/30min"
              data-cal-config='{"layout":"month_view"}'>
-  Book a Demo
-</a>
-</li>
+            Book a Call
+          </a>
+        </li>
       </ul>
 
       <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav" onclick="toggleMenu()">
@@ -820,21 +800,21 @@
   <section class="hero" id="home">
     <div class="container hero-inner">
       <div class="hero-left">
-        <span class="tag">AI CRM</span>
-        <h1>Turn every interaction into <span class="gradient-text">qualified pipeline</span></h1>
+        <span class="tag">AI CRM · REAL ESTATE</span>
+        <h1>Turn every inquiry into <span class="gradient-text">qualified pipeline</span></h1>
         <p>
-          An AI-first CRM that captures leads 24/7, replies instantly, books meetings from shared
-          calendars, and keeps deals moving — with tasks, notes and summaries auto-logged.
+          An AI-first CRM for real estate teams that captures leads 24/7 via SMS, qualifies buyers & sellers,
+          books viewings and valuations, and keeps follow-up on autopilot — with every interaction logged automatically.
         </p>
         <div class="cta">
           <a class="btn btn-primary"
-               href="https://cal.com/rijad-alibasic-i99nd3/30min"
-               data-cal-namespace="30min"
-               data-cal-link="rijad-alibasic-i99nd3/30min"
-               data-cal-config='{"layout":"month_view"}'>
-              Start free trial
-            </a>
-          <a class="btn btn-outline" href="#videos">See Videos</a>
+             href="https://cal.com/rijad-alibasic-i99nd3/30min?overlayCalendar=true&layout=month_view"
+             data-cal-namespace="30min"
+             data-cal-link="rijad-alibasic-i99nd3/30min"
+             data-cal-config='{"layout":"month_view"}'>
+            Book a Call
+          </a>
+          <a class="btn btn-outline" href="#industry-demos">See Workflows</a>
         </div>
       </div>
 
@@ -842,18 +822,18 @@
         <div class="hero-card hero-card-primary">
           <div class="hero-card-pill">
             <span class="hero-card-dot"></span>
-            Live inbox · 24/7 leads
+            SMS inbox · 24/7 coverage
           </div>
           <h3>Never miss a lead</h3>
-          <p>Forms, chat, email and social all land in one inbox, with instant AI replies and suggested next steps.</p>
+          <p>Every buyer and seller inquiry is answered instantly, captured, and routed with context.</p>
           <div class="hero-card-metric">
             <div>
-              <strong>100%</strong><br />
-              coverage
+              <strong>24/7</strong><br />
+              replies
             </div>
             <div>
-              <span>2 min</span><br />
-              median response
+              <span>Auto</span><br />
+              logging
             </div>
           </div>
         </div>
@@ -863,8 +843,8 @@
             <span class="hero-card-dot"></span>
             Today view
           </div>
-          <h3>Only the calls that matter</h3>
-          <p>Your reps get a “Today” list with hot replies, booking requests and SLA-due leads.</p>
+          <h3>Only the conversations that matter</h3>
+          <p>Your team gets a prioritized list: hot replies, booking requests, and follow-ups due.</p>
         </div>
 
         <div class="hero-card">
@@ -873,7 +853,7 @@
             Autopilot
           </div>
           <h3>Follow-up sequences</h3>
-          <p>Polite, branded nudges across email/SMS/chat until there’s a real booking or clear no.</p>
+          <p>Polite, branded nudges by SMS until there’s a booking, a pause, or a clear no.</p>
         </div>
       </div>
     </div>
@@ -885,13 +865,13 @@
   </section>
 
   <!-- Metrics -->
-  <section class="section" aria-label="Key results">
+  <section class="section" aria-label="Key outcomes">
     <div class="container">
       <div class="metrics-grid">
-        <div class="metric fade tilt"><span class="value">100%</span><span class="label">Lead coverage</span></div>
-        <div class="metric fade tilt"><span class="value">2 min</span><span class="label">Median response time</span></div>
-        <div class="metric fade tilt"><span class="value">+28%</span><span class="label">Booked meetings</span></div>
-        <div class="metric fade tilt"><span class="value">-35%</span><span class="label">Time-to-first-touch</span></div>
+        <div class="metric fade tilt"><span class="value">24/7</span><span class="label">Reply coverage</span></div>
+        <div class="metric fade tilt"><span class="value">Instant</span><span class="label">First response</span></div>
+        <div class="metric fade tilt"><span class="value">Booked</span><span class="label">Viewings & valuations</span></div>
+        <div class="metric fade tilt"><span class="value">Logged</span><span class="label">CRM updates automatically</span></div>
       </div>
     </div>
   </section>
@@ -900,38 +880,41 @@
   <section class="section videos" id="videos">
     <div class="container">
       <div class="section-header">
-        <h2>Learn how our CRM + AI works</h2>
-        <p class="lead">Short explainers aligned to your workflow — capture, triage, automate, optimise, and advance deals.</p>
+        <h2>See how CRM + AI works</h2>
+        <p class="lead">Short explainers aligned to the real estate workflow: capture, qualify, book, follow up, and hand off safely.</p>
       </div>
 
       <div class="video-grid">
-        <a class="video-card fade" href="#contact" aria-label="Never miss a lead">
-          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
+        <a class="video-card fade" href="#industry-demos" aria-label="Instant replies">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" disablepictureinpicture
+            poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
           </video>
           <div class="video-info">
-            <h3>Never miss a lead <span class="badge">24/7 capture</span></h3>
-            <p>Phone and inbox notifications lighting up as leads come in — always answered.</p>
+            <h3>Instant replies <span class="badge">24/7 SMS</span></h3>
+            <p>Every lead gets an immediate, branded response — automatically.</p>
           </div>
         </a>
 
-        <a class="video-card fade" href="#industry-demos" aria-label="Demos">
-          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
+        <a class="video-card fade" href="#industry-demos" aria-label="Workflows">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" disablepictureinpicture
+            poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
-            <h3>See industry demos <span class="badge">Scrollytelling</span></h3>
-            <p>Scroll through examples: booking, qualification, and follow-ups.</p>
+            <h3>Workflows <span class="badge">Booking</span></h3>
+            <p>Qualification, booking, and follow-up — with safe agent handoff.</p>
           </div>
         </a>
 
         <a class="video-card fade" href="#contact" aria-label="Follow-up on autopilot">
-          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" disablepictureinpicture
+            poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
           </video>
           <div class="video-info">
             <h3>Follow-up on autopilot <span class="badge">Sequences</span></h3>
-            <p>Sequences and email flows running automatically in a marketing dashboard.</p>
+            <p>Long-term nurture and reminders — without losing context.</p>
           </div>
         </a>
       </div>
@@ -939,16 +922,16 @@
   </section>
 
   <!-- Story scroll: phone left, text right -->
-  <section class="story-scroll" id="industry-demos" aria-label="Industry demos">
+  <section class="story-scroll" id="industry-demos" aria-label="Workflows">
     <div class="story-sticky">
       <div class="story-layout">
         <!-- LEFT: phone -->
         <div class="story-phoneWrap out">
-          <div class="phone" aria-label="Demo phone">
+          <div class="phone" aria-label="SMS workflow">
             <div class="screen">
               <div class="topbar">
                 <div class="notch" aria-hidden="true"></div>
-                <div class="name" id="storyName">Rithink AI</div>
+                <div class="name" id="storyName">Nordic Realty</div>
               </div>
               <div class="msgs" id="storyMsgs"></div>
               <div class="composer" aria-hidden="true">
@@ -957,23 +940,23 @@
               </div>
             </div>
           </div>
-          <div class="story-phoneLabel" id="storyLabel">General demo</div>
+          <div class="story-phoneLabel" id="storyLabel">Buyer lead · Viewing booking</div>
         </div>
 
         <!-- RIGHT: copy -->
-        <div class="story-copy" id="storyCopy">
-          <span class="tag story-kicker" id="storyKicker">DEMO</span>
+        <div class="story-copy show" id="storyCopy">
+          <span class="tag story-kicker" id="storyKicker">VIEWING</span>
           <h2 class="story-title" id="storyTitle">
-            Turn every interaction into <span class="gradient-text">qualified pipeline</span>
+            Reply instantly. Book <span class="gradient-text">viewings</span>
           </h2>
           <p class="story-lead" id="storyLead">
-            Scroll to see one scenario at a time — the phone stays left, and the context updates on the right.
+            Scroll through real estate SMS workflows — booking, qualification, follow-up, and safe handoffs.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Scroll steps (one “screen” per phone) -->
+    <!-- Scroll steps -->
     <div class="story-steps" aria-hidden="true">
       <div class="story-step" data-step="0"></div>
       <div class="story-step" data-step="1"></div>
@@ -984,49 +967,46 @@
     </div>
   </section>
 
-  <!-- Case Studies -->
+  <!-- Use Cases -->
   <section class="section cases" id="cases">
     <div class="container">
       <div class="section-header">
-        <h2>Selected results (demo)</h2>
-        <p class="lead">Placeholder companies and metrics for layout — replace with real results when ready.</p>
+        <h2>Use cases</h2>
+        <p class="lead">Built for real estate: capture, qualify, book and follow up — with everything logged to your CRM.</p>
       </div>
 
       <div class="case-grid">
         <div class="card case fade tilt">
-          <span class="tag">B2B SaaS • “Voltify”</span>
-          <h3>Only the calls that matter</h3>
-          <p>Assistant deflects routine questions and routes hot intent with full context.</p>
+          <span class="tag">Buyers · Inquiry → viewing</span>
+          <h3>Book viewings without back-and-forth</h3>
+          <p>Answer inbound SMS, ask a few questions, propose time slots, and confirm instantly.</p>
           <div class="stats">
-            <div class="stat"><span class="v">+44%</span><span class="k">MQL→SQL</span></div>
-            <div class="stat"><span class="v">-35%</span><span class="k">Time-to-first-touch</span></div>
-            <div class="stat"><span class="v">+18%</span><span class="k">Win rate</span></div>
+            <div class="stat"><span class="v">SMS</span><span class="k">Conversations</span></div>
+            <div class="stat"><span class="v">Auto</span><span class="k">Scheduling</span></div>
+            <div class="stat"><span class="v">Fast</span><span class="k">Handoff</span></div>
           </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
         </div>
 
         <div class="card case fade tilt">
-          <span class="tag">Industrial • “Acme Industrial”</span>
-          <h3>Never miss a lead</h3>
-          <p>24/7 capture from forms, inbox and chat with instant replies and booking.</p>
+          <span class="tag">Sellers · Valuation intake</span>
+          <h3>Collect seller details automatically</h3>
+          <p>Capture address, size, upgrades and timeline — then book a valuation visit for the agent.</p>
           <div class="stats">
-            <div class="stat"><span class="v">100%</span><span class="k">Lead coverage</span></div>
-            <div class="stat"><span class="v">2 min</span><span class="k">Median response</span></div>
-            <div class="stat"><span class="v">-41%</span><span class="k">CPL</span></div>
+            <div class="stat"><span class="v">Clean</span><span class="k">Data capture</span></div>
+            <div class="stat"><span class="v">Booked</span><span class="k">Valuations</span></div>
+            <div class="stat"><span class="v">Logged</span><span class="k">In CRM</span></div>
           </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
         </div>
 
         <div class="card case fade tilt">
-          <span class="tag">Healthcare • “Helio Health”</span>
-          <h3>Follow-up on autopilot</h3>
-          <p>Polite sequences across SMS & email; auto-reschedules no-shows.</p>
+          <span class="tag">Pipeline · Nurture</span>
+          <h3>Follow-up that never slips</h3>
+          <p>Long-term check-ins, opt-outs handled, and hot replies surfaced to your team.</p>
           <div class="stats">
-            <div class="stat"><span class="v">+29%</span><span class="k">Show rate</span></div>
-            <div class="stat"><span class="v">-22%</span><span class="k">No-shows</span></div>
-            <div class="stat"><span class="v">+31%</span><span class="k">Booked meetings</span></div>
+            <div class="stat"><span class="v">Auto</span><span class="k">Sequences</span></div>
+            <div class="stat"><span class="v">Today</span><span class="k">Priority list</span></div>
+            <div class="stat"><span class="v">Safe</span><span class="k">Routing</span></div>
           </div>
-          <div class="placeholder-note">Demo data • Replace with real case.</div>
         </div>
       </div>
     </div>
@@ -1038,34 +1018,34 @@
       <div class="about-grid">
         <div>
           <h2>About Rithink</h2>
-          <p>We’re an AI-first CRM built in Copenhagen. Capture, converse, book and advance deals in one place — with brand-safe AI assistance and measurable outcomes.</p>
+          <p>We’re building an AI-first CRM for real estate teams. Capture, converse, book and advance deals in one place — with brand-safe assistance and measurable operations.</p>
           <div class="features" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px">
             <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧪</div>
+              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">⚡</div>
               <div class="f-t">
-                <h3 style="margin:0 0 4px;font-size:16px">Experiment-driven</h3>
-                <p style="margin:0;color:var(--muted)">Short cycles, clear KPIs, compounding learnings.</p>
+                <h3 style="margin:0 0 4px;font-size:16px">Fast to deploy</h3>
+                <p style="margin:0;color:var(--muted)">Connect your inbox, calendar and workflows in days.</p>
+              </div>
+            </div>
+            <div class="feat" style="display:flex;gap:10px">
+              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧩</div>
+              <div class="f-t">
+                <h3 style="margin:0 0 4px;font-size:16px">CRM built-in</h3>
+                <p style="margin:0;color:var(--muted)">No extra tools required to get value.</p>
               </div>
             </div>
             <div class="feat" style="display:flex;gap:10px">
               <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🔒</div>
               <div class="f-t">
                 <h3 style="margin:0 0 4px;font-size:16px">Privacy-aware</h3>
-                <p style="margin:0;color:var(--muted)">EU-friendly, consent-first, cookieless-ready.</p>
+                <p style="margin:0;color:var(--muted)">EU-friendly approach with access controls and auditability.</p>
               </div>
             </div>
             <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧩</div>
+              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">🧠</div>
               <div class="f-t">
-                <h3 style="margin:0 0 4px;font-size:16px">All-in-one</h3>
-                <p style="margin:0;color:var(--muted)">No external CRM required.</p>
-              </div>
-            </div>
-            <div class="feat" style="display:flex;gap:10px">
-              <div class="icon" style="width:38px;height:38px;border-radius:10px;font-size:16px">⚡</div>
-              <div class="f-t">
-                <h3 style="margin:0 0 4px;font-size:16px">Built-in AI</h3>
-                <p style="margin:0;color:var(--muted)">Assist, summarize, schedule, and nudge — safely.</p>
+                <h3 style="margin:0 0 4px;font-size:16px">Agent assist</h3>
+                <p style="margin:0;color:var(--muted)">Summaries, next steps and safe routing when needed.</p>
               </div>
             </div>
           </div>
@@ -1073,10 +1053,10 @@
         <div>
           <h3 style="margin-bottom:10px">What the assistant does</h3>
           <ul style="line-height:1.9;opacity:.95">
-            <li>Captures, replies, books, and logs across channels.</li>
-            <li>Creates tasks, summaries and next steps in Rithink CRM.</li>
-            <li>Builds a prioritized “Today” list for reps.</li>
-            <li>Optimizes messaging and cadences over time.</li>
+            <li>Replies instantly via SMS to buyer and seller inquiries.</li>
+            <li>Qualifies leads (budget, timeline, must-haves) and routes with context.</li>
+            <li>Books viewings and valuation visits from shared calendars.</li>
+            <li>Runs follow-up sequences and logs everything to your CRM.</li>
           </ul>
         </div>
       </div>
@@ -1098,8 +1078,8 @@
 
         <h3>What we process</h3>
         <ul>
-          <li>Contact and company details (e.g., name, email, role, firmographics)</li>
-          <li>Interactions (forms, chat, email threads, bookings, summaries, notes)</li>
+          <li>Contact and company details (e.g., name, email, role)</li>
+          <li>Interactions (SMS threads, bookings, summaries, notes)</li>
           <li>Operational metadata (owners, SLAs, cadence steps, timestamps)</li>
         </ul>
 
@@ -1121,8 +1101,8 @@
         <ul>
           <li>Encryption in transit (TLS) and at rest</li>
           <li>Role-based access controls, 2FA/SSO options</li>
-          <li>Daily backups and disaster recovery procedures</li>
-          <li>Regular vulnerability scans and least-privilege policies</li>
+          <li>Backups and disaster recovery procedures</li>
+          <li>Least-privilege policies</li>
         </ul>
 
         <h3>AI & model usage</h3>
@@ -1154,19 +1134,20 @@
   <!-- CTA -->
   <section class="section" id="contact" style="text-align:center">
     <div class="container">
-      <h2>Ready to try an AI-first CRM?</h2>
-      <p class="lead">Start a free beta or book a quick demo — we’ll show you the agenda in action.</p>
+      <h2>Ready to see it in action?</h2>
+      <p class="lead">Book a 30‑minute call — we’ll walk through the workflows and how it fits your process.</p>
       <div class="benefits">
-        <div class="benefit"><span class="check">✓</span><span>Free beta access</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Guided setup</span></div>
-        <div class="benefit"><span class="check">✓</span><span>Cancel anytime</span></div>
+        <div class="benefit"><span class="check">✓</span><span>30‑minute call</span></div>
+        <div class="benefit"><span class="check">✓</span><span>Workflow walkthrough</span></div>
+        <div class="benefit"><span class="check">✓</span><span>No commitment</span></div>
       </div>
+
       <a class="btn btn-primary"
-         href="https://cal.com/rijad-alibasic-i99nd3/30min"
+         href="https://cal.com/rijad-alibasic-i99nd3/30min?overlayCalendar=true&layout=month_view"
          data-cal-namespace="30min"
          data-cal-link="rijad-alibasic-i99nd3/30min"
          data-cal-config='{"layout":"month_view"}'>
-        Start free trial
+        Book a Call
       </a>
     </div>
   </section>
@@ -1177,67 +1158,33 @@
       <div class="foot">
         <div>
           <h3>Rithink</h3>
-          <p>AI-first CRM. Capture, converse and close — with assistive AI.</p>
+          <p>AI-first CRM for real estate. Capture, converse and close — with assistive AI.</p>
         </div>
         <div class="fcol">
           <h4>Company</h4>
           <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#videos">Videos</a></li>
-            <li><a href="#cases">Cases</a></li>
+            <li><a href="#privacy">Privacy</a></li>
           </ul>
         </div>
         <div class="fcol">
           <h4>Product</h4>
           <ul>
-            <li><a href="#industry-demos">Assistant</a></li>
-            <li><a href="#contact">Sequences</a></li>
-            <li><a href="#contact">Analytics</a></li>
+            <li><a href="#industry-demos">Workflows</a></li>
+            <li><a href="#cases">Use cases</a></li>
+            <li><a href="#contact">Book a call</a></li>
           </ul>
         </div>
         <div class="fcol">
-          <h4>Legal</h4>
+          <h4>Resources</h4>
           <ul>
-            <li><a href="#privacy">Privacy</a></li>
-            <li><a href="#privacy">DPA (on request)</a></li>
+            <li><a href="#videos">Videos</a></li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">© <span id="yr"></span> Rithink. All rights reserved.</div>
     </div>
   </footer>
-
-  <!-- Demo / trial popup -->
-  <div id="demo-modal-backdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal">
-      <button class="modal-close" aria-label="Close" onclick="closeDemoModal()">×</button>
-      <h2>Book a demo</h2>
-      <p style="margin-bottom:16px;color:var(--muted);font-size:14px">
-        Skriv dine oplysninger, så vender vi tilbage med en tid.
-      </p>
-      <form onsubmit="submitDemoForm(event)">
-        <div class="field">
-          <label>Navn</label>
-          <input type="text" name="name" required />
-        </div>
-        <div class="field">
-          <label>Firma</label>
-          <input type="text" name="company" />
-        </div>
-        <div class="field">
-          <label>E-mail</label>
-          <input type="email" name="email" required />
-        </div>
-        <div class="field">
-          <label>Besked</label>
-          <textarea name="message" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:8px">
-          Send
-        </button>
-      </form>
-    </div>
-  </div>
 
   <script>
     // Mobile menu
@@ -1247,16 +1194,27 @@
       const open = !existing;
       btn.setAttribute('aria-expanded', String(open));
       if (existing){ existing.remove(); return; }
+
       const ul = document.querySelector('.nav-links').cloneNode(true);
       ul.id = 'mobile-nav';
       ul.className = 'mobile-nav';
       ul.setAttribute('role','menu');
+
+      const header = document.getElementById('header');
+      const topPx = header ? header.offsetHeight : 64;
+
       Object.assign(ul.style,{
-        position:'fixed',top:'64px',left:'0',right:'0',
+        position:'fixed',
+        top: topPx + 'px',
+        left:'0',right:'0',
         background:'linear-gradient(180deg, rgba(14,20,54,.95), rgba(14,20,54,.85))',
-        padding:'16px 20px 24px',display:'grid',gap:'14px',
-        borderBottom:'1px solid var(--border)',boxShadow:'0 14px 32px rgba(0,0,0,.5)',
-        zIndex:'999',backdropFilter:'blur(10px)'
+        padding:'16px 20px 24px',
+        display:'grid',
+        gap:'14px',
+        borderBottom:'1px solid var(--border)',
+        boxShadow:'0 14px 32px rgba(0,0,0,.5)',
+        zIndex:'999',
+        backdropFilter:'blur(10px)'
       });
       document.body.appendChild(ul);
     };
@@ -1281,9 +1239,11 @@
       const pct = height > 0 ? Math.max(0, Math.min(1, scrollY / height)) : 0;
       progressBar.style.width = (pct * 100) + '%';
 
-      // Advanced hero scroll
+      // Advanced hero scroll (desktop only)
+      if (window.matchMedia('(max-width:900px)').matches) return;
+
       const hero = document.querySelector('.hero');
-      const bgVideo = document.querySelector('.site-bg video');
+      const bgVideo = document.getElementById('bgVideo');
       const bgOverlay = document.querySelector('.site-bg-overlay');
       const heroInner = document.querySelector('.hero-inner');
       const heroLeft = document.querySelector('.hero-left');
@@ -1303,11 +1263,14 @@
         else progress = (scrollY - start) / (end - start);
         progress = Math.min(1, Math.max(0, progress));
 
-        if (bgVideo) {
+        // Only animate bg when it's actually playing (prevents moving "still" on first scroll)
+        const isTouch = window.matchMedia('(pointer: coarse)').matches;
+        if (bgVideo && !isTouch && bgVideo.classList.contains('is-playing')) {
           const scale = 1.08 + progress * 0.25;
           const translateY = progress * 60;
           bgVideo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
         }
+
         if (bgOverlay) {
           const o = 0.9 - progress * 0.3;
           bgOverlay.style.opacity = Math.max(0.5, o);
@@ -1348,38 +1311,6 @@
         });
       });
     }
-
-    /* ===== Modal / popup til Book Demo ===== */
-    function openDemoModal(e){
-      if (e) e.preventDefault();
-      const m = document.getElementById('demo-modal-backdrop');
-      if (!m) return;
-      m.classList.add('show');
-      m.setAttribute('aria-hidden','false');
-    }
-
-    function closeDemoModal(){
-      const m = document.getElementById('demo-modal-backdrop');
-      if (!m) return;
-      m.classList.remove('show');
-      m.setAttribute('aria-hidden','true');
-    }
-
-    function submitDemoForm(e){
-      e.preventDefault();
-      alert('Tak! Vi vender tilbage hurtigst muligt.');
-      closeDemoModal();
-    }
-
-    document.addEventListener('click', (e)=>{
-      const backdrop = document.getElementById('demo-modal-backdrop');
-      if (!backdrop || !backdrop.classList.contains('show')) return;
-      if (e.target === backdrop) closeDemoModal();
-    });
-
-    document.addEventListener('keydown', (e)=>{
-      if (e.key === 'Escape') closeDemoModal();
-    });
 
     window.addEventListener('load', ()=>{
       document.getElementById('yr').textContent = new Date().getFullYear();
@@ -1594,14 +1525,12 @@
         runToken++;
         const token = runToken;
 
-        // fade/slide OUT
         phoneWrap.classList.add('out');
         copyEl.classList.remove('show');
 
         if (!reduceMotion) await sleep(240);
         if (token !== runToken) return;
 
-        // swap content
         msgsEl.innerHTML = "";
         if (nameEl) nameEl.textContent = s.name;
         if (labelEl) labelEl.textContent = s.label;
@@ -1609,11 +1538,9 @@
         titleEl.innerHTML = s.title;
         leadEl.textContent = s.lead;
 
-        // slide IN + text fade IN samtidigt
         phoneWrap.classList.remove('out');
         requestAnimationFrame(()=>copyEl.classList.add('show'));
 
-        // Reduced motion: show all instantly
         if (reduceMotion){
           for (const step of s.script){
             if (step.typing) continue;
@@ -1622,14 +1549,12 @@
           return;
         }
 
-        // start chat lige efter phone “lander”
         await sleep(180);
         if (token !== runToken) return;
 
         runChat(s.script, token);
       }
 
-      // Observe scroll steps
       const stepEls = Array.from(section.querySelectorAll('.story-step'));
       if ('IntersectionObserver' in window && stepEls.length){
         const io = new IntersectionObserver((entries)=>{
@@ -1644,87 +1569,12 @@
         stepEls.forEach(el=>io.observe(el));
       }
 
-      // initial
       renderStep(0);
     })();
   </script>
 
-  <!-- iPhone/Safari autoplay stabilizer -->
+  <!-- Cal.com embed (overlay) -->
   <script>
-  (function(){
-    const ensurePlay = (v) => {
-      if (!v) return;
-      try{
-        v.muted = true;
-        v.playsInline = true;
-        v.setAttribute('playsinline','');
-        v.setAttribute('webkit-playsinline','');
-        const p = v.play();
-        if (p && p.catch) p.catch(()=>{});
-      }catch(e){}
-    };
-
-    const bgVideo = document.getElementById('bgVideo');
-    const bgSource = document.getElementById('bgSource');
-
-    // pick lighter bg video on mobile (more stable on iPhone)
-    function setBgSrc(){
-      if (!bgVideo || !bgSource) return;
-      const mobile = window.matchMedia('(max-width: 700px)').matches;
-      const desired = mobile ? bgVideo.dataset.mobileSrc : bgVideo.dataset.desktopSrc;
-      if (!desired) return;
-      const current = bgSource.getAttribute('src');
-      if (current !== desired){
-        bgSource.setAttribute('src', desired);
-        try{ bgVideo.load(); }catch(e){}
-      }
-    }
-
-    setBgSrc();
-
-    window.addEventListener('resize', ()=>{
-      setBgSrc();
-      ensurePlay(bgVideo);
-    }, { passive:true });
-
-    window.addEventListener('load', ()=>{
-      setBgSrc();
-      ensurePlay(bgVideo);
-      document.querySelectorAll('video').forEach(ensurePlay);
-    });
-
-    // iOS: autoplay becomes more reliable after first gesture
-    ['touchstart','pointerdown','click','scroll'].forEach(evt=>{
-      window.addEventListener(evt, ()=>{
-        setBgSrc();
-        ensurePlay(bgVideo);
-        document.querySelectorAll('video').forEach(ensurePlay);
-      }, { once:true, passive:true });
-    });
-
-    document.addEventListener('visibilitychange', ()=>{
-      if (!document.hidden){
-        setBgSrc();
-        ensurePlay(bgVideo);
-        document.querySelectorAll('video').forEach(ensurePlay);
-      }
-    });
-
-    // Play/pause video cards based on visibility (keeps iPhone from freezing random ones)
-    const vids = document.querySelectorAll('.video-card video');
-    if ('IntersectionObserver' in window && vids.length){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          const v = e.target;
-          if (e.isIntersecting) ensurePlay(v);
-          else v.pause();
-        });
-      }, { threshold: 0.35 });
-      vids.forEach(v=>io.observe(v));
-    }
-  })();
-  </script>
-  <script type="text/javascript">
   (function (C, A, L) {
     let p = function (a, ar) { a.q.push(ar); };
     let d = C.document;
@@ -1753,7 +1603,84 @@
   })(window, "https://app.cal.com/embed/embed.js", "init");
 
   Cal("init", "30min", { origin: "https://cal.com" });
-</script>
+  </script>
 
+  <!-- iPhone/Safari autoplay stabilizer (bg + video cards) -->
+  <script>
+  (function(){
+    const ensurePlay = (v) => {
+      if (!v) return;
+      try{
+        v.muted = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline','');
+        v.setAttribute('webkit-playsinline','');
+        const p = v.play();
+        if (p && p.catch) p.catch(()=>{});
+      }catch(e){}
+    };
+
+    const bgVideo = document.getElementById('bgVideo');
+    const bgSource = document.getElementById('bgSource');
+
+    function setBgSrc(){
+      if (!bgVideo || !bgSource) return;
+      const mobile = window.matchMedia('(max-width: 700px)').matches;
+      const desired = mobile ? bgVideo.dataset.mobileSrc : bgVideo.dataset.desktopSrc;
+      if (!desired) return;
+      const current = bgSource.getAttribute('src');
+      if (current !== desired){
+        bgSource.setAttribute('src', desired);
+        try{ bgVideo.load(); }catch(e){}
+      }
+    }
+
+    if (bgVideo){
+      bgVideo.addEventListener('playing', ()=> bgVideo.classList.add('is-playing'));
+      bgVideo.addEventListener('pause', ()=> bgVideo.classList.remove('is-playing'));
+    }
+
+    setBgSrc();
+
+    window.addEventListener('resize', ()=>{
+      setBgSrc();
+      ensurePlay(bgVideo);
+    }, { passive:true });
+
+    window.addEventListener('load', ()=>{
+      setBgSrc();
+      ensurePlay(bgVideo);
+      document.querySelectorAll('video').forEach(ensurePlay);
+    });
+
+    ['touchstart','pointerdown','click','scroll'].forEach(evt=>{
+      window.addEventListener(evt, ()=>{
+        setBgSrc();
+        ensurePlay(bgVideo);
+        document.querySelectorAll('video').forEach(ensurePlay);
+      }, { once:true, passive:true });
+    });
+
+    document.addEventListener('visibilitychange', ()=>{
+      if (!document.hidden){
+        setBgSrc();
+        ensurePlay(bgVideo);
+        document.querySelectorAll('video').forEach(ensurePlay);
+      }
+    });
+
+    const vids = document.querySelectorAll('.video-card video');
+    if ('IntersectionObserver' in window && vids.length){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          const v = e.target;
+          if (e.isIntersecting) ensurePlay(v);
+          else v.pause();
+        });
+      }, { threshold: 0.35 });
+      vids.forEach(v=>io.observe(v));
+    }
+  })();
+  </script>
 </body>
 </html>
