@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="Rithink — AI-first CRM. Capture every lead 24/7, reply instantly, book meetings, and keep deals moving — all in one CRM with built-in AI." />
   <title>Rithink — AI-first CRM</title>
 
@@ -403,15 +403,15 @@
     }
 
     /* phone */
-.story-scroll .phone{
-  width:min(360px, 92vw);
-  height:min(820px, 84vh); /* var 720px / 76vh */
-  border-radius:44px;
-  background:linear-gradient(180deg,#0b1220,#111827);
-  padding:14px;
-  box-shadow:0 30px 90px rgba(0,0,0,.55);
-  position:relative;
-  border:1px solid rgba(255,255,255,.10);
+    .story-scroll .phone{
+      width:min(360px, 92vw);
+      height:min(820px, 84vh);
+      border-radius:44px;
+      background:linear-gradient(180deg,#0b1220,#111827);
+      padding:14px;
+      box-shadow:0 30px 90px rgba(0,0,0,.55);
+      position:relative;
+      border:1px solid rgba(255,255,255,.10);
     }
     .story-scroll .screen{
       height:100%;
@@ -422,12 +422,14 @@
       flex-direction:column;
       border:1px solid rgba(255,255,255,.08);
     }
+
+    /* FIX: give notch room so the name never overlaps */
     .story-scroll .topbar{
-      height:64px;
+      height:74px;
       display:flex;
       align-items:flex-end;
       justify-content:center;
-      padding:10px 14px 2px;
+      padding:26px 14px 10px;
       color:rgba(255,255,255,.9);
       position:relative;
       border-bottom:1px solid rgba(255,255,255,.08);
@@ -438,13 +440,15 @@
       position:absolute; top:10px; left:50%; transform:translateX(-50%);
       width:160px; height:26px; border-radius:0 0 18px 18px;
       background:rgba(0,0,0,.55);
+      pointer-events:none;
     }
-    .story-scroll .name{font-weight:600;font-size:14px;padding-top:6px}
+    .story-scroll .name{font-weight:600;font-size:14px;padding-top:0}
     .story-scroll .msgs{
       flex:1;
       padding:14px 12px;
       overflow:auto;
       scroll-behavior:smooth;
+      -webkit-overflow-scrolling: touch;
     }
     .story-scroll .composer{
       height:66px;
@@ -466,20 +470,19 @@
       user-select:none;
     }
     .story-phoneWrap{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:10px;
-
-  opacity:1;
-  transform:translateX(0);
-  transition:opacity .45s ease, transform .45s ease;
-  will-change:opacity,transform;
-}
-.story-phoneWrap.out{
-  opacity:0;
-  transform:translateX(-34px) translateY(10px) scale(.985);
-}
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      opacity:1;
+      transform:translateX(0);
+      transition:opacity .45s ease, transform .45s ease;
+      will-change:opacity,transform;
+    }
+    .story-phoneWrap.out{
+      opacity:0;
+      transform:translateX(-34px) translateY(10px) scale(.985);
+    }
     .story-phoneLabel{font-size:12px;color:rgba(255,255,255,.75)}
 
     /* bubbles */
@@ -726,6 +729,32 @@
       .story-copy{opacity:1 !important;transform:none !important}
       .story-scroll .bubble{opacity:1 !important;transform:none !important}
     }
+
+    /* ===== Mobile polish ===== */
+    @media (max-width: 520px){
+      .container{ padding: 0 16px; }
+      .section{ padding: 72px 0; }
+      .hero p{ font-size: 16px; }
+      .btn{ padding: 14px 22px; }
+      .video-card{ height: 200px; }
+
+      .story-scroll .phone{
+        width: 94vw;
+        height: min(720px, 78vh);
+      }
+      .story-scroll .topbar{
+        height:72px;
+        padding:24px 14px 10px;
+      }
+    }
+
+    @media (pointer: coarse){
+      .tilt{ transform: none !important; }
+      .hero-card:hover,
+      .metric:hover,
+      .video-card:hover,
+      .card:hover{ transform: none !important; }
+    }
   </style>
 
   <!-- JSON-LD -->
@@ -742,8 +771,19 @@
 
   <!-- GLOBAL VIDEO BACKGROUND -->
   <div class="site-bg">
-    <video muted autoplay playsinline loop>
-      <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
+    <video
+      id="bgVideo"
+      muted
+      autoplay
+      playsinline
+      webkit-playsinline
+      loop
+      preload="auto"
+      poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg"
+      data-mobile-src="https://res.cloudinary.com/dkmriwd2i/video/upload/f_mp4,vc_h264,q_auto,w_1280/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4"
+      data-desktop-src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4"
+    >
+      <source id="bgSource" src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764512217/3129957-uhd_3840_2160_25fps_yrkaps.mp4" type="video/mp4">
     </video>
     <div class="site-bg-overlay"></div>
   </div>
@@ -854,7 +894,7 @@
 
       <div class="video-grid">
         <a class="video-card fade" href="#contact" aria-label="Never miss a lead">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/374857/pexels-photo-374857.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764615850/answer_hg9pno.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -864,7 +904,7 @@
         </a>
 
         <a class="video-card fade" href="#industry-demos" aria-label="Demos">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/886743/pexels-photo-886743.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778500/107048_xf0sgq.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -874,7 +914,7 @@
         </a>
 
         <a class="video-card fade" href="#contact" aria-label="Follow-up on autopilot">
-          <video muted playsinline autoplay loop poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
+          <video muted playsinline webkit-playsinline autoplay loop preload="auto" poster="https://images.pexels.com/photos/4064840/pexels-photo-4064840.jpeg">
             <source src="https://res.cloudinary.com/dkmriwd2i/video/upload/v1764778512/106390_u0cpyz.mp4" type="video/mp4">
           </video>
           <div class="video-info">
@@ -1274,6 +1314,7 @@
     document.addEventListener('scroll', onScroll, {passive:true});
 
     function setupTilt(){
+      if (window.matchMedia('(pointer: coarse)').matches) return; // disable on iPhone/touch
       const els = document.querySelectorAll('.tilt');
       const limit = 8;
       els.forEach(el=>{
@@ -1348,143 +1389,138 @@
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       const steps = [
-  {
-    name: "Nordic Realty",
-    label: "Buyer lead · Viewing booking",
-    kicker: "VIEWING",
-    title: `Reply instantly. Book <span class="gradient-text">viewings</span>`,
-    lead: "24/7 SMS assistant qualifies lightly and locks a time — no back-and-forth.",
-    script: [
-      { side:"out", text:"Hi — is the apartment on Strandvej 12 still available?", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Yes 😊 Want to book a viewing?\nQuick questions so we get the right slot:\n• How many people?\n• Preferred day/time?", delay:650 },
-      { side:"out", text:"2 people. This week after 17:00 if possible.", delay:900 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Perfect. I can offer:\n1) Thu 17:30\n2) Sat 11:00\nWhich works?", delay:650 },
-      { side:"out", text:"Sat 11:00.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Booked ✅ What’s your full name + email for confirmation?\n(Reply STOP to opt out.)", delay:650 },
-      { side:"out", text:"Sara Jensen, sara@email.com", delay:900 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Thanks! Confirmation sent. If you have questions before the viewing, just text me here.", delay:650 },
-    ]
-  },
-
-  {
-    name: "Nordic Realty",
-    label: "Buyer lead · Qualification → flow",
-    kicker: "QUALIFY",
-    title: `Qualify buyers into <span class="gradient-text">ready-to-view</span> leads`,
-    lead: "Budget, timeline, and must-haves — then the lead is routed + enrolled in follow-up.",
-    script: [
-      { side:"out", text:"Do you have a 3-bedroom in Østerbro under 6.0M?", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Yes — I can help. Quick questions so I only send relevant homes:\n• Move timeline?\n• Must-haves (balcony/elevator/parking)?", delay:650 },
-      { side:"out", text:"Within 3 months. Balcony + elevator.", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Got it. Are you already mortgage pre-approved?\n(Yes / No / Not yet)", delay:650 },
-      { side:"out", text:"Not yet.", delay:750 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"No worries. Want me to:\n1) Send 3 best matches today, and\n2) Follow up weekly until you book a viewing?", delay:650 },
-      { side:"out", text:"Yes please.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Perfect. What’s your email for brochure links?", delay:650 },
-      { side:"out", text:"sara@email.com", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Done ✅ You’ll get a shortlist today. Reply PAUSE anytime.\n(Reply STOP to opt out.)", delay:650 },
-    ]
-  },
-
-  {
-    name: "Nordic Realty",
-    label: "Seller lead · Property intake",
-    kicker: "SELLER INTAKE",
-    title: `Qualify seller inquiries before <span class="gradient-text">hand-off</span>`,
-    lead: "Collect address, size, upgrades, and timeline — then book a valuation visit.",
-    script: [
-      { side:"out", text:"Hi — we’re considering selling our house. Can you help?", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Absolutely. I’ll collect the basics and book a free valuation visit.\nWhat’s the address?", delay:650 },
-      { side:"out", text:"Skovvej 8, 2820 Gentofte", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Thanks. Property type (villa/townhouse/apartment) + approx. m²?", delay:650 },
-      { side:"out", text:"Villa, ~165 m².", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Any major upgrades recently?\n(kitchen / bath / roof / windows)", delay:650 },
-      { side:"out", text:"New kitchen 2022, roof 2018.", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"When would you ideally list?\n(ASAP / 1–3 months / 3+ months)", delay:650 },
-      { side:"out", text:"1–3 months.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Great. I can book a 20‑min valuation visit:\n• Tue 16:30\n• Thu 18:00\nWhich suits?", delay:650 },
-      { side:"out", text:"Thu 18:00.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Booked ✅ What’s your name + email for confirmation?", delay:650 },
-      { side:"out", text:"Mikkel, mikkel@email.com", delay:900 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Thanks! If you have photos or a floorplan, you can text them here — it helps the agent prepare.", delay:650 },
-    ]
-  },
-
-  {
-    name: "Nordic Realty",
-    label: "Nurture · Long-term follow-up",
-    kicker: "FOLLOW UP",
-    title: `Long-term follow-up on <span class="gradient-text">autopilot</span>`,
-    lead: "Polite check-ins until they reply, book, pause, or opt out.",
-    script: [
-      { side:"in",  text:"Hi Sara — quick check-in 👋 Still looking for a 3-bed in Østerbro?", delay:650 },
-      { side:"out", text:"Not actively right now.", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"No problem. When should I follow up again?\n1) 2 weeks\n2) 1 month\n3) 3 months\n(Reply STOP to opt out.)", delay:650 },
-      { side:"out", text:"2", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Got it ✅ I’ll check back in 2 weeks.\nIf you want to restart sooner, reply START.", delay:650 },
-    ]
-  },
-
-  {
-    name: "Nordic Realty",
-    label: "After viewing · Next step",
-    kicker: "POST VIEWING",
-    title: `Post-viewing follow-up that <span class="gradient-text">moves deals</span>`,
-    lead: "Capture interest + objections, then book the next action automatically.",
-    script: [
-      { side:"in",  text:"Thanks for coming to the viewing at Strandvej 12 today 😊", delay:650 },
-      { side:"out", text:"We liked it.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Great to hear. Quick questions so your agent can move fast:\n• Interested in a second viewing? (Yes/No)\n• Any deal-breakers?", delay:650 },
-      { side:"out", text:"Yes. No deal-breakers.", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Perfect. I can offer:\n• Mon 17:00\n• Wed 18:30\nWhich works?", delay:650 },
-      { side:"out", text:"Wed 18:30.", delay:800 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Booked ✅ Want us to prepare offer documents after the second viewing? (Yes/No)", delay:650 },
-      { side:"out", text:"Yes.", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Done. Your agent will have everything ready.", delay:650 },
-    ]
-  },
-
-  {
-    name: "Nordic Realty",
-    label: "Handoff · Negotiation / legal",
-    kicker: "HANDOFF",
-    title: `Safe replies + instant <span class="gradient-text">agent handoff</span>`,
-    lead: "When it becomes negotiation or legal topics, the assistant routes to a human — with context.",
-    script: [
-      { side:"out", text:"Could we offer 4.1M instead of 4.295M? And is there anything legal I should know?", delay:650 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"I can capture your offer details, but negotiation and legal questions need a licensed agent.\nShare:\n• Offer amount\n• Conditions (financing/inspection)\n• Preferred takeover date\n…and I’ll send it to your agent right away.", delay:650 },
-      { side:"out", text:"Offer 4.1M, subject to financing. Takeover June 1.", delay:950 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Got it. Best time for your agent to contact you today?\n(Or we can continue by SMS)", delay:650 },
-      { side:"out", text:"After 16:00. SMS is fine too.", delay:850 },
-      { side:"in",  typing:true, delay:650 },
-      { side:"in",  text:"Perfect ✅ I’ve alerted your agent with the full context.", delay:650 },
-    ]
-  },
-];
+        {
+          name: "Nordic Realty",
+          label: "Buyer lead · Viewing booking",
+          kicker: "VIEWING",
+          title: `Reply instantly. Book <span class="gradient-text">viewings</span>`,
+          lead: "24/7 SMS assistant qualifies lightly and locks a time — no back-and-forth.",
+          script: [
+            { side:"out", text:"Hi — is the apartment on Strandvej 12 still available?", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Yes 😊 Want to book a viewing?\nQuick questions so we get the right slot:\n• How many people?\n• Preferred day/time?", delay:650 },
+            { side:"out", text:"2 people. This week after 17:00 if possible.", delay:900 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Perfect. I can offer:\n1) Thu 17:30\n2) Sat 11:00\nWhich works?", delay:650 },
+            { side:"out", text:"Sat 11:00.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Booked ✅ What’s your full name + email for confirmation?\n(Reply STOP to opt out.)", delay:650 },
+            { side:"out", text:"Sara Jensen, sara@email.com", delay:900 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Thanks! Confirmation sent. If you have questions before the viewing, just text me here.", delay:650 },
+          ]
+        },
+        {
+          name: "Nordic Realty",
+          label: "Buyer lead · Qualification → flow",
+          kicker: "QUALIFY",
+          title: `Qualify buyers into <span class="gradient-text">ready-to-view</span> leads`,
+          lead: "Budget, timeline, and must-haves — then the lead is routed + enrolled in follow-up.",
+          script: [
+            { side:"out", text:"Do you have a 3-bedroom in Østerbro under 6.0M?", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Yes — I can help. Quick questions so I only send relevant homes:\n• Move timeline?\n• Must-haves (balcony/elevator/parking)?", delay:650 },
+            { side:"out", text:"Within 3 months. Balcony + elevator.", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Got it. Are you already mortgage pre-approved?\n(Yes / No / Not yet)", delay:650 },
+            { side:"out", text:"Not yet.", delay:750 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"No worries. Want me to:\n1) Send 3 best matches today, and\n2) Follow up weekly until you book a viewing?", delay:650 },
+            { side:"out", text:"Yes please.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Perfect. What’s your email for brochure links?", delay:650 },
+            { side:"out", text:"sara@email.com", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Done ✅ You’ll get a shortlist today. Reply PAUSE anytime.\n(Reply STOP to opt out.)", delay:650 },
+          ]
+        },
+        {
+          name: "Nordic Realty",
+          label: "Seller lead · Property intake",
+          kicker: "SELLER INTAKE",
+          title: `Qualify seller inquiries before <span class="gradient-text">hand-off</span>`,
+          lead: "Collect address, size, upgrades, and timeline — then book a valuation visit.",
+          script: [
+            { side:"out", text:"Hi — we’re considering selling our house. Can you help?", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Absolutely. I’ll collect the basics and book a free valuation visit.\nWhat’s the address?", delay:650 },
+            { side:"out", text:"Skovvej 8, 2820 Gentofte", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Thanks. Property type (villa/townhouse/apartment) + approx. m²?", delay:650 },
+            { side:"out", text:"Villa, ~165 m².", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Any major upgrades recently?\n(kitchen / bath / roof / windows)", delay:650 },
+            { side:"out", text:"New kitchen 2022, roof 2018.", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"When would you ideally list?\n(ASAP / 1–3 months / 3+ months)", delay:650 },
+            { side:"out", text:"1–3 months.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Great. I can book a 20‑min valuation visit:\n• Tue 16:30\n• Thu 18:00\nWhich suits?", delay:650 },
+            { side:"out", text:"Thu 18:00.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Booked ✅ What’s your name + email for confirmation?", delay:650 },
+            { side:"out", text:"Mikkel, mikkel@email.com", delay:900 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Thanks! If you have photos or a floorplan, you can text them here — it helps the agent prepare.", delay:650 },
+          ]
+        },
+        {
+          name: "Nordic Realty",
+          label: "Nurture · Long-term follow-up",
+          kicker: "FOLLOW UP",
+          title: `Long-term follow-up on <span class="gradient-text">autopilot</span>`,
+          lead: "Polite check-ins until they reply, book, pause, or opt out.",
+          script: [
+            { side:"in",  text:"Hi Sara — quick check-in 👋 Still looking for a 3-bed in Østerbro?", delay:650 },
+            { side:"out", text:"Not actively right now.", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"No problem. When should I follow up again?\n1) 2 weeks\n2) 1 month\n3) 3 months\n(Reply STOP to opt out.)", delay:650 },
+            { side:"out", text:"2", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Got it ✅ I’ll check back in 2 weeks.\nIf you want to restart sooner, reply START.", delay:650 },
+          ]
+        },
+        {
+          name: "Nordic Realty",
+          label: "After viewing · Next step",
+          kicker: "POST VIEWING",
+          title: `Post-viewing follow-up that <span class="gradient-text">moves deals</span>`,
+          lead: "Capture interest + objections, then book the next action automatically.",
+          script: [
+            { side:"in",  text:"Thanks for coming to the viewing at Strandvej 12 today 😊", delay:650 },
+            { side:"out", text:"We liked it.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Great to hear. Quick questions so your agent can move fast:\n• Interested in a second viewing? (Yes/No)\n• Any deal-breakers?", delay:650 },
+            { side:"out", text:"Yes. No deal-breakers.", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Perfect. I can offer:\n• Mon 17:00\n• Wed 18:30\nWhich works?", delay:650 },
+            { side:"out", text:"Wed 18:30.", delay:800 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Booked ✅ Want us to prepare offer documents after the second viewing? (Yes/No)", delay:650 },
+            { side:"out", text:"Yes.", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Done. Your agent will have everything ready.", delay:650 },
+          ]
+        },
+        {
+          name: "Nordic Realty",
+          label: "Handoff · Negotiation / legal",
+          kicker: "HANDOFF",
+          title: `Safe replies + instant <span class="gradient-text">agent handoff</span>`,
+          lead: "When it becomes negotiation or legal topics, the assistant routes to a human — with context.",
+          script: [
+            { side:"out", text:"Could we offer 4.1M instead of 4.295M? And is there anything legal I should know?", delay:650 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"I can capture your offer details, but negotiation and legal questions need a licensed agent.\nShare:\n• Offer amount\n• Conditions (financing/inspection)\n• Preferred takeover date\n…and I’ll send it to your agent right away.", delay:650 },
+            { side:"out", text:"Offer 4.1M, subject to financing. Takeover June 1.", delay:950 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Got it. Best time for your agent to contact you today?\n(Or we can continue by SMS)", delay:650 },
+            { side:"out", text:"After 16:00. SMS is fine too.", delay:850 },
+            { side:"in",  typing:true, delay:650 },
+            { side:"in",  text:"Perfect ✅ I’ve alerted your agent with the full context.", delay:650 },
+          ]
+        },
+      ];
 
       function addBubble(side, node){
         const row = document.createElement('div');
@@ -1533,48 +1569,47 @@
         }
       }
 
-async function renderStep(i){
-  const s = steps[i];
-  if (!s || !phoneWrap) return;
+      async function renderStep(i){
+        const s = steps[i];
+        if (!s || !phoneWrap) return;
 
-  runToken++;
-  const token = runToken;
+        runToken++;
+        const token = runToken;
 
-  // fade/slide OUT
-  phoneWrap.classList.add('out');
-  copyEl.classList.remove('show');
+        // fade/slide OUT
+        phoneWrap.classList.add('out');
+        copyEl.classList.remove('show');
 
-  if (!reduceMotion) await sleep(240);
-  if (token !== runToken) return;
+        if (!reduceMotion) await sleep(240);
+        if (token !== runToken) return;
 
-  // swap content
-  msgsEl.innerHTML = "";
-  if (nameEl) nameEl.textContent = s.name;
-  if (labelEl) labelEl.textContent = s.label;
-  if (kickerEl) kickerEl.textContent = s.kicker;
-  titleEl.innerHTML = s.title;
-  leadEl.textContent = s.lead;
+        // swap content
+        msgsEl.innerHTML = "";
+        if (nameEl) nameEl.textContent = s.name;
+        if (labelEl) labelEl.textContent = s.label;
+        if (kickerEl) kickerEl.textContent = s.kicker;
+        titleEl.innerHTML = s.title;
+        leadEl.textContent = s.lead;
 
-  // slide IN + text fade IN samtidig
-  phoneWrap.classList.remove('out');
-  requestAnimationFrame(()=>copyEl.classList.add('show'));
+        // slide IN + text fade IN samtidigt
+        phoneWrap.classList.remove('out');
+        requestAnimationFrame(()=>copyEl.classList.add('show'));
 
-  // Reduced motion: show all instantly
-  if (reduceMotion){
-    for (const step of s.script){
-      if (step.typing) continue;
-      addBubble(step.side || 'in', makeTextBubble(step.text || ""));
-    }
-    return;
-  }
+        // Reduced motion: show all instantly
+        if (reduceMotion){
+          for (const step of s.script){
+            if (step.typing) continue;
+            addBubble(step.side || 'in', makeTextBubble(step.text || ""));
+          }
+          return;
+        }
 
-  // start chat lige efter phone “lander”
-  await sleep(180);
-  if (token !== runToken) return;
+        // start chat lige efter phone “lander”
+        await sleep(180);
+        if (token !== runToken) return;
 
-  runChat(s.script, token);
-}
-
+        runChat(s.script, token);
+      }
 
       // Observe scroll steps
       const stepEls = Array.from(section.querySelectorAll('.story-step'));
@@ -1594,6 +1629,82 @@ async function renderStep(i){
       // initial
       renderStep(0);
     })();
+  </script>
+
+  <!-- iPhone/Safari autoplay stabilizer -->
+  <script>
+  (function(){
+    const ensurePlay = (v) => {
+      if (!v) return;
+      try{
+        v.muted = true;
+        v.playsInline = true;
+        v.setAttribute('playsinline','');
+        v.setAttribute('webkit-playsinline','');
+        const p = v.play();
+        if (p && p.catch) p.catch(()=>{});
+      }catch(e){}
+    };
+
+    const bgVideo = document.getElementById('bgVideo');
+    const bgSource = document.getElementById('bgSource');
+
+    // pick lighter bg video on mobile (more stable on iPhone)
+    function setBgSrc(){
+      if (!bgVideo || !bgSource) return;
+      const mobile = window.matchMedia('(max-width: 700px)').matches;
+      const desired = mobile ? bgVideo.dataset.mobileSrc : bgVideo.dataset.desktopSrc;
+      if (!desired) return;
+      const current = bgSource.getAttribute('src');
+      if (current !== desired){
+        bgSource.setAttribute('src', desired);
+        try{ bgVideo.load(); }catch(e){}
+      }
+    }
+
+    setBgSrc();
+
+    window.addEventListener('resize', ()=>{
+      setBgSrc();
+      ensurePlay(bgVideo);
+    }, { passive:true });
+
+    window.addEventListener('load', ()=>{
+      setBgSrc();
+      ensurePlay(bgVideo);
+      document.querySelectorAll('video').forEach(ensurePlay);
+    });
+
+    // iOS: autoplay becomes more reliable after first gesture
+    ['touchstart','pointerdown','click','scroll'].forEach(evt=>{
+      window.addEventListener(evt, ()=>{
+        setBgSrc();
+        ensurePlay(bgVideo);
+        document.querySelectorAll('video').forEach(ensurePlay);
+      }, { once:true, passive:true });
+    });
+
+    document.addEventListener('visibilitychange', ()=>{
+      if (!document.hidden){
+        setBgSrc();
+        ensurePlay(bgVideo);
+        document.querySelectorAll('video').forEach(ensurePlay);
+      }
+    });
+
+    // Play/pause video cards based on visibility (keeps iPhone from freezing random ones)
+    const vids = document.querySelectorAll('.video-card video');
+    if ('IntersectionObserver' in window && vids.length){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          const v = e.target;
+          if (e.isIntersecting) ensurePlay(v);
+          else v.pause();
+        });
+      }, { threshold: 0.35 });
+      vids.forEach(v=>io.observe(v));
+    }
+  })();
   </script>
 </body>
 </html>
